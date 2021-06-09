@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Devisor</string>
+    <string name="title_activity_main">Devisor</string>
+    <string name="package_name">com.tomsoft.devisor</string>
+    <string name="custom_url_scheme">com.tomsoft.devisor</string>
+    <string name="server_client_id">857736696611-nhrtmkdhp5v3p6sue1re947r7kd1j269.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">470825360937769</string>
+    <string name="fb_login_protocol_scheme">470825360937769</string>
+</resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "857736696611",
+    "project_id": "calculodeengrenagens",
+    "storage_bucket": "calculodeengrenagens.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857736696611:android:c68e8a76859e1239e8f296",
+        "android_client_info": {
+          "package_name": "com.tomsoft.devisor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "857736696611-nhrtmkdhp5v3p6sue1re947r7kd1j269.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtKU94WDwIPw3CJ9Wbr695umk6M-g9NpE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "857736696611-nhrtmkdhp5v3p6sue1re947r7kd1j269.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

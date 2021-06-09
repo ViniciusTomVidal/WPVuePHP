@@ -1,0 +1,8 @@
+{
+  "name": "Devisor",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue",
+  "id": "dda08907"
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="bb8920bf-1e23-4bc7-b9f9-890a0aab61ca" name="HOMOLOGAÇÃO">
+        <fileTransfer rootFolder="/var/www/bemquetequero/" accessType="SFTP" host="192.168.0.7" port="22" sshConfigId="105bfa9a-bcf9-493d-8fd4-0ac8a2de010d" sshConfig="chleba@192.168.0.7:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,5709 @@
+{
+  "J": [
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "12",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "21",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "26",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "35",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "55",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "135",
+      "FJ": "0.35"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "26",
+      "FJ": "0.35"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "35",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "55",
+      "FJ": "0.37"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "135",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "35",
+      "FJ": "0.39"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "55",
+      "FJ": "0.4"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "135",
+      "FJ": "0.41"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "55",
+      "NE": "55",
+      "FJ": "0.43"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "55",
+      "NE": "135",
+      "FJ": "0.45"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "135",
+      "NE": "135",
+      "FJ": "0.49"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "12",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "14",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "17",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "21",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "26",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "35",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "55",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "135",
+      "FJ": "0.35"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "17",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "21",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "26",
+      "FJ": "0.37"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "35",
+      "FJ": "0.37"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "55",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "135",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "21",
+      "FJ": "0.39"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "26",
+      "FJ": "0.4"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "35",
+      "FJ": "0.4"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "55",
+      "FJ": "0.41"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "135",
+      "FJ": "0.42"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "26",
+      "FJ": "0.43"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "35",
+      "FJ": "0.43"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "55",
+      "FJ": "0.44"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "135",
+      "FJ": "0.45"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "35",
+      "FJ": "0.46"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "55",
+      "FJ": "0.47"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "135",
+      "FJ": "0.48"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "55",
+      "NE": "55",
+      "FJ": "0.51"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "55",
+      "NE": "135",
+      "FJ": "0.53"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "135",
+      "NE": "135",
+      "FJ": "0.57"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "12",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "21",
+      "FJ": "0.39"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "26",
+      "FJ": "0.39"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "35",
+      "FJ": "0.4"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "55",
+      "FJ": "0.4"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "135",
+      "FJ": "0.41"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "26",
+      "FJ": "0.41"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "35",
+      "FJ": "0.41"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "55",
+      "FJ": "0.42"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "135",
+      "FJ": "0.43"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "35",
+      "FJ": "0.43"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "55",
+      "FJ": "0.44"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "135",
+      "FJ": "0.45"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "55",
+      "NE": "55",
+      "FJ": "0.47"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "55",
+      "NE": "135",
+      "FJ": "0.48"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "135",
+      "NE": "135",
+      "FJ": "0.51"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "12",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "14",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "17",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "21",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "26",
+      "FJ": "0.39"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "35",
+      "FJ": "0.39"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "55",
+      "FJ": "0.39"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "135",
+      "FJ": "0.4"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "14",
+      "FJ": "0.4"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "17",
+      "FJ": "0.4"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "21",
+      "FJ": "0.41"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "26",
+      "FJ": "0.41"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "35",
+      "FJ": "0.41"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "55",
+      "FJ": "0.42"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "135",
+      "FJ": "0.42"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "17",
+      "FJ": "0.43"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "21",
+      "FJ": "0.43"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "26",
+      "FJ": "0.44"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "35",
+      "FJ": "0.44"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "55",
+      "FJ": "0.44"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "135",
+      "FJ": "0.45"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "21",
+      "FJ": "0.46"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "26",
+      "FJ": "0.46"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "35",
+      "FJ": "0.47"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "55",
+      "FJ": "0.47"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "135",
+      "FJ": "0.48"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "26",
+      "FJ": "0.48"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "35",
+      "FJ": "0.49"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "55",
+      "FJ": "0.49"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "135",
+      "FJ": "0.5"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "35",
+      "FJ": "0.51"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "55",
+      "FJ": "0.52"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "135",
+      "FJ": "0.53"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "55",
+      "NE": "55",
+      "FJ": "0.55"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "55",
+      "NE": "135",
+      "FJ": "0.56"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "135",
+      "NE": "135",
+      "FJ": "0.59"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "12",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "21",
+      "FJ": "0.24"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "26",
+      "FJ": "0.24"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "35",
+      "FJ": "0.24"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "55",
+      "FJ": "0.24"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "135",
+      "FJ": "0.24"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "26",
+      "FJ": "0.25"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "35",
+      "FJ": "0.25"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "55",
+      "FJ": "0.25"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "135",
+      "FJ": "0.25"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "35",
+      "FJ": "0.26"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "55",
+      "FJ": "0.26"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "135",
+      "FJ": "0.26"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "55",
+      "NE": "55",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "55",
+      "NE": "135",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "135",
+      "NE": "135",
+      "FJ": "0.29"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "12",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "14",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "17",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "21",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "26",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "35",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "55",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "135",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "17",
+      "FJ": "0.3"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "21",
+      "FJ": "0.3"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "26",
+      "FJ": "0.3"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "35",
+      "FJ": "0.3"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "55",
+      "FJ": "0.3"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "135",
+      "FJ": "0.3"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "21",
+      "FJ": "0.31"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "26",
+      "FJ": "0.31"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "35",
+      "FJ": "0.31"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "55",
+      "FJ": "0.31"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "135",
+      "FJ": "0.31"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "26",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "35",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "55",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "135",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "35",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "55",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "135",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "55",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "135",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "135",
+      "NE": "135",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "12",
+      "FJ": "0.32"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "14",
+      "FJ": "0.32"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "17",
+      "FJ": "0.32"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "21",
+      "FJ": "0.32"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "26",
+      "FJ": "0.32"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "35",
+      "FJ": "0.32"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "55",
+      "FJ": "0.32"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "135",
+      "FJ": "0.32"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "14",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "17",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "21",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "26",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "35",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "55",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "135",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "17",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "21",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "26",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "35",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "55",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "135",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "21",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "26",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "35",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "55",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "135",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "26",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "35",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "55",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "135",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "35",
+      "FJ": "0.37"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "55",
+      "FJ": "0.37"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "135",
+      "FJ": "0.37"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "55",
+      "NE": "55",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "55",
+      "NE": "135",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "P",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "135",
+      "NE": "135",
+      "FJ": "0.39"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "12",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "17",
+      "FJ": "0.27"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "21",
+      "FJ": "0.27"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "26",
+      "FJ": "0.27"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "35",
+      "FJ": "0.27"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "55",
+      "FJ": "0.27"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "135",
+      "FJ": "0.27"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "21",
+      "FJ": "0.27"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "26",
+      "FJ": "0.27"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "35",
+      "FJ": "0.27"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "55",
+      "FJ": "0.27"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "135",
+      "FJ": "0.27"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "26",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "35",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "55",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "135",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "35",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "55",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "135",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "55",
+      "NE": "55",
+      "FJ": "0.29"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "55",
+      "NE": "135",
+      "FJ": "0.29"
+    },
+    {
+      "RD": "P",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "135",
+      "NE": "135",
+      "FJ": "0.3"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "12",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "21",
+      "FJ": "0.24"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "26",
+      "FJ": "0.25"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "35",
+      "FJ": "0.26"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "55",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "135",
+      "FJ": "0.29"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "26",
+      "FJ": "0.25"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "35",
+      "FJ": "0.26"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "55",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "135",
+      "FJ": "0.29"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "35",
+      "FJ": "0.26"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "55",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "135",
+      "FJ": "0.29"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "55",
+      "NE": "55",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "55",
+      "NE": "135",
+      "FJ": "0.29"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "135",
+      "NE": "135",
+      "FJ": "0.29"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "12",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "14",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "17",
+      "FJ": "0.3"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "21",
+      "FJ": "0.31"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "26",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "35",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "55",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "135",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "17",
+      "FJ": "0.3"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "21",
+      "FJ": "0.31"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "26",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "35",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "55",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "135",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "21",
+      "FJ": "0.31"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "26",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "35",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "55",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "135",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "26",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "35",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "55",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "135",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "35",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "55",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "135",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "55",
+      "NE": "55",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "55",
+      "NE": "135",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "135",
+      "NE": "135",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "12",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "17",
+      "FJ": "0.19"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "21",
+      "FJ": "0.21"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "26",
+      "FJ": "0.22"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "35",
+      "FJ": "0.24"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "55",
+      "FJ": "0.26"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "135",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "21",
+      "FJ": "0.21"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "26",
+      "FJ": "0.22"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "35",
+      "FJ": "0.24"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "55",
+      "FJ": "0.26"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "135",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "26",
+      "FJ": "0.22"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "35",
+      "FJ": "0.24"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "55",
+      "FJ": "0.26"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "135",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "35",
+      "FJ": "0.24"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "55",
+      "FJ": "0.26"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "135",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "55",
+      "NE": "55",
+      "FJ": "0.26"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "55",
+      "NE": "135",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "135",
+      "NE": "135",
+      "FJ": "0.28"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "12",
+      "FJ": "0.2"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "14",
+      "FJ": "0.22"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "17",
+      "FJ": "0.25"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "21",
+      "FJ": "0.27"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "26",
+      "FJ": "0.29"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "35",
+      "FJ": "0.31"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "55",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "12",
+      "NE": "135",
+      "FJ": "0.37"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "14",
+      "FJ": "0.22"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "17",
+      "FJ": "0.25"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "21",
+      "FJ": "0.27"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "26",
+      "FJ": "0.29"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "35",
+      "FJ": "0.31"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "55",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "14",
+      "NE": "135",
+      "FJ": "0.37"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "17",
+      "FJ": "0.25"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "21",
+      "FJ": "0.27"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "26",
+      "FJ": "0.29"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "35",
+      "FJ": "0.31"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "55",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "17",
+      "NE": "135",
+      "FJ": "0.37"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "21",
+      "FJ": "0.27"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "26",
+      "FJ": "0.29"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "35",
+      "FJ": "0.31"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "55",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "21",
+      "NE": "135",
+      "FJ": "0.37"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "26",
+      "FJ": "0.29"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "35",
+      "FJ": "0.31"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "55",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "26",
+      "NE": "135",
+      "FJ": "0.37"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "35",
+      "FJ": "0.31"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "55",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "35",
+      "NE": "135",
+      "FJ": "0.37"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "55",
+      "NE": "55",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "55",
+      "NE": "135",
+      "FJ": "0.37"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "CARR. PONTA DO DENTE",
+      "NP": "135",
+      "NE": "135",
+      "FJ": "0.37"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "12",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "21",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "26",
+      "FJ": "0.35"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "35",
+      "FJ": "0.37"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "55",
+      "FJ": "0.4"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "135",
+      "FJ": "0.43"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "26",
+      "FJ": "0.35"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "35",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "55",
+      "FJ": "0.41"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "135",
+      "FJ": "0.44"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "35",
+      "FJ": "0.39"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "55",
+      "FJ": "0.42"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "135",
+      "FJ": "0.45"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "55",
+      "NE": "55",
+      "FJ": "0.43"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "55",
+      "NE": "135",
+      "FJ": "0.47"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "135",
+      "NE": "135",
+      "FJ": "0.49"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "12",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "14",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "17",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "21",
+      "FJ": "0.39"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "26",
+      "FJ": "0.41"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "35",
+      "FJ": "0.44"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "55",
+      "FJ": "0.47"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "135",
+      "FJ": "0.51"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "17",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "21",
+      "FJ": "0.39"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "26",
+      "FJ": "0.42"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "35",
+      "FJ": "0.45"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "55",
+      "FJ": "0.48"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "135",
+      "FJ": "0.52"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "21",
+      "FJ": "0.39"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "26",
+      "FJ": "0.42"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "35",
+      "FJ": "0.45"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "55",
+      "FJ": "0.49"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "135",
+      "FJ": "0.53"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "26",
+      "FJ": "0.43"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "35",
+      "FJ": "0.46"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "55",
+      "FJ": "0.49"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "135",
+      "FJ": "0.53"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "35",
+      "FJ": "0.46"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "55",
+      "FJ": "0.5"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "135",
+      "FJ": "0.54"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "55",
+      "NE": "55",
+      "FJ": "0.51"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "55",
+      "NE": "135",
+      "FJ": "0.56"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "PROF. COMPLETA",
+      "CR": "HPSTC",
+      "NP": "135",
+      "NE": "135",
+      "FJ": "0.57"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "12",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "14",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "17",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "21",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "26",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "35",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "55",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "135",
+      "FJ": "U"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "17",
+      "FJ": "0.24"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "21",
+      "FJ": "0.26"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "26",
+      "FJ": "0.29"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "35",
+      "FJ": "0.32"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "55",
+      "FJ": "0.35"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "135",
+      "FJ": "0.39"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "21",
+      "FJ": "0.27"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "26",
+      "FJ": "0.29"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "35",
+      "FJ": "0.32"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "55",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "135",
+      "FJ": "0.4"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "26",
+      "FJ": "0.3"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "35",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "55",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "135",
+      "FJ": "0.41"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "35",
+      "FJ": "0.34"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "55",
+      "FJ": "0.37"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "135",
+      "FJ": "0.42"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "55",
+      "NE": "55",
+      "FJ": "0.39"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "55",
+      "NE": "135",
+      "FJ": "0.44"
+    },
+    {
+      "RD": "E",
+      "AP": "20",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "135",
+      "NE": "135",
+      "FJ": "0.46"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "12",
+      "FJ": "0.22"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "14",
+      "FJ": "0.25"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "17",
+      "FJ": "0.29"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "21",
+      "FJ": "0.32"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "26",
+      "FJ": "0.35"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "35",
+      "FJ": "0.38"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "55",
+      "FJ": "0.42"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "12",
+      "NE": "135",
+      "FJ": "0.47"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "14",
+      "FJ": "0.25"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "17",
+      "FJ": "0.29"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "21",
+      "FJ": "0.32"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "26",
+      "FJ": "0.35"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "35",
+      "FJ": "0.39"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "55",
+      "FJ": "0.43"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "14",
+      "NE": "135",
+      "FJ": "0.48"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "17",
+      "FJ": "0.29"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "21",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "26",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "35",
+      "FJ": "0.39"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "55",
+      "FJ": "0.44"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "17",
+      "NE": "135",
+      "FJ": "0.49"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "21",
+      "FJ": "0.33"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "26",
+      "FJ": "0.36"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "35",
+      "FJ": "0.4"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "55",
+      "FJ": "0.44"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "21",
+      "NE": "135",
+      "FJ": "0.49"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "26",
+      "FJ": "0.37"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "35",
+      "FJ": "0.41"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "55",
+      "FJ": "0.45"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "26",
+      "NE": "135",
+      "FJ": "0.5"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "35",
+      "FJ": "0.41"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "55",
+      "FJ": "0.46"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "35",
+      "NE": "135",
+      "FJ": "0.51"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "55",
+      "NE": "55",
+      "FJ": "0.47"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "55",
+      "NE": "135",
+      "FJ": "0.53"
+    },
+    {
+      "RD": "E",
+      "AP": "25",
+      "PD": "ADENDO ALONGADO 25%",
+      "CR": "HPSTC",
+      "NP": "135",
+      "NE": "135",
+      "FJ": "0.55"
+    }
+  ],
+  "Ka": [
+    {
+      "MM": "Uniforme (motor elétrico, turbina)",
+      "CO": "Uniforme",
+      "Ka": "1"
+    },
+    {
+      "MM": "Uniforme (motor elétrico, turbina)",
+      "CO": "Choque moderado",
+      "Ka": "1.25"
+    },
+    {
+      "MM": "Uniforme (motor elétrico, turbina)",
+      "CO": "Choque severo",
+      "Ka": "1.75"
+    },
+    {
+      "MM": "Choque leve (motor multi-cilindros)",
+      "CO": "Uniforme",
+      "Ka": "1.25"
+    },
+    {
+      "MM": "Choque leve (motor multi-cilindros)",
+      "CO": "Choque moderado",
+      "Ka": "1.5"
+    },
+    {
+      "MM": "Choque leve (motor multi-cilindros)",
+      "CO": "Choque severo",
+      "Ka": "2"
+    },
+    {
+      "MM": "Choque médio (motor de um único cilindro)",
+      "CO": "Uniforme",
+      "Ka": "1.5"
+    },
+    {
+      "MM": "Choque médio (motor de um único cilindro)",
+      "CO": "Choque moderado",
+      "Ka": "1.75"
+    },
+    {
+      "MM": "Choque médio (motor de um único cilindro)",
+      "CO": "Choque severo",
+      "Ka": "2.25"
+    }
+  ],
+  "Kv": [
+    {
+      "AP": "Acionador do tambor do misturador de cimento",
+      "Qv": "3.00"
+    },
+    {
+      "AP": "Acionador do tambor do misturador de cimento",
+      "Qv": "4.00"
+    },
+    {
+      "AP": "Acionador do tambor do misturador de cimento",
+      "Qv": "5.00"
+    },
+    {
+      "AP": "Forno de cimento",
+      "Qv": "5.00"
+    },
+    {
+      "AP": "Forno de cimento",
+      "Qv": "6.00"
+    },
+    {
+      "AP": "Acionadores de fresa de aço",
+      "Qv": "5.00"
+    },
+    {
+      "AP": "Acionadores de fresa de aço",
+      "Qv": "6.00"
+    },
+    {
+      "AP": "Selecionador de milho",
+      "Qv": "5.00"
+    },
+    {
+      "AP": "Selecionador de milho",
+      "Qv": "6.00"
+    },
+    {
+      "AP": "Selecionador de milho",
+      "Qv": "7.00"
+    },
+    {
+      "AP": "Guindaste",
+      "Qv": "5.00"
+    },
+    {
+      "AP": "Guindaste",
+      "Qv": "6.00"
+    },
+    {
+      "AP": "Guindaste",
+      "Qv": "7.00"
+    },
+    {
+      "AP": "Prensa de esmagamento",
+      "Qv": "5.00"
+    },
+    {
+      "AP": "Prensa de esmagamento",
+      "Qv": "6.00"
+    },
+    {
+      "AP": "Prensa de esmagamento",
+      "Qv": "7.00"
+    },
+    {
+      "AP": "Esteira de mineração",
+      "Qv": "5.00"
+    },
+    {
+      "AP": "Esteira de mineração",
+      "Qv": "6.00"
+    },
+    {
+      "AP": "Esteira de mineração",
+      "Qv": "7.00"
+    },
+    {
+      "AP": "Máquina de fabricação de caixa de papel",
+      "Qv": "6.00"
+    },
+    {
+      "AP": "Máquina de fabricação de caixa de papel",
+      "Qv": "7.00"
+    },
+    {
+      "AP": "Máquina de fabricação de caixa de papel",
+      "Qv": "8.00"
+    },
+    {
+      "AP": "Mecanismo do medidor de gás",
+      "Qv": "7.00"
+    },
+    {
+      "AP": "Mecanismo do medidor de gás",
+      "Qv": "8.00"
+    },
+    {
+      "AP": "Mecanismo do medidor de gás",
+      "Qv": "9.00"
+    },
+    {
+      "AP": "Furadeira de baixa potência",
+      "Qv": "7.00"
+    },
+    {
+      "AP": "Furadeira de baixa potência",
+      "Qv": "8.00"
+    },
+    {
+      "AP": "Furadeira de baixa potência",
+      "Qv": "9.00"
+    },
+    {
+      "AP": "Máquina de lavar roupas ",
+      "Qv": "8.00"
+    },
+    {
+      "AP": "Máquina de lavar roupas ",
+      "Qv": "9.00"
+    },
+    {
+      "AP": "Máquina de lavar roupas ",
+      "Qv": "10.00"
+    },
+    {
+      "AP": "Prensa de impressão",
+      "Qv": "9.00"
+    },
+    {
+      "AP": "Prensa de impressão",
+      "Qv": "10.00"
+    },
+    {
+      "AP": "Prensa de impressão",
+      "Qv": "11.00"
+    },
+    {
+      "AP": "Mecanismo de computador",
+      "Qv": "10.00"
+    },
+    {
+      "AP": "Mecanismo de computador",
+      "Qv": "11.00"
+    },
+    {
+      "AP": "Transmissão de automóveis ",
+      "Qv": "10.00"
+    },
+    {
+      "AP": "Transmissão de automóveis ",
+      "Qv": "11.00"
+    },
+    {
+      "AP": "Acionador de antena de radar",
+      "Qv": "10.00"
+    },
+    {
+      "AP": "Acionador de antena de radar",
+      "Qv": "11.00"
+    },
+    {
+      "AP": "Acionador de antena de radar",
+      "Qv": "12.00"
+    },
+    {
+      "AP": "Acionador de propulsor marítmo",
+      "Qv": "10.00"
+    },
+    {
+      "AP": "Acionador de propulsor marítmo",
+      "Qv": "11.00"
+    },
+    {
+      "AP": "Acionador de propulsor marítmo",
+      "Qv": "12.00"
+    },
+    {
+      "AP": "Acionador de motor de avião",
+      "Qv": "10.00"
+    },
+    {
+      "AP": "Acionador de motor de avião",
+      "Qv": "11.00"
+    },
+    {
+      "AP": "Acionador de motor de avião",
+      "Qv": "12.00"
+    },
+    {
+      "AP": "Acionador de motor de avião",
+      "Qv": "13.00"
+    },
+    {
+      "AP": "Giroscópio",
+      "Qv": "12.00"
+    },
+    {
+      "AP": "Giroscópio",
+      "Qv": "13.00"
+    },
+    {
+      "AP": "Giroscópio",
+      "Qv": "14.00"
+    }
+  ],
+  "Qv": [
+    {
+      "VR": "0.01",
+      "Qv": "6.00"
+    },
+    {
+      "VR": "4",
+      "Qv": "8.00"
+    },
+    {
+      "VR": "10.16",
+      "Qv": "10.00"
+    },
+    {
+      "VR": "20.32",
+      "Qv": "12.00"
+    },
+    {
+      "VR": "30.48",
+      "Qv": "14.00"
+    }
+  ],
+  "KVe": [
+    {
+      "Min": 0,
+      "Max": 4,
+      "Qv": "6.00"
+    },
+    {
+      "Min": 0,
+      "Max": 4,
+      "Qv": "7.00"
+    },
+    {
+      "Min": 0,
+      "Max": 4,
+      "Qv": "8.00"
+    },
+    {
+      "Min": 4,
+      "Max": 10.16,
+      "Qv": "8.00"
+    },
+    {
+      "Min": 4,
+      "Max": 10.16,
+      "Qv": "9.00"
+    },
+    {
+      "Min": 4,
+      "Max": 10.16,
+      "Qv": "10.00"
+    },
+    {
+      "Min": 10.16,
+      "Max": 20.32,
+      "Qv": "10.00"
+    },
+    {
+      "Min": 10.16,
+      "Max": 20.32,
+      "Qv": "11.00"
+    },
+    {
+      "Min": 10.16,
+      "Max": 20.32,
+      "Qv": "12.00"
+    },
+    {
+      "Min": 20.32,
+      "Max": null,
+      "Qv": "12.00"
+    },
+    {
+      "Min": 20.32,
+      "Max": null,
+      "Qv": "13.00"
+    },
+    {
+      "Min": 20.32,
+      "Max": null,
+      "Qv": "14.00"
+    }
+  ],
+  "Km": [
+    {
+      "LF": "2.4",
+      "Km": "1.5524"
+    },
+    {
+      "LF": "50",
+      "Km": "1.6"
+    },
+    {
+      "LF": "150",
+      "Km": "1.7"
+    },
+    {
+      "LF": "250",
+      "Km": "1.8"
+    },
+    {
+      "LF": "500",
+      "Km": "2"
+    },
+    {
+      "LF": "600",
+      "Km": "2.1"
+    },
+    {
+      "LF": "745",
+      "Km": "2.23"
+    },
+    {
+      "LF": "890",
+      "Km": "2.36"
+    },
+    {
+      "LF": "1035",
+      "Km": "2.49"
+    },
+    {
+      "LF": "1180",
+      "Km": "2.62"
+    },
+    {
+      "LF": "1325",
+      "Km": "2.75"
+    },
+    {
+      "LF": "1470",
+      "Km": "2.88"
+    },
+    {
+      "LF": "1615",
+      "Km": "3.01"
+    },
+    {
+      "LF": "1760",
+      "Km": "3.14"
+    },
+    {
+      "LF": "1905",
+      "Km": "3.27"
+    },
+    {
+      "LF": "2050",
+      "Km": "3.4"
+    }
+  ],
+  "Ru": [
+    {
+      "RM": "0.1",
+      "Qv": "13.00"
+    },
+    {
+      "RM": "0.4",
+      "Qv": "12.00"
+    },
+    {
+      "RM": "0.8",
+      "Qv": "11.00"
+    },
+    {
+      "RM": "1.6",
+      "Qv": "10.00"
+    },
+    {
+      "RM": "1.6",
+      "Qv": "9.00"
+    },
+    {
+      "RM": "3.2",
+      "Qv": "8.00"
+    },
+    {
+      "RM": "6.3",
+      "Qv": "7.00"
+    },
+    {
+      "RM": "12.5",
+      "Qv": "6.00"
+    },
+    {
+      "RM": "25",
+      "Qv": "5.00"
+    }
+  ],
+  "Material": [
+    {
+      "M": "Aço, carbono",
+      "MPSI": "29.9938584",
+      "GPA": "206.8",
+      "PV": "0.28"
+    },
+    {
+      "M": "Aço, inoxidável",
+      "MPSI": "27.4992048",
+      "GPA": "189.6",
+      "PV": "0.28"
+    },
+    {
+      "M": "Aço, ligas",
+      "MPSI": "29.9938584",
+      "GPA": "206.8",
+      "PV": "0.28"
+    },
+    {
+      "M": "Cobre berílio",
+      "MPSI": "36.0129354",
+      "GPA": "248.3",
+      "PV": "0.64"
+    },
+    {
+      "M": "Ferro, fundido, cinza",
+      "MPSI": "14.9969292",
+      "GPA": "103.4",
+      "PV": "0.28"
+    },
+    {
+      "M": "Ferro, fundido, dúctil",
+      "MPSI": "24.4969182",
+      "GPA": "168.9",
+      "PV": "0.3"
+    },
+    {
+      "M": "Ferro, fundido, maleável",
+      "MPSI": "25.0045512",
+      "GPA": "172.4",
+      "PV": "0.3"
+    },
+    {
+      "M": "Latão, bronze",
+      "MPSI": "15.9976914",
+      "GPA": "110.3",
+      "PV": "0.33"
+    },
+    {
+      "M": "Ligas de alumínio",
+      "MPSI": "10.3992246",
+      "GPA": "71.7",
+      "PV": "0.34"
+    },
+    {
+      "M": "Ligas de magnésio",
+      "MPSI": "6.4977024",
+      "GPA": "44.8",
+      "PV": "0.33"
+    },
+    {
+      "M": "Ligas de níquel",
+      "MPSI": "29.9938584",
+      "GPA": "206.8",
+      "PV": "0.3"
+    },
+    {
+      "M": "Ligas de titânio",
+      "MPSI": "16.5053244",
+      "GPA": "113.8",
+      "PV": "0.34"
+    },
+    {
+      "M": "Ligas de zinco",
+      "MPSI": "11.9946426",
+      "GPA": "82.7",
+      "PV": "0.33"
+    }
+  ]
+}

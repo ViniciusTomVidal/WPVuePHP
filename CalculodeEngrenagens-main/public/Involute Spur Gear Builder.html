@@ -1,0 +1,1319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0232)http://hessmer.org/gears/InvoluteSpurGearBuilder.html?circularPitch=8&pressureAngle=20&clearance=0.05&backlash=0.05&profileShift=0&gear1ToothCount=30&gear1CenterHoleDiamater=4&gear2ToothCount=8&gear2CenterHoleDiamater=4&showOption=3 -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Involute Spur Gear Builder</title>
+  
+  <meta name="description" content="Involute spur gear builder with SVG output. Licensed under the MIT license (http://opensource.org/licenses/mit-license.php). Copyright 2020 Dr. Rainer Hessmer">
+  <meta name="author" content="Dr. Rainer Hessmer">
+  <style type="text/css">
+    body {
+      font: 14px/20px 'Helvetica Neue Light', HelveticaNeue-Light, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+    textarea {
+      font: 12px/20px Monaco, monospace;
+      border: 1px solid #CCC;
+      border-radius: 3px;
+      background: LightGray ;
+      padding: 10px;
+      width: 800px;
+    }
+    .parametersdiv {
+      border: 1px solid black;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      padding: 10px;
+    }
+    .svgdiv {
+      border: 1px solid black;
+      padding: 10px;
+    }
+  </style>
+
+  <script type="text/javascript" src="./Involute Spur Gear Builder_files/clipper_unminified.js.baixados"></script>
+  <script type="text/javascript" src="./Involute Spur Gear Builder_files/svg.js.baixados"></script>
+  <script type="text/javascript" src="./Involute Spur Gear Builder_files/svg.path.js.baixados"></script>
+  <script type="text/javascript" src="./Involute Spur Gear Builder_files/svg.export.js.baixados"></script>
+  <script type="text/javascript" src="./Involute Spur Gear Builder_files/svg.pan-zoom.js.baixados"></script>
+  <script type="module" src="./Involute Spur Gear Builder_files/parameters.js.baixados"></script>
+  <script type="module" src="./Involute Spur Gear Builder_files/status.js.baixados"></script>
+  <script type="module">
+    import { Parameters } from './lib/modules/parameters.js';
+    import { StatusCode, Status } from './lib/modules/status.js';
+
+    // Hook up event handlers
+    window.addEventListener("load", onLoad);
+    document.querySelector('#update').addEventListener('click', update)
+
+    const ORIGIN = {X: 0, Y: 0};
+    const CLIPPER_SCALE = 100000;
+    const CLIPPER_LIGHTEN_FACTOR = 0.0005;
+
+    var drawingWidth;
+    var drawingHeight;
+    var clipper;
+    var drawing;
+    var mainGroup;
+    var parameters;
+
+    function getParameterDefinitions() {
+      return [
+        { name: 'circularPitch', caption: 'Circular pitch (the circumference of the pitch circle divided by the number of teeth):', type: 'float', initial: 8 },
+        { name: 'pressureAngle', caption: 'Pressure Angle (common values are 14.5, 20 and 25 degrees):', type: 'float', initial: 20 },
+        { name: 'clearance', caption: 'Clearance (minimal distance between the apex of a tooth and the trough of the other gear; in length units):', type: 'float', initial: 0.05 },
+        { name: 'backlash', caption: 'Backlash (minimal distance between meshing gears; in length units):', type: 'float', initial: 0.05 },
+        { name: 'profileShift', caption: 'Profile Shift (indicates what portion of gear one\'s addendum height should be shifted to gear two. E.g., a value of 0.1 means the adddendum of gear two is increased by a factor of 1.1 while the height of the addendum of gear one is reduced to 0.9 of its normal height):', type: 'float', initial: 0.0 },
+        { name: 'gear1ToothCount', caption: 'Gear 1 Tooth Count (n1 > 0: external gear; n1 = 0: rack; n1 < 0: internal gear):', type: 'int', initial: 30 },
+        { name: 'gear1PitchDiameter', caption: 'Gear 1 Pitch Circle Diameter', type: 'float', isCalculated: true },
+        { name: 'gear1OuterDiameter', caption: 'Gear 1 Outer Circle Diameter', type: 'float', isCalculated: true },
+        { name: 'gear1CenterHoleDiamater', caption: 'Gear 1 Center Hole Diameter (0 for no hole):', type: 'float', initial: 4 },
+        { name: 'gear2ToothCount', caption: 'Gear 2 Tooth Count:', type: 'int', initial: 8 },
+        { name: 'gear2PitchDiameter', caption: 'Gear 2 Pitch Circle Diameter', type: 'float', isCalculated: true },
+        { name: 'gear2OuterDiameter', caption: 'Gear 2 Outer Circle Diameter', type: 'float', isCalculated: true },
+        { name: 'gear2CenterHoleDiamater', caption: 'Gear 2 Center Hole Diameter (0 for no hole):', type: 'float', initial: 4 },
+        { name: 'gearCentersDistance', caption: 'Gear Centers Distance', type: 'float', isCalculated: true },
+        { name: 'showOption', caption: 'Show:', type: 'choice', values: [3, 1, 2], initial: 3, captions: ["Gear 1 and 2", "Gear 1 Only", "Gear 2 Only"]},
+      ];
+    }
+
+    var helperLinesStyle = {
+      color: 'blue',
+      width: 0.04
+    };
+
+    var helperLinesStyle2 = {
+      color: 'green',
+      width: 0.04
+    };
+
+    var markerLinesStyle = {
+      color: 'red',
+      width: 0.04
+    };
+
+    var regularLinesStyle = {
+      color: 'black',
+      width: 0.1
+    };
+
+    var regularLinesStyle2 = {
+      color: 'red',
+      width: 0.04
+    };
+
+    function onLoad() {
+      let drawingDiv = document.getElementById('drawing');
+      drawingWidth = 800;
+      drawingHeight = 800;
+      drawingDiv.style.width = drawingWidth + 'px';
+      drawingDiv.style.height = drawingHeight + 'px';
+
+      let parameterDefinitions = getParameterDefinitions();
+      parameters = new Parameters(parameterDefinitions);
+
+      var parametersDiv = document.getElementById("parameters");
+      parameters.createParamControls(parametersDiv);
+      parameters.updateFromQueryParams();
+
+      drawing = SVG('drawing');
+
+      update();
+    }
+
+    function update() {
+      var gearSet = new GearSet();
+      parameters.injectFromUI(gearSet);
+      let status = gearSet.update();
+      if (!status.ok()) {
+        alert(status.message);
+        return;
+      }
+      parameters.writeToUI(gearSet);
+      parameters.setQueryParameters();
+      
+      display(gearSet);
+      exportSvg(gearSet);
+    }
+
+    function display(gearSet) {
+      drawing.clear();
+      let topGroup = drawing.group();
+      topGroup.panZoom();
+
+      // Scale to fit with some border around
+      var borderRatio = 0.02;
+      var border = borderRatio * Math.max(gearSet.width, gearSet.height); 
+      var totalWidth = gearSet.width + 2 * border;
+      var totalHeight = gearSet.height + 2 * border;
+
+      var scalingFactor = Math.min(drawingWidth / totalWidth, drawingHeight / totalHeight);
+      mainGroup = topGroup.group().scale(scalingFactor, scalingFactor).x(-gearSet.center.X).y(-gearSet.center.Y);
+      mainGroup.dx(drawingWidth / scalingFactor / 2);
+      mainGroup.dy(drawingHeight / scalingFactor / 2);
+
+      //console.log(drawingWidth / scalingFactor / 2);
+      //console.log(gearSet.width / 2);
+
+      mainGroup.stroke(regularLinesStyle).fill('none');
+
+      gearSet.createGraphics(mainGroup);
+    }
+
+    function exportSvg(gearSet) {
+      // For export we use a separate svg instance that is properly sized in mm.
+      // The viewbox is always in px. 1 mm = 3.543307 px (see https://mpetroff.net/2013/08/analysis-of-svg-units/)
+      let pxPerMillimeter = 3.543307;
+      // We leave some space around the escapement drawing.
+      let borderRatio = 0.05;
+      let border = borderRatio * Math.max(gearSet.width, gearSet.height); 
+      let totalWidth = gearSet.width + 2 * border;
+      let totalHeight = gearSet.height + 2 * border;
+      let drawingForExport = SVG('drawingForExport')
+          .size(totalWidth + 'mm', totalHeight + 'mm')
+          .viewbox(gearSet.left - border, -gearSet.top - border, totalWidth, totalHeight); 
+      let topGroup = drawingForExport.group();
+
+      gearSet.createGraphics(topGroup);
+      let exportedSVG = drawingForExport.exportSvg({ whitespace: true });
+      document.getElementById("exportedSVG").value = exportedSVG;
+
+      // based on code from Andreas Köberle (http://stackoverflow.com/questions/10120975/how-to-save-an-svg-generated-by-raphael)
+      let anchor = document.getElementById('downloadSVG');
+      anchor.innerHTML = 'Download SVG';
+      anchor.download =`involute_gear_${gearSet.gear1.toothCount ? gearSet.gear1.toothCount : 0}_to_${gearSet.gear2.toothCount}.svg`;
+      anchor.type = 'image/svg+xml';
+      
+      // see Eric Bidelman: http://updates.html5rocks.com/2012/06/Don-t-Build-Blobs-Construct-Them
+      let blob = new Blob([exportedSVG], {type: 'image/svg+xml'});
+      anchor.href = (window.URL || webkitURL).createObjectURL(blob);
+    }
+
+    class GearSet {
+      update() {
+        // convert circular pitch to diametral pitch
+        this.diametralPitch = Math.PI / this.circularPitch;
+
+        // Gear 2 must always be a regular gear.
+        if (this.gear2ToothCount < 3) {
+          return Status.createError('Gear 2 must have at least three teeth.');
+        }
+        this.gear2 = new RegularGear(
+          this,
+          this.gear2ToothCount,
+          this.gear2CenterHoleDiamater,
+          this.clearance,
+          this.backlash,
+          this.profileShift
+        );
+        this.gear2PitchDiameter = this.gear2.pitchDiameter;
+        this.gear2OuterDiameter = 2 * this.gear2.outerRadius;
+
+        if (this.gear1ToothCount == 0) {
+          // Create rack
+          this.gear1 = new Rack(
+            this,
+            this.clearance,
+            this.backlash,
+            -this.profileShift
+          );
+          this.gear1PitchDiameter = 0;
+          this.gear1OuterDiameter = 0;
+          this.gearCentersDistance = 0;
+
+          this.gear1.isLeft = true;
+          this.gear2.isLeft = false;
+        }
+
+        if (this.gear1ToothCount > 0) {
+          // Regular gear
+          if (this.gear1ToothCount < 3) {
+            return Status.createError('External gear 1 must have at least three teeth.');
+          }
+
+          this.gear1 = new RegularGear(
+            this,
+            this.gear1ToothCount,
+            this.gear1CenterHoleDiamater,
+            this.clearance,
+            this.backlash,
+            -this.profileShift
+          );
+          this.gear1PitchDiameter = this.gear1.pitchDiameter;
+          this.gear1OuterDiameter = 2 * this.gear1.outerRadius;
+          this.gearCentersDistance = this.gear1.pitchRadius + this.gear2.pitchRadius;
+
+          this.gear1.isLeft = true;
+          this.gear2.isLeft = false;
+        }
+
+        if (this.gear1ToothCount < 0) {
+          // Internal gear
+          if (-this.gear1ToothCount - this.gear2ToothCount < 1) {
+            return Status.createError('Internal gear 1 must have at least one more tooth than gear 2.');
+          }
+
+          this.gear1 = new InternalGear(
+            this,
+            -this.gear1ToothCount,
+            this.clearance,
+            this.backlash,
+            -this.profileShift
+          );
+          this.gear1PitchDiameter = this.gear1.pitchDiameter;
+          this.gear1OuterDiameter = 2 * this.gear1.outerRadius;
+          this.gearCentersDistance = this.gear1.pitchRadius - this.gear2.pitchRadius;
+
+          this.gear1.isLeft = false;
+          this.gear2.isLeft = true;
+        }
+
+        this.gear1.connectedGear = this.gear2;
+        this.gear2.connectedGear = this.gear1;
+
+        this.gear1.center = ORIGIN;
+        this.gear2.center = this.calcGear2Center();
+
+        this.gear1.update();
+        this.gear2.update();
+
+        this.topLeft = createPoint(Math.min(this.gear1.topLeft.X, this.gear2.topLeft.X), Math.max(this.gear1.topLeft.Y, this.gear2.topLeft.Y));
+        this.lowerRight = createPoint(Math.max(this.gear1.lowerRight.X, this.gear2.lowerRight.X), Math.min(this.gear1.lowerRight.Y, this.gear2.lowerRight.Y));
+
+        this.width = this.lowerRight.X - this.topLeft.X;
+        this.height = this.topLeft.Y - this.lowerRight.Y;
+        this.center = multiplyVector(0.5, addVectors(this.topLeft, this.lowerRight));
+
+        this.left = this.topLeft.X;
+        this.top = this.topLeft.Y;
+
+        return Status.OK;
+      }
+
+      calcGear2Center() {
+        if (this.gear1ToothCount == 0) {
+          // Rack
+          return addVectors(this.gear1.center, createPoint(this.gear2.pitchRadius, 0));
+        }
+        if (this.gear1ToothCount > 0) {
+          // Regular gear
+          return addVectors(this.gear1.center, createPoint(this.gear1.pitchRadius + this.gear2.pitchRadius, 0));
+        }
+        if (this.gear1ToothCount < 0) {
+          // Inner gear
+          return addVectors(this.gear1.center, createPoint(this.gear1.pitchRadius - this.gear2.pitchRadius, 0));
+        }
+      }
+
+      createGraphics(parent) {
+        let crossMarkerLength = Math.min(this.circularPitch / 2, this.width / 50);
+        if ((this.showOption & 2) > 0) {
+          // show gear 2
+          this.gear2.createGraphics(parent, crossMarkerLength);
+        }
+        if ((this.showOption & 1) > 0) {
+          // show gear 1
+          this.gear1.createGraphics(parent, crossMarkerLength);
+        }
+      }
+    }
+
+    class RegularGear {
+      constructor(gearSet, toothCount, centerHoleDiameter, clearance, backlash, profileShift, addendumExtension = 0) {
+        this.gearSet = gearSet;
+        this.toothCount = toothCount;
+
+        this.centerHoleDiameter = centerHoleDiameter;
+        this.clearance = clearance;
+        this.backlash = backlash;
+        this.profileShift = profileShift;
+
+        // addendumExtension is only set for a pinion that is used as a cutter of an inner gear. In this case the 
+        // addendum extension creates the clearance between the inner gear and its pinion.
+        this.addendumExtension = addendumExtension;
+
+        this.angle = 0; // angle in rad of the complete gear (changes during rotation animation)
+
+        // Pitch diameter: Diameter of pitch circle.
+        this.pitchDiameter = this.toothCount / this.gearSet.diametralPitch;
+        this.pitchRadius = this.pitchDiameter / 2;
+
+        // Addendum: Radial distance from pitch circle to outside circle.
+        this.addendum = 1 / this.gearSet.diametralPitch;
+        
+        // Typically no profile shift is used meaning that this.shiftedAddendum = this.addendum 
+        this.shiftedAddendum = this.addendum * (1 + this.profileShift);
+
+        //Outer Circle
+        this.outerRadius = this.pitchRadius + this.shiftedAddendum + this.addendumExtension;
+        this.angleToothToTooth = degreeToRad(360 / this.toothCount);
+      }
+
+      update() {
+        this.topLeft = addVectors(createPoint(-this.outerRadius, this.outerRadius), this.center);
+        this.lowerRight = addVectors(createPoint(this.outerRadius, -this.outerRadius), this.center);
+
+        this.toothPointsTemplate = this.createToothPath();
+      }
+
+      createGraphics(parent, crossMarkerLength) {
+        var gearGroup = parent.group();
+        var helperGroup = gearGroup.group();
+        helperGroup.stroke(helperLinesStyle).fill('none');
+        // Pitch circle
+        drawCircle(helperGroup, ORIGIN, this.pitchRadius);
+        // Outer circle
+        drawCircle(helperGroup, ORIGIN, this.outerRadius);
+
+        drawCross(helperGroup, ORIGIN, crossMarkerLength);
+
+        var regularGroup = gearGroup.group();
+        regularGroup.stroke(regularLinesStyle).fill('none');
+
+        if (this.centerHoleDiameter > 0) {
+          drawCircle(regularGroup, ORIGIN, this.centerHoleDiameter / 2);
+        }
+
+        //let {cutterPath, lowerLeftCorner} = this.createToothCutter();
+        //insertSvgPath(regularGroup, cutterPath, /* isClosed=*/true);
+
+        //let toothSectorPath = this.createToothSectorPath();
+        //insertSvgPath(regularGroup, toothSectorPath, /* isClosed=*/true);
+
+        //let {cutterPaths, lowerLeftCornerIndex} = this.createToothCutterPaths();
+        //cutterPaths.forEach(toothCutterPath => insertSvgPath(regularGroup, toothCutterPath, /* isClosed=*/true));
+
+        //let cornersPath = [];
+        //cutterPaths.forEach(toothCutterPath => cornersPath.push(clonePoint(toothCutterPath[lowerLeftCornerIndex])));
+
+        //var helperGroup2 = gearGroup.group();
+        //helperGroup2.stroke(markerLinesStyle).fill('none');
+        //drawCircles(helperGroup2, cornersPath, 0.0001);
+        //insertSvgPath(helperGroup2, cornersPath, /* isClosed=*/true)
+
+
+        //let halfToothPath = this.createHalfToothPath();
+        //insertSvgPath(regularGroup, halfToothPath, /* isClosed=*/false);
+        //drawCircles(helperGroup, halfToothPath, 0.0002);
+        //drawCircle(helperGroup, toothCutoutPath[dedendumStartIndex], 0.1);
+
+        //let toothPath = this.createToothPath();
+        //insertSvgPath(regularGroup, toothPath, /* isClosed=*/false);
+        //drawCircles(helperGroup, toothPath, 0.01);
+
+        //let nextIndex = (dedendumStartIndex - 1) % toothCutoutPath.length;
+        //drawCircle(helperGroup, toothCutoutPath[nextIndex], 0.1);
+
+        //let corners = [];
+        //cutterPaths.forEach(toothCutterPath => corners.push(toothCutterPath[lowerLeftCornerIndex]));
+        //drawCircles(helperGroup, corners, 0.1);
+
+        this.insertGearSvgPath(regularGroup);
+
+        gearGroup.move(this.center.X, this.center.Y);
+      }
+
+      createToothSectorPath() {
+        // create outer circle sector covering one tooth
+        return [
+          ORIGIN,
+          createPoint(0, this.outerRadius),
+          rotatePointAroundCenter(createPoint(0, this.outerRadius), ORIGIN, this.angleToothToTooth)
+        ];
+      }
+
+      insertGearSvgPath(group) {
+        let svgPath = group.path();
+        var firstSvgPoint;
+        // Next create N (tooth count) rotated tooth paths and connect them via arcs.
+        var angleOffset;
+        if (this.isLeft) {
+          // rotate counter clockwise so that the starter tooth points east.
+          angleOffset = -Math.PI / 2 - this.angleToothToTooth / 2;
+        } else {
+          // rotate clock wise so that the starter tooth meshes with the left gear.
+          angleOffset = Math.PI / 2 - this.angleToothToTooth;
+        }
+
+        for (let i = 0; i < this.toothCount; i++) {
+          let angle = i * this.angleToothToTooth + angleOffset;
+          let rotatedToothPoints = rotatePointsAroundCenter(this.toothPointsTemplate, ORIGIN, angle);
+
+          if (i == 0) {
+            // Start with the second point since the closing arc of the last tooth will add the first point.
+            addLineSegmentsToPath(svgPath, rotatedToothPoints.slice(1), /*moveToFirst=*/ true);
+            firstSvgPoint = createSvgPoint(rotatedToothPoints[0]);
+          } else {
+            // connect the previous last point with an arc to the new, rotated tooth points.
+            svgPath.A(this.outerRadius, this.outerRadius, 0, 0, 1, createSvgPoint(rotatedToothPoints[0]));
+            addLineSegmentsToPath(svgPath, rotatedToothPoints.slice(1));
+          }
+        }
+
+        // Close the path by connecting the final arc.
+        svgPath.A(this.outerRadius, this.outerRadius, 0, 0, 1, firstSvgPoint);
+        // Close the path
+        svgPath.Z();
+
+        return svgPath;
+      }
+
+      createToothPath() {
+        let halfToothPath = this.createHalfToothPath();
+
+        let toothPath = [];
+        // Add mirrored half tooth
+        for (let i = halfToothPath.length - 1; i > 0; i--) {
+          let point = halfToothPath[i];
+          toothPath.push(createPoint(-point.X, point.Y));
+        }
+        // Add the unmirrored original half.
+        halfToothPath.forEach(point => toothPath.push(point));
+
+        return toothPath;
+      }
+
+      createHalfToothPath() {
+        let toothCutoutPath = this.createToothCutoutPath();
+
+        // Intersect with a slice that is half the pitch angle.
+        let angle = this.angleToothToTooth / 2;
+        let cosAngle = Math.cos(angle);
+        let sinAngle = Math.sin(angle);
+
+        let halfPointOnCircle = {X: -this.outerRadius * sinAngle, Y: this.outerRadius * cosAngle};
+        let tangentIntercept = {
+          X: 0,
+          Y: this.outerRadius * (cosAngle + sinAngle * sinAngle / cosAngle)
+        };
+
+        let intersectPath = [
+          ORIGIN,
+          halfPointOnCircle,
+          tangentIntercept
+        ];
+        ClipperLib.JS.ScaleUpPath(intersectPath,  CLIPPER_SCALE);
+
+        var clipper = new ClipperLib.Clipper();
+        clipper.AddPath(toothCutoutPath, ClipperLib.PolyType.ptSubject, true);  // true means closed path;
+        clipper.AddPath(intersectPath, ClipperLib.PolyType.ptClip, true);  // true means closed path;
+
+        let solutionPaths = new ClipperLib.Paths();
+        var succeeded = clipper.Execute(ClipperLib.ClipType.ctIntersection, solutionPaths, ClipperLib.PolyFillType.pftNonZero, ClipperLib.PolyFillType.pftNonZero);
+
+        let lightenedPaths = ClipperLib.JS.Lighten(solutionPaths[0], this.gearSet.circularPitch * CLIPPER_LIGHTEN_FACTOR * CLIPPER_SCALE);
+        var clippedToothCutoutPath = lightenedPaths[0];
+
+        ClipperLib.JS.ScaleDownPath(clippedToothCutoutPath, CLIPPER_SCALE);
+
+        // Find dedendum start point at x == 0;
+        let dedendumStartIndex = clippedToothCutoutPath.findIndex((point) => Math.abs(point.X) < 0.01 * this.addendum && point.Y < this.pitchRadius);
+        //console.log("dedendumStartIndex: ", dedendumStartIndex);
+
+        // Start from the dedendumStartIndex and iterate over all points until the next point is outside of the outer radius.
+        let halfToothPath = [clippedToothCutoutPath[dedendumStartIndex]];
+        var currentIndex = dedendumStartIndex;
+        let squaredOuterRadius = this.outerRadius * this.outerRadius;
+        let getNextIndex = (index) => (index - 1 + clippedToothCutoutPath.length) % clippedToothCutoutPath.length
+        while (true) {
+          let nextIndex = getNextIndex(currentIndex);
+          if (squaredLenth(clippedToothCutoutPath[nextIndex]) >= squaredOuterRadius) {
+            break;
+          }
+          currentIndex = nextIndex;
+          halfToothPath.push(clippedToothCutoutPath[currentIndex]);
+        }
+
+        // Interpolate between the last point in the trimmed path and the next point
+        // to find the point that intersects with the outer radius.
+        let lastInsidePoint = clippedToothCutoutPath[currentIndex];
+        let lastInsideLength = length(lastInsidePoint);
+
+        let firstOnOrOutsidePoint = clippedToothCutoutPath[getNextIndex(currentIndex)];
+        let firstOnOrOutsideLength = length(firstOnOrOutsidePoint);
+
+        let ratio = (this.outerRadius - lastInsideLength) / (firstOnOrOutsideLength - lastInsideLength);
+
+        let vectorBetweenPoints = subtractVectors(firstOnOrOutsidePoint, lastInsidePoint);
+        let pointOnOuterRadius = addVectors(lastInsidePoint, multiplyVector(ratio, vectorBetweenPoints));
+
+        halfToothPath.push(pointOnOuterRadius);
+
+        return halfToothPath;
+      }
+
+      createToothCutoutPath() {
+        let {cutterPaths, lowerLeftCornerIndex} = this.createToothCutterPaths();
+
+        // Also create a path from one of the addendum corners to get smooth undercut curves.
+        let cornersPath = [];
+        cutterPaths.forEach(toothCutterPath => cornersPath.push(clonePoint(toothCutterPath[lowerLeftCornerIndex])));
+        cornersPath.reverse();
+
+        const combinedPaths = [...cutterPaths];
+        combinedPaths.push(cornersPath);
+
+        var clipper = new ClipperLib.Clipper();
+        combinedPaths.forEach(path => {
+          ClipperLib.JS.ScaleUpPath(path,  CLIPPER_SCALE);
+          clipper.AddPath(path, ClipperLib.PolyType.ptSubject, true);  // true means closed path;
+        });
+
+        // Union the shapes of all the tooth cutter paths.
+        var solutionPaths = new ClipperLib.Paths();
+        var succeeded = clipper.Execute(ClipperLib.ClipType.ctUnion, solutionPaths, ClipperLib.PolyFillType.pftNonZero, ClipperLib.PolyFillType.pftNonZero);
+
+        return solutionPaths[0];
+      }
+
+      createToothCutterPaths() {
+        let angleStepSize = Math.PI / 600;
+       
+        let {cutterPath, lowerLeftCornerIndex} = this.createToothCutter();
+        let cutterPaths = [cutterPath];
+        
+        // To create the tooth profile we move the (virtual) infinite gear and then turn the resulting cutter position back. 
+        // For illustration see http://lcamtuf.coredump.cx/gcnc/ch6/, section 'Putting it all together'.
+        // We continue until the moved tooth cutter's lower left corner is outside of the outer circle of the gear.
+        // Going any further will no longer influence the shape of the tooth.
+        var stepCounter = 0;
+        while (true) {
+          let angle = stepCounter * angleStepSize;
+          let xTranslation = angle * this.pitchRadius;
+
+          // we move in both directions
+          var transformedCutterPath = createTranslatedPath(cutterPath, xTranslation, 0);
+          transformedCutterPath = rotatePointsAroundCenter(transformedCutterPath, ORIGIN, angle);
+
+          cutterPaths.push(transformedCutterPath)
+
+          // Rotate in opposite direction. This is required to get the undercuts.
+          //console.log("xTranslation: " + xTranslation);
+          transformedCutterPath = createTranslatedPath(cutterPath, -xTranslation, 0);
+          transformedCutterPath = rotatePointsAroundCenter(transformedCutterPath, ORIGIN, -angle);
+
+          cutterPaths.unshift(transformedCutterPath);
+
+          //var movedLowerLeftCorner = createTranslatedPoint(lowerLeftCorner, xTranslation, 0);
+          //movedLowerLeftCorner = rotatePointAroundCenter(movedLowerLeftCorner, ORIGIN, angle);
+          
+          if (length(transformedCutterPath[lowerLeftCornerIndex]) > this.outerRadius) {
+            // The cutter is now completely outside the gear and additional steps will no longer influences the shape of the gear tooth.
+            break;
+          }
+
+          stepCounter++;
+       }
+
+       return {
+          cutterPaths: cutterPaths,
+          lowerLeftCornerIndex: lowerLeftCornerIndex 
+        }
+      }
+      
+      createToothCutter() {
+        // we create a trapezoidal cutter as described at http://lcamtuf.coredump.cx/gcnc/ch6/ under the section 'Putting it all together'
+        let toothWidth = this.gearSet.circularPitch / 2;
+        //console.log("toothWidth: " + toothWidth);
+        //console.log("addendum: " + this.addendum);
+        //console.log("shiftedAddendum: " + this.shiftedAddendum);
+        //console.log("clearance: " + this.clearance);
+        
+        let cutterDepth = this.addendum + this.clearance;
+        let cutterOutsideLength = 3 * this.addendum;
+        //console.log("cutterDepth: " + cutterDepth);
+        //console.log("cutterOutsideLength: " + cutterOutsideLength);
+        
+        let cosPressureAngle = Math.cos(this.gearSet.pressureAngle * Math.PI / 180);
+        let tanPressureAngle = Math.tan(this.gearSet.pressureAngle * Math.PI / 180);
+
+        // If a positive backlash is defined then we widen the trapezoid accordingly.
+        // Each side of the tooth needs to widened by a fourth of the backlash (perpendiculr to cutter faces).
+        let dx = this.backlash / 4 / cosPressureAngle;
+
+        // Create the cutout at 6 o'clock position pointing upwards
+        let yBottom = this.pitchRadius + this.profileShift * this.addendum - cutterDepth;
+        let yTop = this.pitchRadius + this.profileShift * this.addendum + cutterOutsideLength;
+
+        let lowerRightCorner = createPoint(toothWidth / 2 + dx - tanPressureAngle * cutterDepth, yBottom);
+        let upperRightCorner = createPoint(toothWidth / 2 + dx  + tanPressureAngle * cutterOutsideLength, yTop);
+        let upperLeftCorner = createPoint(-upperRightCorner.X, upperRightCorner.Y);
+        let lowerLeftCorner = createPoint(-lowerRightCorner.X, lowerRightCorner.Y);
+        
+        let cutterPath = [lowerLeftCorner, upperLeftCorner, upperRightCorner, lowerRightCorner];
+
+        return {
+          cutterPath: cutterPath,
+          lowerLeftCornerIndex: 0 
+        }
+      }
+    }
+
+    class InternalGear {
+      constructor(gearSet, toothCount, clearance, backlash, profileShift) {
+        this.gearSet = gearSet;
+        this.toothCount = toothCount;
+        this.clearance = clearance;
+        this.backlash = backlash;
+        this.profileShift = profileShift;
+
+        this.angle = 0; // angle in rad of the complete gear (changes during rotation animation)
+
+        // Pitch diameter: Diameter of pitch circle.
+        this.pitchDiameter = this.toothCount / this.gearSet.diametralPitch;
+        this.pitchRadius = this.pitchDiameter / 2;
+
+        // Addendum: Radial distance from pitch circle to inside circle.
+        this.addendum = 1 / this.gearSet.diametralPitch;
+        
+        // Typically no profile shift is used meaning that this.shiftedAddendum = this.addendum 
+        this.shiftedAddendum = this.addendum * (1 + this.profileShift);
+
+        // Inner Circle (addendum)
+        this.innerRadius = this.pitchRadius - this.shiftedAddendum;
+
+        // Dedendum Circle
+        this.dedendumRadius = this.pitchRadius + this.shiftedAddendum;
+
+        this.angleToothToTooth = degreeToRad(360 / this.toothCount);
+
+        // Outer circle; just a circle that is greater than the dedendum circle.
+        this.outerRadius = this.pitchRadius + 2.5 * this.addendum;
+      }
+
+      update() {
+        this.topLeft = addVectors(createPoint(-this.outerRadius, this.outerRadius), this.center);
+        this.lowerRight = addVectors(createPoint(this.outerRadius, -this.outerRadius), this.center);
+
+        this.pinion = this.connectedGear;
+        this.toothPointsTemplate = this.createToothPath();
+      }
+
+      createGraphics(parent, crossMarkerLength) {
+        let gearGroup = parent.group();
+        let helperGroup = gearGroup.group();
+        helperGroup.stroke(helperLinesStyle).fill('none');
+        // Inner circle (addendum)
+        drawCircle(helperGroup, ORIGIN, this.innerRadius);
+        // Pitch circle
+        drawCircle(helperGroup, ORIGIN, this.pitchRadius);
+        // Dedendum circle
+        drawCircle(helperGroup, ORIGIN, this.dedendumRadius);
+
+        drawCross(helperGroup, ORIGIN, crossMarkerLength);
+
+        //let zeroedHalfCutterPath = this.createZeroedHalfToothCutterPath();
+        //insertSvgPath(helperGroup, zeroedHalfCutterPath, true);
+
+        //let halfToothSectorPath = this.createHalfToothSectorPath();
+        //insertSvgPath(helperGroup, halfToothSectorPath, /* isClosed=*/true);
+
+        let regularGroup = gearGroup.group();
+        regularGroup.stroke(regularLinesStyle).fill('none');
+
+        //let halfToothPath = this.createEnlargedPinionHalfToothPath();
+        //insertSvgPath(regularGroup, halfToothPath, /* isClosed=*/false);
+
+        //let zeroedCutterPath = this.createZeroedCutterPath();
+        //insertSvgPath(regularGroup, zeroedCutterPath, false);
+
+        let helperGroup2 = gearGroup.group();
+        helperGroup2.stroke(helperLinesStyle2).fill('none');
+        
+        //let zeroedHalfCutterPath = this.createZeroedHalfToothCutterPath();
+        //insertSvgPath(helperGroup2, zeroedHalfCutterPath, true);
+
+        //let halfToothSectorPath = this.createHalfToothSectorPath();
+        //insertSvgPath(helperGroup2, halfToothSectorPath, true);
+
+        //let cutterPaths = this.createHalfToothCutterPaths(zeroedHalfCutterPath);
+        //cutterPaths.forEach(path => insertSvgPath(helperGroup2, path, true));
+
+        //let cornersPaths = this.createCornersPaths(cutterPaths);
+        //cornersPaths.forEach(path => insertSvgPath(helperGroup, path, true));
+
+        let markerGroup = gearGroup.group();
+        markerGroup.stroke(markerLinesStyle).fill('none');
+
+        /*
+        cornersPaths.forEach(path => {
+          drawCircle(markerGroup, path[0], 0.01);
+          drawCircle(markerGroup, path.slice(-1)[0], 0.01);
+        });
+        cornersPaths[0].slice(0,5).forEach(point => {
+          drawCircle(markerGroup, point, 0.01);
+        });
+        */
+
+        //let edgesPath = this.createEdgesPath(cutterPaths);
+        //insertSvgPath(markerGroup, edgesPath, true);
+        //drawCircles(markerGroup, edgesPath, 0.02);
+
+        //let halfToothPath = this.createHalfToothPath();
+        //insertSvgPath(markerGroup, halfToothPath, false);
+        //drawCircle(markerGroup, halfToothPath[0], 0.01);
+        //drawCircle(markerGroup, halfToothPath.slice(-1)[0], 0.01);
+
+        //let toothPath = this.createToothPath();
+        //insertSvgPath(markerGroup, this.toothPointsTemplate, false);
+
+        this.insertGearSvgPath(regularGroup);
+
+        // Outer circle
+        drawCircle(regularGroup, ORIGIN, this.outerRadius);
+
+        gearGroup.move(this.center.X, this.center.Y);
+      }
+
+      insertGearSvgPath(group) {
+        let svgPath = group.path();
+
+        let firstSvgPoint;
+        var angleOffset;
+        if (this.isLeft) {
+          // rotate counter clockwise so that the starter tooth points east.
+          angleOffset = Math.PI - this.angleToothToTooth / 2;
+        } else {
+          // rotate clock wise so that the starter tooth meshes with the left gear.
+          angleOffset = -this.angleToothToTooth / 2;
+        }
+        for (let i = 0; i < this.toothCount; i++) {
+          let angle = -i * this.angleToothToTooth + angleOffset;
+          let rotatedToothPoints = rotatePointsAroundCenter(this.toothPointsTemplate, ORIGIN, angle);
+
+          if (i == 0) {
+            // Start with the second point since the closing arc of the last tooth will add the first point.
+            addLineSegmentsToPath(svgPath, rotatedToothPoints.slice(1), /*moveToFirst=*/ true);
+            firstSvgPoint = createSvgPoint(rotatedToothPoints[0]);
+          } else {
+            // connect the previous last point with an arc to the new, rotated tooth points.
+            svgPath.A(this.outerRadius, this.outerRadius, 0, 0, 1, createSvgPoint(rotatedToothPoints[0]));
+            addLineSegmentsToPath(svgPath, rotatedToothPoints.slice(1));
+          }
+        }
+
+        // Close the path by connecting the final arc.
+        svgPath.A(this.outerRadius, this.outerRadius, 0, 0, 1, firstSvgPoint);
+        // Close the path
+        svgPath.Z();
+
+        return svgPath;
+      }
+
+      createHalfToothSectorPath() {
+        // create outer circle sector covering half a tooth
+        return [
+          ORIGIN,
+          createPoint(this.outerRadius, 0),
+          rotatePointAroundCenter(createPoint(this.outerRadius, 0), ORIGIN, -this.angleToothToTooth / 2)
+        ];
+      }
+
+      createCornersPaths(cutterPaths) {
+        // Create a paths from each of the corners to avoid ragged edges.
+        let cornersPaths = [];
+        // Ignore the last point which is always the origin.
+        for (let i = 0; i < cutterPaths[0].length - 1; i++) {
+          let cornersPath = [];
+          cutterPaths.forEach(cutterPath => cornersPath.push(clonePoint(cutterPath[i])));
+          cornersPaths.push(cornersPath);
+        }
+
+        return cornersPaths;
+      }
+
+      createEdgesPath(cutterPaths) {
+        // This step is described in the accompanying pdf doc.
+        // Conceptually, first we create shapes by connecting correponding points from the various cutter paths.
+        // Then we connect the top most endpoints of these shapes.
+        // Finally we add the top half of the rightmost shape.
+
+        // Create a paths from each of the corners to avoid ragged edges.
+        let edgesPath = [ORIGIN];
+        // Ignore the last point which is always the origin.
+        for (let i = cutterPaths[0].length - 1; i > 0; i--) {
+          let endPoint1 = cutterPaths[0][i];
+          let endPoint2 = cutterPaths.slice(-1)[0][i];
+
+          if (endPoint1.Y < endPoint2.Y) {
+            edgesPath.push(clonePoint(endPoint1));
+          } else {
+            edgesPath.push(clonePoint(endPoint2));
+          }
+        }
+
+        // Add the top half of the points of the rightmost shape.
+        for (let i = 0; i < (cutterPaths.length + 1) / 2; i++) {
+          edgesPath.push(clonePoint(cutterPaths[i][0]));
+        }
+        
+        return edgesPath;
+      }
+
+      createToothPath() {
+        let halfToothPath = this.createHalfToothPath();
+        let rotatedHalfToothPath = rotatePointsAroundCenter(halfToothPath, ORIGIN, this.angleToothToTooth / 2);
+
+        let toothPath = [...rotatedHalfToothPath];
+        // Add mirrored half tooth
+        for (let i = rotatedHalfToothPath.length - 1; i > 0; i--) {
+          let point = rotatedHalfToothPath[i];
+          toothPath.push(createPoint(point.X, -point.Y));
+        }
+
+        return toothPath;      }
+
+      createHalfToothPath() {
+        let zeroedHalfCutterPath = this.createZeroedHalfToothCutterPath();
+        let cutterPaths = this.createHalfToothCutterPaths(zeroedHalfCutterPath);
+        // Also create a paths from each of the corners to avoid ragged edges.
+        let cornersPaths = this.createCornersPaths(cutterPaths);
+        let edgesPath = this.createEdgesPath(cutterPaths);
+        let halfToothSectorPath = this.createHalfToothSectorPath();
+
+        // Scale them all up to prepare for union and interesction operations.
+        cutterPaths.forEach(path => {
+          ClipperLib.JS.ScaleUpPath(path, CLIPPER_SCALE);
+        });
+        cornersPaths.forEach(path => {
+          ClipperLib.JS.ScaleUpPath(path, CLIPPER_SCALE);
+        });
+        ClipperLib.JS.ScaleUpPath(edgesPath, CLIPPER_SCALE);
+        // The edges path often self intersects. If needed split into non-intersecting paths.
+        let nonIntersectingEdgesPaths = ClipperLib.Clipper.SimplifyPolygon(edgesPath, ClipperLib.PolyFillType.pftNonZero);
+        ClipperLib.JS.ScaleUpPath(halfToothSectorPath, CLIPPER_SCALE);
+        
+        // Union all these shapes then clip with the half tooth sector path.
+        let cutoutFromAllPaths = this.unionAndClipPaths([...cutterPaths, ...cornersPaths, ...nonIntersectingEdgesPaths], halfToothSectorPath);
+
+        // Remove the origin and order the points so that the point intersecting with the addendum is the first point.
+        var indexOfOrigin;
+        for (let i = 0; i < cutoutFromAllPaths.length; i++) {
+          let point = cutoutFromAllPaths[i];
+          if (point.X == 0 && point.Y == 0) {
+            indexOfOrigin = i;
+            break;
+          }
+        }
+        console.log(`Index of origin: ${indexOfOrigin}`);
+        let maxSquaredRadius = 0;
+        let indexMaxSquaredRadius = 0;
+        let halfToothPath = [];
+        for (let i = 1; i < cutoutFromAllPaths.length; i++) {
+          let point = cutoutFromAllPaths[(indexOfOrigin + i) % cutoutFromAllPaths.length];
+          let squaredRadius = squaredLenth(point);
+          if (squaredRadius > maxSquaredRadius) {
+            maxSquaredRadius = squaredRadius;
+            indexMaxSquaredRadius = i - 1;
+          }
+          halfToothPath.push(point);
+        }
+        console.log(`Index of max radius point: ${indexMaxSquaredRadius}`);
+
+        // Shave off the part beyond the max radius point.
+        halfToothPath = halfToothPath.slice(0, indexMaxSquaredRadius + 1);
+
+        let lightenedPaths = ClipperLib.JS.Lighten(halfToothPath, this.gearSet.circularPitch * CLIPPER_LIGHTEN_FACTOR * CLIPPER_SCALE);
+        let lightenedHalfToothPath = lightenedPaths[0];
+        console.log(`Length of lightened half tooth path: ${lightenedHalfToothPath.length}`);
+
+        ClipperLib.JS.ScaleDownPath(lightenedHalfToothPath, CLIPPER_SCALE);
+        return lightenedHalfToothPath.reverse();
+      }
+
+      unionAndClipPaths(scaledUpPaths, scaledUpHalfToothSectorPath) {
+        let orientation = ClipperLib.Clipper.Orientation(scaledUpHalfToothSectorPath);
+
+        let clipper = new ClipperLib.Clipper();
+        scaledUpPaths.forEach(path => {
+          // Make sure the orientation matches.
+          if (ClipperLib.Clipper.Orientation(path) != orientation) {
+            path.reverse();
+          }
+          clipper.AddPath(path, ClipperLib.PolyType.ptSubject, true);  // true means closed path;
+        });
+
+        // Union the shapes of all paths.
+        let solutionPaths = new ClipperLib.Paths();
+        let succeeded = clipper.Execute(ClipperLib.ClipType.ctUnion, solutionPaths, ClipperLib.PolyFillType.pftNonZero, ClipperLib.PolyFillType.pftNonZero);
+
+        clipper = new ClipperLib.Clipper();
+        clipper.AddPath(scaledUpHalfToothSectorPath, ClipperLib.PolyType.ptSubject, true);  // true means closed path;
+        clipper.AddPath(solutionPaths[0], ClipperLib.PolyType.ptClip, true);  // true means closed path;
+
+        solutionPaths = new ClipperLib.Paths();
+        succeeded = clipper.Execute(ClipperLib.ClipType.ctIntersection, solutionPaths, ClipperLib.PolyFillType.pftNonZero, ClipperLib.PolyFillType.pftNonZero);
+        return solutionPaths[0];
+      }
+
+      createHalfToothCutterPaths(zeroedHalfCutterPath) {
+        let gearRatio = this.toothCount / this.pinion.toothCount;
+        
+        // To create the tooth profile we move the (virtual) infinite gear and then turn the resulting cutter position back. 
+        // For illustration see http://lcamtuf.coredump.cx/gcnc/ch6/, section 'Putting it all together'.
+        // We continue until the moved tooth cutter's lower left corner is outside of the outer circle of the gear.
+        // Going any further will no longer influence the shape of the tooth.
+        let angleStepSize = this.angleToothToTooth / 10;
+        //var angleStepSize = Math.PI / Math.sqrt(this.toothCount - this.pinion.toothCount) / halfCount;
+        let cutterPaths = [];
+
+        let pinionRotationAngle = 0;
+        let rotatedCutter = this.createRotatedCutter(zeroedHalfCutterPath, pinionRotationAngle, gearRatio);
+
+        cutterPaths.push(rotatedCutter);
+
+        let desiredSquaredDistance = (this.gearSet.circularPitch / 25) ** 2;
+
+        // Empirical value for when a half tooth is covered.
+        let maxPinionRotationAngle =  Math.PI / Math.sqrt(this.toothCount - this.pinion.toothCount);
+
+        let cutterEndpointIndex = zeroedHalfCutterPath.length - 1;
+        let outerCounter = 0;
+        while(outerCounter < 200 && pinionRotationAngle < maxPinionRotationAngle) {
+          let previousRotatedCutter = rotatedCutter;
+          let previousPinionRotationAngle = pinionRotationAngle;
+          //console.log(`Outer counter ${outerCounter}; pinionRotationAngle: ${pinionRotationAngle}; maxPinionRotationAngle: ${maxPinionRotationAngle}`);
+          outerCounter++;
+
+          let searchingUp = true;
+          let innerCounter = 0;
+          while(innerCounter < 20) {
+            //console.log(`  inner counter ${innerCounter}`);
+            innerCounter++;
+            pinionRotationAngle = previousPinionRotationAngle + angleStepSize;
+            rotatedCutter = this.createRotatedCutter(zeroedHalfCutterPath, pinionRotationAngle, gearRatio);
+
+            // We look at the start and end point of each cutter path. We dtermine rotation angles so that the squared distance between
+            // consecutive start and end points is below an accuracy threshold. 
+            let squaredDistanceStartPoint = squaredDistance(previousRotatedCutter[0], rotatedCutter[0]);
+            let squaredDistanceEndPoint = squaredDistance(previousRotatedCutter[cutterEndpointIndex], rotatedCutter[cutterEndpointIndex]);
+            let actualSquaredDistance = Math.max(squaredDistanceStartPoint, squaredDistanceEndPoint);
+            if (actualSquaredDistance < desiredSquaredDistance / 10) {
+              if (!searchingUp) {
+                // We crossed from too big an angle to one that is small enough.
+                break;
+              } else {
+                angleStepSize = 2 * angleStepSize;
+              }
+            } else if (squaredDistance < desiredSquaredDistance) {
+              // new angle is okay
+              break;
+            } else {
+              // squared distance is too large
+              searchingUp = false;
+              angleStepSize = 0.5 * angleStepSize;
+            }
+          }
+          cutterPaths.push(rotatedCutter);
+          cutterPaths.unshift(this.createRotatedCutter(zeroedHalfCutterPath, -pinionRotationAngle, gearRatio));
+        }
+
+        console.log(`Cutter paths count: ${cutterPaths.length}`);
+        return cutterPaths;
+      }
+
+      createRotatedCutter(zeroedHalfCutterPath, pinionRotationAngle, gearRatio) {
+        // Rotating the pinion by an angle will also roll it along the inner side of the outer ring gear.
+        // First rotate the pinion.
+        // This results in the center of the pinion to be rotated around the center of the ring gear.
+        let pinionCenterRayAngle = -pinionRotationAngle / gearRatio;
+
+        let transformedCutterPath = rotatePointsAroundCenter(zeroedHalfCutterPath, ORIGIN, pinionCenterRayAngle);
+        let rotatedPinionCenter = rotatePointAroundCenter(this.pinion.center, ORIGIN, pinionCenterRayAngle);
+
+        // The pinion turns into the opposite direction.
+        let rotatedCutter = rotatePointsAroundCenter(transformedCutterPath, rotatedPinionCenter, pinionRotationAngle);
+        // Close the half tooth profile.
+        rotatedCutter.push(ORIGIN);
+        return rotatedCutter;
+      }
+
+      createZeroedHalfToothCutterPath() {
+        let enlargedPinionHalfToothPath = this.createEnlargedPinionHalfToothPath();
+
+        // Rotate so that the half tooth points to 3 o'clock. Then shift so that it mashes with the internal gear.
+        let rotatedHalfToothPath = rotatePointsAroundCenter(enlargedPinionHalfToothPath, ORIGIN, -Math.PI / 2 - this.pinion.angleToothToTooth / 2);
+        return createTranslatedPath(rotatedHalfToothPath, this.pinion.center.X, 0).reverse();
+      }
+
+      createEnlargedPinionHalfToothPath() {
+        // To cut the internal gear teeth, the actual pinion comes close but we need to enlarge it to properly cater for clearance and backlash
+        let enlargedPinion = new RegularGear(
+          this.gearSet,
+          this.pinion.toothCount,
+          /* centerHoleDiameter = */ 0,
+          /* clearance = */ 0,
+          -this.pinion.backlash,
+          this.pinion.profileShift,
+          /* addendumExtension = */ this.pinion.clearance
+        );
+
+        return enlargedPinion.createHalfToothPath();
+        //return enlargedPinion.createToothPath();
+      }
+    }
+
+    class Rack {
+      constructor(gearSet, clearance, backlash, profileShift) {
+        this.gearSet = gearSet;
+        this.clearance = clearance;
+        this.backlash = backlash;
+        this.profileShift = profileShift;
+
+        this.addendum = 1 / this.gearSet.diametralPitch;
+      }
+
+      update() {
+        this.rackShape = this.createRackShape();
+ 
+        let minX = this.rackShape[this.rackShape.length - 1].X;
+        let maxX = this.rackShape[1].X;
+        this.topLeft = addVectors(createPoint(minX, this.gearSet.diametralPitch / 2), this.center);
+        this.lowerRight = addVectors(createPoint(maxX, -this.gearSet.diametralPitch / 2), this.center);
+      }
+
+      createRackShape() {
+        let rackToothTemplate = this.createRackTooth();
+
+        // The template is a tooth pointing right and centered on the x-axis.
+        // We build the rack by starting with the template and then create an equal number
+        // of teeth above and below.
+
+        let rackShape = [];
+        let halfCount = Math.floor(this.connectedGear.outerRadius / this.gearSet.circularPitch);
+        for (let i = -halfCount; i < halfCount + 1; i++) {
+          rackToothTemplate.forEach(point => {
+            let deltaY = -i * this.gearSet.circularPitch;
+            rackShape.push(createTranslatedPoint(point, 0, deltaY));
+          });
+        }
+
+        // create a bar backing the teeth.
+        let width = 0.5 * this.gearSet.circularPitch;
+        let lowerLeftBacking = createTranslatedPoint(rackShape[rackShape.length - 1], -width, 0);
+        let upperLeftBacking = createTranslatedPoint(rackShape[0], -width, 0);
+        rackShape.push(lowerLeftBacking);
+        rackShape.push(upperLeftBacking);
+
+        return rackShape;
+        //return rackToothTemplate;
+      }
+
+      createRackTooth() {
+        // we create a trapezoidal cutter as described at http://lcamtuf.coredump.cx/gcnc/ch6/ under the section 'Putting it all together'
+        let toothWidth = this.gearSet.circularPitch / 2;
+        
+        //console.log("toothWidth: " + toothWidth);
+        //console.log("addendum: " + this.addendum);
+        //console.log("shiftedAddendum: " + this.shiftedAddendum);
+        //console.log("clearance: " + this.clearance);
+        
+        let toothDepth = this.addendum + this.clearance;
+        //console.log("toothDepth: " + toothDepth);
+        
+        let cosPressureAngle = Math.cos(this.gearSet.pressureAngle * Math.PI / 180);
+        let tanPressureAngle = Math.tan(this.gearSet.pressureAngle * Math.PI / 180);
+
+        // If a positive backlash is defined then we narrow the trapezoid accordingly.
+        // Each side of the tooth needs to narrowed by a fourth of the backlash (perpendiculr tooth faces).
+        let dx = this.backlash / 4 / cosPressureAngle;
+        console.log("backlash: " + this.backlash);
+        console.log("dx: " + dx);
+        console.log("profileShift: " + this.profileShift);
+
+        // Create the tooth pointing right.
+        let profileShiftOffset = this.profileShift * this.addendum;
+
+        let upperLeftCorner = createPoint(-toothDepth + profileShiftOffset, toothWidth / 2 - dx + tanPressureAngle * toothDepth);
+        let upperRightCorner = createPoint(this.addendum + profileShiftOffset, toothWidth / 2 - dx - tanPressureAngle * this.addendum);
+        let lowerRightCorner = createPoint(upperRightCorner.X, -upperRightCorner.Y);
+        let lowerLeftCorner = createPoint(upperLeftCorner.X, -upperLeftCorner.Y);
+
+        return [upperLeftCorner, upperRightCorner, lowerRightCorner, lowerLeftCorner];
+      }
+         
+      createGraphics(parent, crossMarkerLength) {
+        var gearGroup = parent.group();
+        var helperGroup = gearGroup.group();
+        helperGroup.stroke(helperLinesStyle).fill('none');
+
+        // Draw pitch 'line'.
+        helperGroup.line(this.center.X, 2 * this.gearSet.circularPitch, this.center.X, -2 * this.gearSet.circularPitch);
+
+        var regularGroup = gearGroup.group();
+        regularGroup.stroke(regularLinesStyle).fill('none');
+
+        insertSvgPath(regularGroup, this.rackShape, /*isClosed=*/ true);
+
+        gearGroup.move(this.center.X, this.center.Y);
+      }
+    }
+
+    function createPoint(x, y) {
+      return { X: x, Y: y};
+    }
+
+    function clonePoint(point) {
+      return { X: point.X, Y: point.Y};
+    }
+
+    function createTranslatedPoint(point, dx, dy) {
+      return { X: point.X + dx, Y: point.Y + dy};
+    }
+
+    function createTranslatedPath(path, dx, dy) {
+      return path.map(point => createTranslatedPoint(point, dx, dy));
+    }
+
+    // Translate point p by vector v
+    function translatePoint(p, v) {
+      return { X: p.X + v.X, Y: p.Y + v.Y};
+    }
+
+    function translatePoints(points, v) {
+      return points.map(point => translatePoint(point, v));
+    }
+
+    // Squared distance between two 2d points.
+    function squaredDistance(a, b) {
+      return square(a.X - b.X) + square(a.Y - b.Y);
+    }
+
+    // Distance between two 2d points.
+    function distance(a, b) {
+      return Math.sqrt(squaredDistance(a, b));
+    }
+
+    function squaredLenth(vector) {
+      return square(vector.X) + square(vector.Y)
+    }
+
+    function length(vector) {
+      return Math.sqrt(squaredLenth(vector));
+    }
+
+    function square(x) { return x * x }
+
+    function addVectors(v1, v2) { return { X: v1.X + v2.X, Y: v1.Y + v2.Y}; }
+    function subtractVectors(v1, v2) { return { X: v1.X - v2.X, Y: v1.Y - v2.Y}; }
+    function multiplyVector(a, v) { return { X: a * v.X, Y: a * v.Y}; }
+
+    function radToDegree(angle) {
+      return angle / Math.PI * 180;
+    }
+
+    function degreeToRad(angle) {
+      return angle * Math.PI / 180;
+    }
+
+    function rotatePointAroundCenter(point, center, angle) {
+      var cosAngle = Math.cos(angle);
+      var sinAngle = Math.sin(angle);
+      return _rotatePointAroundCenter(point, center, cosAngle, sinAngle);
+    }
+
+    function _rotatePointAroundCenter(point, center, cosAngle, sinAngle) {
+      // Move so that center ends up at the origin
+      var movedPoint = {X: point.X - center.X, Y: point.Y - center.Y};
+      var rotated = {
+        X: movedPoint.X * cosAngle - movedPoint.Y * sinAngle,
+        Y: movedPoint.X * sinAngle + movedPoint.Y * cosAngle,
+      };
+      // Undo the move
+      return {X: rotated.X + center.X, Y: rotated.Y + center.Y};
+    }
+
+    function rotatePointsAroundCenter(points, center, angle) {
+      var cosAngle = Math.cos(angle);
+      var sinAngle = Math.sin(angle);
+
+      return points.map(point => _rotatePointAroundCenter(point, center, cosAngle, sinAngle));
+    }
+
+    function drawCircles(parent, points, radius) {
+      points.forEach(point => drawCircle(parent, point, radius));
+    }
+
+    function drawCircle(parent, point, radius, strokeStyle) {
+      parent.circle(2 * radius).cx(point.X).cy(point.Y);
+    }
+
+    function drawCrosses(parent, points, length) {
+      points.forEach(point => drawCross(parent, point, length));
+    }
+
+    function drawCross(parent, point, length) {
+      let halfLength = length / 2;
+      parent.line(point.X, point.Y - halfLength, point.X, point.Y + halfLength); //.stroke(markerLinesStyle);
+      parent.line(point.X - halfLength, point.Y, point.X + halfLength, point.Y); // .stroke(markerLinesStyle);
+    }
+
+    function createSvgPoint(point) {
+      return {x: point.X, y: point.Y};
+    }
+
+    // Converts array of {X:..., Y:...} points into an SVG paths.
+    function insertSvgPath(group, points, isClosed = true) {
+      var svgPath = group.path();
+      for (let i = 0; i < points.length; i++) {
+        var svgPoint = createSvgPoint(points[i]);
+        if (i == 0) {
+          svgPath.M(svgPoint);
+        } else {
+          svgPath.L(svgPoint);
+        }
+      }
+      if (isClosed) {
+        svgPath.Z();
+      }
+    }
+
+    function addLineSegmentsToPath(svgPath, points, moveToFirst = false) {
+      for (let i = 0; i < points.length; i++) {
+        var svgPoint = createSvgPoint(points[i]);
+        if (i == 0 && moveToFirst) {
+          svgPath.M(svgPoint);
+        } else {
+          svgPath.L(svgPoint);
+        }
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Involute Spur Gear Builder v2.0<span style="font-size:10px"> (C) 2020 Dr. Rainer Hessmer</span></h1>
+  <p>An open source, browser based utility for calculating and drawing involute spur gears. As an improvement over the majority of other freely available scripts and utilities it fully accounts for undercuts. For additional information please head over to my <a href="http://www.hessmer.org/blog/2020/09/27/online-involute-spur-gear-builder-v2/">blog post</a>.</p>
+  <p>The page runs in modern browsers with SVG support (if in doubt, use <a href="https://www.google.com/chrome/browser">Chrome</a>). The generated SVG drawing can be downloaded and imported in CAD applications or opened in the open source SVG editor <a href="http://www.inkscape.org/">Inkscape</a> to export as dxf or other formats.</p>
+  <p>The implementation is inspired by the subtractive process that Michal Zalewski's describes in <a href="http://lcamtuf.coredump.cx/gcnc/ch6/#6.2">part six</a> of his excellent <a href="http://lcamtuf.coredump.cx/gcnc/">Guerrilla guide to CNC machining, mold making, and resin casting</a>.</p>
+    <h2>Instructions</h2>
+    <p>Specify desired values in the parameters box and then click on the 'Update' button. The tooth count n1 of gear one defines various configurations: 
+    </p><ul>
+        <li>n1 &gt; 0: A regular external gear <br><img src="./Involute Spur Gear Builder_files/RegularSpurGear_Small.png" alt="Regular Spur Gear"></li>
+    <li>n1 = 0: Rack and pinion <br><img src="./Involute Spur Gear Builder_files/RackAndPinion_Small.png" alt="Rack and Pinion"></li>
+        <li>n1 &lt; 0: An internal gear as used in planetary gears <br><img src="./Involute Spur Gear Builder_files/InternalGear_Small.png" alt="Internal Gear"></li>
+    </ul>
+  <p></p>
+  <p>The tool also supports profile shift to reduce the amount of undercut in gears with low tooth counts. 
+  </p><p>Once the gears are rendered   you can use the mouse scroll wheel or the slider underneath the window to zoom in and out. For panning move the mouse while pressing the left mouse button.</p>
+  <div id="parametersblock" class="parametersdiv">
+    <b>Parameters</b> (svg output assumes inputs in millimeters)
+    <div id="parameters"><table class="parameterstable"><tr><td>Circular pitch (the circumference of the pitch circle divided by the number of teeth):</td><td><input type="text"></td></tr><tr><td>Pressure Angle (common values are 14.5, 20 and 25 degrees):</td><td><input type="text"></td></tr><tr><td>Clearance (minimal distance between the apex of a tooth and the trough of the other gear; in length units):</td><td><input type="text"></td></tr><tr><td>Backlash (minimal distance between meshing gears; in length units):</td><td><input type="text"></td></tr><tr><td>Profile Shift (indicates what portion of gear one's addendum height should be shifted to gear two. E.g., a value of 0.1 means the adddendum of gear two is increased by a factor of 1.1 while the height of the addendum of gear one is reduced to 0.9 of its normal height):</td><td><input type="text"></td></tr><tr><td>Gear 1 Tooth Count (n1 &gt; 0: external gear; n1 = 0: rack; n1 &lt; 0: internal gear):</td><td><input type="text"></td></tr><tr><td>Gear 1 Pitch Circle Diameter</td><td><input type="text" readonly="" style="background-color: lightgrey;"></td></tr><tr><td>Gear 1 Outer Circle Diameter</td><td><input type="text" readonly="" style="background-color: lightgrey;"></td></tr><tr><td>Gear 1 Center Hole Diameter (0 for no hole):</td><td><input type="text"></td></tr><tr><td>Gear 2 Tooth Count:</td><td><input type="text"></td></tr><tr><td>Gear 2 Pitch Circle Diameter</td><td><input type="text" readonly="" style="background-color: lightgrey;"></td></tr><tr><td>Gear 2 Outer Circle Diameter</td><td><input type="text" readonly="" style="background-color: lightgrey;"></td></tr><tr><td>Gear 2 Center Hole Diameter (0 for no hole):</td><td><input type="text"></td></tr><tr><td>Gear Centers Distance</td><td><input type="text" readonly="" style="background-color: lightgrey;"></td></tr><tr><td>Show:</td><td><select><option value="3">Gear 1 and 2</option><option value="1">Gear 1 Only</option><option value="2">Gear 2 Only</option></select></td></tr></table></div>
+    <input id="update" type="button" value="update">
+  </div>
+  <p></p><div id="drawing" class="svgdiv" style="width: 800px; height: 800px;"><svg id="SvgjsSvg1000" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="100%" height="100%"><rect id="SvgjsRect1010" width="100%" height="100%" fill="none" style="pointer-events: all;"></rect><g id="SvgjsG1007" transform="matrix(0.9696471362046502,0,0,0.9696471362046502,6.940364988660917,88.41871529849806)"><g id="SvgjsG1011" transform="matrix(7.551905417283156,0,0,7.551905417283156,323.076935970744,400.00000979058547)" stroke="black" stroke-width="0.1" fill="none"><g id="SvgjsG1012" transform="matrix(1,0,0,1,48.38310241699219,0)"><g id="SvgjsG1013" stroke="blue" stroke-width="0.04" fill="none"><circle id="SvgjsCircle1014" r="10.185916357881302" cx="0" cy="0"></circle><circle id="SvgjsCircle1015" r="12.732395447351628" cx="0" cy="0"></circle><line id="SvgjsLine1016" x1="0" y1="-1.0185916357881302" x2="0" y2="1.0185916357881302"></line><line id="SvgjsLine1017" x1="-1.0185916357881302" y1="0" x2="1.0185916357881302" y2="0"></line></g><g id="SvgjsG1018" stroke="black" stroke-width="0.1" fill="none"><circle id="SvgjsCircle1019" r="2" cx="0" cy="0"></circle><path id="SvgjsPath1020" d="M-5.565686972193999 11.18759600456014  L-5.635966315176128 10.866986718902346 -5.689826638699108 10.560349863240802 -5.728512450697824 10.26904308259538 -5.75359352822651 9.991638021268084 -5.766151744660384 9.731309588706445 -5.767714450646806 9.48752038375676 -5.759632220137844 9.259839071282503 -5.743340479899307 9.049941494355089 -5.691905532635797 8.683052069868637 -5.62505565754242 8.387863272994501 -5.553687370117261 8.16199215388008 -5.489786130301434 8.006110463967506 -5.173483124941068 7.700399918189315 -5.015932663024893 7.518708830763431 -4.88238140526219 7.338021834966833 -4.772440442923305 7.16001477387093 -4.685607730193598 6.986335206275893 -4.621324652715928 6.818588264575007 -4.578898245844735 6.658343725822511 -4.557564834256337 6.507114798530145 -4.556468818745498 6.366365193734962 -4.574683889428863 6.2375161960671495 -4.611170599338089 6.121918379478773 -4.664832932962337 6.020837465108156 -4.744276379828644 5.926007374683227 -5.152722469845431 5.572206496716539 -5.36654448940843 5.366544489408431 -5.572206496716538 5.152722469845432 -5.926007374683227 4.744276379828646 -6.020837465108155 4.664832932962338 -6.121918379478772 4.61117059933809 -6.2375161960671495 4.574683889428865 -6.3663651937349615 4.556468818745499 -6.507114798530144 4.557564834256338 -6.65834372582251 4.578898245844736 -6.818588264575006 4.621324652715929 -6.986335206275892 4.685607730193599 -7.16001477387093 4.7724404429233065 -7.338021834966832 4.8823814052621906 -7.51870883076343 5.015932663024894 -7.700399918189314 5.173483124941069 -8.006110463967506 5.489786130301435 -8.16199215388008 5.553687370117263 -8.3878632729945 5.625055657542422 -8.683052069868635 5.691905532635799 -9.049941494355089 5.743340479899308 -9.259839071282501 5.759632220137846 -9.487520383756758 5.767714450646808 -9.731309588706445 5.7661517446603865 -9.991638021268084 5.753593528226512 -10.269043082595378 5.728512450697826 -10.5603498632408 5.68982663869911 -10.866986718902346 5.63596631517613 -11.18759600456014 5.565686972193999 -11.489638265789267 5.4862674461646375 A12.732395447351628 12.732395447351628 0 0 1 -12.003778045706051 4.245024216534018 L-11.84636 3.975290000000001 -11.66935 3.698890000000001 -11.49061 3.4439800000000007 -11.31198 3.210640000000001 -11.13356 2.996750000000001 -10.95836 2.8037900000000007 -10.78708 2.6303000000000005 -10.62037 2.4750200000000007 -10.46043 2.3381200000000004 -10.16463 2.1150600000000006 -9.90863 1.9536000000000007 -9.69845 1.8443500000000006 -9.54304 1.7793100000000006 -9.10321 1.7868000000000006 -8.86333 1.7697300000000005 -8.64113 1.7364000000000004 -8.43752 1.6882700000000004 -8.25331 1.6268600000000004 -8.08924 1.5537000000000005 -7.94593 1.4703900000000005 -7.82391 1.3785400000000005 -7.72361 1.2797900000000004 -7.64538 1.1758000000000004 -7.58944 1.0682600000000004 -7.55591 0.9588400000000005 -7.54503 0.8356100000000004 -7.58367 0.29662000000000044 -7.58944 4.647191701660444e-16 -7.58367 -0.29661999999999955 -7.54503 -0.8356099999999995 -7.55591 -0.9588399999999996 -7.58944 -1.0682599999999995 -7.64538 -1.1757999999999995 -7.72361 -1.2797899999999995 -7.82391 -1.3785399999999997 -7.94593 -1.4703899999999996 -8.08924 -1.5536999999999996 -8.25331 -1.6268599999999995 -8.43752 -1.6882699999999995 -8.64113 -1.7363999999999995 -8.86333 -1.7697299999999996 -9.10321 -1.7867999999999993 -9.54304 -1.7793099999999993 -9.69845 -1.8443499999999993 -9.90863 -1.9535999999999993 -10.16463 -2.1150599999999997 -10.46043 -2.3381199999999995 -10.62037 -2.4750199999999998 -10.78708 -2.6302999999999996 -10.95836 -2.803789999999999 -11.13356 -2.996749999999999 -11.31198 -3.2106399999999993 -11.49061 -3.443979999999999 -11.66935 -3.698889999999999 -11.84636 -3.9752899999999993 -12.003778045706051 -4.245024216534016 A12.732395447351628 12.732395447351628 0 0 1 -11.489638265789266 -5.486267446164637 L-11.18759600456014 -5.565686972193999 -10.866986718902346 -5.635966315176128 -10.560349863240802 -5.689826638699108 -10.26904308259538 -5.728512450697824 -9.991638021268084 -5.75359352822651 -9.731309588706445 -5.766151744660384 -9.48752038375676 -5.767714450646806 -9.259839071282503 -5.759632220137844 -9.049941494355089 -5.743340479899307 -8.683052069868637 -5.691905532635797 -8.387863272994501 -5.62505565754242 -8.16199215388008 -5.553687370117261 -8.006110463967506 -5.489786130301434 -7.700399918189315 -5.173483124941068 -7.518708830763431 -5.015932663024893 -7.338021834966833 -4.88238140526219 -7.16001477387093 -4.772440442923305 -6.986335206275893 -4.685607730193598 -6.818588264575007 -4.621324652715928 -6.658343725822511 -4.578898245844735 -6.507114798530145 -4.557564834256337 -6.366365193734962 -4.556468818745498 -6.2375161960671495 -4.574683889428863 -6.121918379478773 -4.611170599338089 -6.020837465108156 -4.664832932962337 -5.926007374683227 -4.744276379828644 -5.572206496716539 -5.152722469845431 -5.366544489408431 -5.36654448940843 -5.152722469845432 -5.572206496716538 -4.744276379828646 -5.926007374683227 -4.664832932962338 -6.020837465108155 -4.61117059933809 -6.121918379478772 -4.574683889428865 -6.2375161960671495 -4.556468818745499 -6.3663651937349615 -4.557564834256338 -6.507114798530144 -4.578898245844736 -6.65834372582251 -4.621324652715929 -6.818588264575006 -4.685607730193599 -6.986335206275892 -4.7724404429233065 -7.16001477387093 -4.8823814052621906 -7.338021834966832 -5.015932663024894 -7.51870883076343 -5.173483124941069 -7.700399918189314 -5.489786130301435 -8.006110463967506 -5.553687370117263 -8.16199215388008 -5.625055657542422 -8.3878632729945 -5.691905532635799 -8.683052069868635 -5.743340479899308 -9.049941494355089 -5.759632220137846 -9.259839071282501 -5.767714450646808 -9.487520383756758 -5.7661517446603865 -9.731309588706445 -5.753593528226512 -9.991638021268084 -5.728512450697826 -10.269043082595378 -5.68982663869911 -10.5603498632408 -5.63596631517613 -10.866986718902346 -5.565686972193999 -11.18759600456014 -5.4862674461646375 -11.489638265789267 A12.732395447351628 12.732395447351628 0 0 1 -4.245024216534019 -12.003778045706051 L-3.9752900000000015 -11.84636 -3.6988900000000013 -11.66935 -3.443980000000001 -11.49061 -3.2106400000000015 -11.31198 -2.9967500000000014 -11.13356 -2.803790000000001 -10.95836 -2.6303000000000014 -10.78708 -2.4750200000000016 -10.62037 -2.3381200000000013 -10.46043 -2.1150600000000015 -10.16463 -1.9536000000000011 -9.90863 -1.844350000000001 -9.69845 -1.779310000000001 -9.54304 -1.786800000000001 -9.10321 -1.7697300000000011 -8.86333 -1.736400000000001 -8.64113 -1.688270000000001 -8.43752 -1.626860000000001 -8.25331 -1.553700000000001 -8.08924 -1.470390000000001 -7.94593 -1.378540000000001 -7.82391 -1.2797900000000009 -7.72361 -1.1758000000000008 -7.64538 -1.0682600000000009 -7.58944 -0.9588400000000009 -7.55591 -0.8356100000000009 -7.54503 -0.29662000000000094 -7.58367 -9.294383403320888e-16 -7.58944 0.29661999999999905 -7.58367 0.8356099999999991 -7.54503 0.9588399999999991 -7.55591 1.068259999999999 -7.58944 1.175799999999999 -7.64538 1.279789999999999 -7.72361 1.3785399999999992 -7.82391 1.4703899999999992 -7.94593 1.5536999999999992 -8.08924 1.6268599999999989 -8.25331 1.6882699999999988 -8.43752 1.7363999999999988 -8.64113 1.769729999999999 -8.86333 1.7867999999999988 -9.10321 1.7793099999999988 -9.54304 1.8443499999999988 -9.69845 1.953599999999999 -9.90863 2.115059999999999 -10.16463 2.3381199999999986 -10.46043 2.475019999999999 -10.62037 2.6302999999999988 -10.78708 2.8037899999999985 -10.95836 2.9967499999999987 -11.13356 3.210639999999999 -11.31198 3.4439799999999985 -11.49061 3.6988899999999987 -11.66935 3.975289999999999 -11.84636 4.2450242165340155 -12.003778045706051 A12.732395447351628 12.732395447351628 0 0 1 5.486267446164636 -11.489638265789267 L5.5656869721939985 -11.187596004560142 5.635966315176127 -10.866986718902348 5.689826638699108 -10.560349863240804 5.728512450697823 -10.269043082595381 5.75359352822651 -9.991638021268084 5.766151744660384 -9.731309588706447 5.767714450646806 -9.48752038375676 5.759632220137843 -9.259839071282505 5.743340479899307 -9.049941494355089 5.691905532635797 -8.683052069868637 5.62505565754242 -8.387863272994501 5.553687370117261 -8.161992153880082 5.489786130301434 -8.006110463967508 5.173483124941068 -7.700399918189316 5.015932663024892 -7.5187088307634315 4.88238140526219 -7.338021834966835 4.772440442923305 -7.160014773870932 4.685607730193598 -6.986335206275894 4.621324652715928 -6.818588264575007 4.5788982458447345 -6.658343725822512 4.557564834256337 -6.507114798530146 4.556468818745498 -6.366365193734963 4.574683889428863 -6.23751619606715 4.611170599338089 -6.121918379478774 4.664832932962336 -6.020837465108157 4.744276379828644 -5.926007374683229 5.152722469845431 -5.5722064967165394 5.36654448940843 -5.366544489408432 5.572206496716538 -5.152722469845433 5.926007374683227 -4.744276379828646 6.020837465108156 -4.664832932962339 6.121918379478772 -4.611170599338091 6.2375161960671495 -4.574683889428866 6.3663651937349615 -4.5564688187455 6.507114798530144 -4.557564834256339 6.658343725822511 -4.578898245844737 6.818588264575006 -4.621324652715931 6.986335206275892 -4.6856077301936 7.16001477387093 -4.7724404429233065 7.338021834966832 -4.882381405262192 7.518708830763431 -5.015932663024895 7.700399918189314 -5.17348312494107 8.006110463967506 -5.489786130301436 8.16199215388008 -5.553687370117265 8.3878632729945 -5.625055657542424 8.683052069868635 -5.6919055326358 9.049941494355089 -5.743340479899309 9.259839071282501 -5.7596322201378465 9.48752038375676 -5.7677144506468085 9.731309588706445 -5.766151744660387 9.991638021268084 -5.753593528226513 10.269043082595378 -5.728512450697827 10.5603498632408 -5.689826638699111 10.866986718902346 -5.635966315176132 11.187596004560142 -5.565686972194001 11.489638265789267 -5.486267446164639 A12.732395447351628 12.732395447351628 0 0 1 12.003778045706051 -4.245024216534019 L11.84636 -3.9752900000000024 11.66935 -3.6988900000000022 11.49061 -3.443980000000002 11.31198 -3.2106400000000024 11.13356 -2.9967500000000022 10.95836 -2.803790000000002 10.78708 -2.630300000000002 10.62037 -2.475020000000002 10.46043 -2.3381200000000018 10.16463 -2.115060000000002 9.90863 -1.9536000000000018 9.69845 -1.8443500000000017 9.54304 -1.7793100000000017 9.10321 -1.7868000000000017 8.86333 -1.7697300000000016 8.64113 -1.7364000000000015 8.43752 -1.6882700000000015 8.25331 -1.6268600000000015 8.08924 -1.5537000000000016 7.94593 -1.4703900000000016 7.82391 -1.3785400000000014 7.72361 -1.2797900000000013 7.64538 -1.1758000000000013 7.58944 -1.0682600000000013 7.55591 -0.9588400000000015 7.54503 -0.8356100000000013 7.58367 -0.2966200000000014 7.58944 -1.3941575104981331e-15 7.58367 0.2966199999999986 7.54503 0.8356099999999986 7.55591 0.9588399999999986 7.58944 1.0682599999999987 7.64538 1.1757999999999986 7.72361 1.2797899999999987 7.82391 1.3785399999999988 7.94593 1.4703899999999985 8.08924 1.5536999999999985 8.25331 1.6268599999999984 8.43752 1.6882699999999984 8.64113 1.7363999999999984 8.86333 1.7697299999999985 9.10321 1.7867999999999982 9.54304 1.7793099999999982 9.69845 1.8443499999999982 9.90863 1.9535999999999982 10.16463 2.1150599999999984 10.46043 2.338119999999998 10.62037 2.4750199999999984 10.78708 2.6302999999999983 10.95836 2.8037899999999976 11.13356 2.996749999999998 11.31198 3.210639999999998 11.49061 3.4439799999999976 11.66935 3.698889999999998 11.84636 3.975289999999998 12.003778045706051 4.2450242165340155 A12.732395447351628 12.732395447351628 0 0 1 11.489638265789267 5.486267446164634 L11.187596004560142 5.565686972193997 10.866986718902348 5.635966315176127 10.560349863240802 5.689826638699106 10.269043082595381 5.7285124506978224 9.991638021268084 5.753593528226508 9.731309588706447 5.766151744660383 9.48752038375676 5.767714450646804 9.259839071282503 5.759632220137842 9.049941494355089 5.743340479899305 8.683052069868637 5.691905532635795 8.387863272994501 5.625055657542419 8.161992153880082 5.55368737011726 8.006110463967508 5.489786130301432 7.700399918189316 5.173483124941066 7.5187088307634315 5.015932663024891 7.338021834966835 4.882381405262189 7.160014773870932 4.772440442923304 6.986335206275893 4.685607730193597 6.818588264575007 4.621324652715927 6.658343725822512 4.578898245844734 6.507114798530146 4.557564834256336 6.366365193734962 4.556468818745497 6.23751619606715 4.574683889428862 6.121918379478773 4.611170599338088 6.020837465108157 4.6648329329623355 5.926007374683228 4.744276379828643 5.5722064967165394 5.15272246984543 5.366544489408432 5.3665444894084295 5.152722469845433 5.572206496716537 4.744276379828647 5.926007374683226 4.664832932962339 6.020837465108155 4.611170599338092 6.121918379478771 4.574683889428866 6.237516196067149 4.5564688187455005 6.366365193734961 4.557564834256339 6.507114798530143 4.578898245844737 6.65834372582251 4.621324652715931 6.8185882645750056 4.685607730193601 6.986335206275891 4.7724404429233065 7.160014773870929 4.882381405262192 7.338021834966831 5.015932663024895 7.51870883076343 5.17348312494107 7.700399918189314 5.489786130301436 8.006110463967504 5.553687370117265 8.161992153880078 5.625055657542424 8.387863272994498 5.6919055326358 8.683052069868635 5.7433404798993095 9.049941494355087 5.7596322201378465 9.259839071282501 5.7677144506468085 9.487520383756756 5.766151744660387 9.731309588706443 5.753593528226514 9.991638021268082 5.728512450697827 10.269043082595378 5.689826638699112 10.560349863240798 5.635966315176132 10.866986718902346 5.565686972194001 11.187596004560138 5.486267446164639 11.489638265789266 A12.732395447351628 12.732395447351628 0 0 1 4.24502421653402 12.00377804570605 L3.9752900000000033 11.846359999999999 3.6988900000000027 11.669349999999998 3.4439800000000025 11.49061 3.210640000000003 11.31198 2.9967500000000027 11.13356 2.8037900000000024 10.95836 2.6303000000000027 10.78708 2.475020000000003 10.62037 2.3381200000000026 10.46043 2.115060000000003 10.16463 1.9536000000000024 9.90863 1.8443500000000024 9.69845 1.7793100000000024 9.54304 1.7868000000000022 9.10321 1.7697300000000022 8.86333 1.7364000000000022 8.64113 1.688270000000002 8.43752 1.626860000000002 8.25331 1.553700000000002 8.08924 1.470390000000002 7.94593 1.378540000000002 7.82391 1.279790000000002 7.72361 1.1758000000000017 7.64538 1.0682600000000018 7.58944 0.9588400000000019 7.55591 0.8356100000000019 7.54503 0.2966200000000018 7.58367 1.8588766806641776e-15 7.58944 -0.29661999999999816 7.58367 -0.8356099999999981 7.54503 -0.9588399999999981 7.55591 -1.0682599999999982 7.58944 -1.1757999999999982 7.64538 -1.279789999999998 7.72361 -1.378539999999998 7.82391 -1.470389999999998 7.94593 -1.553699999999998 8.08924 -1.626859999999998 8.25331 -1.688269999999998 8.43752 -1.7363999999999977 8.64113 -1.7697299999999978 8.86333 -1.7867999999999977 9.10321 -1.7793099999999975 9.54304 -1.8443499999999975 9.69845 -1.9535999999999976 9.90863 -2.1150599999999975 10.16463 -2.3381199999999973 10.46043 -2.4750199999999976 10.62037 -2.6302999999999974 10.78708 -2.803789999999997 10.95836 -2.9967499999999974 11.13356 -3.2106399999999975 11.31198 -3.443979999999997 11.49061 -3.6988899999999973 11.669350000000001 -3.975289999999997 11.846360000000002 -4.245024216534015 12.003778045706053 A12.732395447351628 12.732395447351628 0 0 1 -5.486267446164637 11.489638265789266 Z"></path></g></g><g id="SvgjsG1021" transform="matrix(1,0,0,1,0,0)"><g id="SvgjsG1022" stroke="blue" stroke-width="0.04" fill="none"><circle id="SvgjsCircle1023" r="38.197186342054884" cx="0" cy="0"></circle><circle id="SvgjsCircle1024" r="40.74366543152521" cx="0" cy="0"></circle><line id="SvgjsLine1025" x1="0" y1="-1.0185916357881302" x2="0" y2="1.0185916357881302"></line><line id="SvgjsLine1026" x1="-1.0185916357881302" y1="0" x2="1.0185916357881302" y2="0"></line></g><g id="SvgjsG1027" stroke="black" stroke-width="0.1" fill="none"><circle id="SvgjsCircle1028" r="2" cx="0" cy="0"></circle><path id="SvgjsPath1029" d="M39.44816410981711 -7.108848991717149  L38.86517940068624 -6.693565529706439 38.318547441447635 -6.337657228118844 37.811435855091716 -6.036912120122755 37.34615273458056 -5.786686025825197 36.928831141274024 -5.584305378627671 36.56151426067382 -5.424776393091703 36.24704722756554 -5.303511334694486 35.71579147161138 -5.121412430069643 35.60070679610345 -5.068261640205005 35.50351240120832 -5.012888720822246 35.42424242384093 -4.956021225816987 35.3629111104783 -4.89838461851559 35.319522762378526 -4.8407033169597815 35.29402200948594 -4.78369546748349 35.2863613363946 -4.728100152143189 35.308301622253175 -4.554462330351841 35.405685585656244 -3.7212875075373786 35.48365648166172 -2.8860722891199324 35.4982969768083 -2.7116672284081993 35.517349161826544 -2.6588795475912668 35.55414526045983 -2.608419361054062 35.608578085988476 -2.5610194791452594 35.680552487481016 -2.5173938670602585 35.769913642692266 -2.4782502182866635 35.87649678415809 -2.444295181027446 36.000117253976455 -2.41623331291631 36.55762428819566 -2.3485679887383637 36.89043188546887 -2.295334235374265 37.28288995205423 -2.215660814636255 37.73316936982905 -2.1044687082241644 38.240309868171096 -1.9564484547404515 38.798868273578094 -1.7677097762741836 39.40755250975091 -1.5332300998953565 40.064139891007066 -1.2482309145014505 40.733155403840534 -0.9243861031216603 A40.74366543152521 40.74366543152521 0 0 1 40.73315540384053 0.9243861031216749 L40.06413989100706 1.2482309145014652 39.4075525097509 1.5332300998953703 38.79886827357809 1.7677097762741973 38.240309868171096 1.9564484547404644 37.73316936982905 2.1044687082241778 37.28288995205423 2.2156608146362684 36.89043188546887 2.295334235374278 36.55762428819566 2.3485679887383766 36.000117253976455 2.4162333129163227 35.87649678415809 2.4442951810274582 35.769913642692266 2.4782502182866764 35.68055248748101 2.517393867060271 35.608578085988476 2.561019479145272 35.554145260459826 2.6084193610540747 35.51734916182654 2.6588795475912796 35.49829697680829 2.7116672284082117 35.483656481661725 2.8860722891199444 35.40568558565624 3.721287507537391 35.30830162225317 4.5544623303518526 35.28636133639459 4.728100152143201 35.294022009485936 4.783695467483502 35.31952276237852 4.840703316959793 35.3629111104783 4.898384618515602 35.42424242384092 4.9560212258169996 35.50351240120832 5.012888720822257 35.60070679610345 5.068261640205018 35.71579147161138 5.121412430069656 36.24704722756554 5.303511334694497 36.56151426067382 5.424776393091716 36.928831141274024 5.5843053786276835 37.34615273458056 5.786686025825209 37.8114358550917 6.036912120122768 38.31854744144763 6.337657228118857 38.86517940068623 6.6935655297064525 39.4481641098171 7.108848991717163 40.03522890625233 7.564713163434913 A40.74366543152521 40.74366543152521 0 0 1 39.650847550915394 9.373085261275167 L38.929120509887106 9.550757140079883 38.22762647572238 9.69301621687745 37.583492384527126 9.795819381031432 36.997898842645945 9.86430284405024 36.47106543978065 9.903648061362889 36.00750756877467 9.918791998380412 35.60706061693671 9.915127743518724 35.27045774448742 9.898003621383802 34.711065164614126 9.848278065754027 34.584311708213214 9.85002457381942 34.47299801490139 9.861077730892521 34.377451193131414 9.88078676815098 34.29797933022569 9.908494736432559 34.23488100294146 9.94354159640507 34.188397724645014 9.985248767716675 34.15878669960768 10.032921739055142 34.108205283346756 10.200471700645824 33.85828723023403 11.001224401814135 33.58980455392324 11.795945091252246 33.5322423828327 11.961226868104218 33.52817673582305 12.017200035911594 33.54126763770734 12.078264031750846 33.57171522936591 12.143705803290079 33.61972298190438 12.212834409497674 33.6854373030374 12.28494036832235 33.76899508991446 12.359311107542878 33.87051421855472 12.435227874598148 34.352300270460695 12.723801763730288 34.63468302107695 12.907798262214357 34.960805205427846 13.140210630375355 35.32693001810741 13.424934812945695 35.7300206557452 13.766430667018277 36.16352221333492 14.166038200189618 36.62421145598943 14.627820226369089 37.10811426373498 15.155238084955593 37.5875707951183 15.723198165228245 A40.74366543152521 40.74366543152521 0 0 1 36.835607394139046 17.412135616457736 L36.09271175983947 17.435869449019346 35.376969728201 17.429171012929732 34.72553753266685 17.395804673281027 34.138502102081254 17.34103986489834 33.61500094242509 17.26999047124406 33.15842432154835 17.18842437615068 32.767489937810765 17.101582591209795 32.44180295091123 17.014848999883803 31.90497296538771 16.849905809837015 31.78062625667954 16.825260627073533 31.669446954061826 16.812928827957496 31.571890320328983 16.812341874198168 31.48839429776735 16.822921227504835 31.41938816840923 16.844083349586768 31.365249252762702 16.87521470215324 31.326373531589876 16.915689426405454 31.242061844821766 17.069061551559653 30.8311192527627 17.800355000000003 30.403271844821763 18.521888448440354 30.312603531589875 18.671590573594553 30.2969892527627 18.725495297846766 30.29709816840923 18.78794665041324 30.31327429776735 18.85828877249517 30.34586032032898 18.93588812580184 30.39514695406183 19.020081172042513 30.46141625667954 19.110199372926473 30.544932965387712 19.205564190162992 30.956192950911234 19.5880010001162 31.194149937810767 19.82668740879021 31.46482432154835 20.12182562384933 31.763750942425087 20.476449528755946 32.08703210208126 20.894290135101663 32.427977532666844 21.375295326718977 32.782589728200996 21.922768987070274 33.14626175983947 22.539270550980664 33.49715547506173 23.194503958925463 A40.74366543152521 40.74366543152521 0 0 1 32.41047443738369 24.690192092504383 L31.678878313840464 24.55895059645238 30.980169646022183 24.403587401275363 30.349910059012455 24.235509826976084 29.787089004947582 24.059890232108934 29.28979960121477 23.881551426923235 28.86015881969731 23.706840129472077 28.495822712540736 23.54061621716703 28.195285695338022 23.38806383078486 27.704480350527724 23.115111815211346 27.58797493736455 23.065152054366465 27.48178909446282 23.02997425785719 27.3864863417899 23.009116965775878 27.302615336416675 23.00210533560276 27.23071730396576 23.008457833512 27.171288881370238 23.027652777841386 27.124847519623582 23.059160315338254 27.01049038763241 23.19165150622562 26.456483419821325 23.821524669105866 25.887970265016918 24.43833640254999 25.76815845000674 24.565916174786686 25.741677958272412 24.615396560370346 25.728800127544794 24.67650584588205 25.72999782012783 24.748674030232753 25.745737947161597 24.831352666535974 25.77644283109663 24.923953160068876 25.82252736293521 25.025880224802528 25.884391570783123 25.1365251920959 26.207151455112452 25.596110599139806 26.390282816123445 25.879055176600236 26.59367962983859 26.224020282329107 26.8123435311711 26.633045143253288 27.041686274893564 27.10896886235315 27.275174627120737 27.650349477423767 27.508211520971592 28.259587545919448 27.735758563628345 28.93822873850812 27.942753723559495 29.65209863003915 A40.74366543152521 40.74366543152521 0 0 1 26.568848225003336 30.88916869742215 L25.880525873403002 30.60868775590058 25.22938749096474 30.311449918780724 24.647845880752808 30.01600690635343 24.13383718398634 29.72720794401382 23.68449346937932 29.44937398884785 23.300565891018657 29.189153211095356 22.978751296604443 28.9508119540247 22.71649915888691 28.73910804389882 22.2931690035034 28.37007651564823 22.189596731495453 28.296985658004395 22.09304517918071 28.240499302611138 22.004161495172873 28.20028323595619 21.923581072380607 28.17598706418739 21.851933425860032 28.167252303282638 21.789812803552152 28.17367192820018 21.737835511590376 28.19483524836314 21.598430889790556 28.30065500417863 20.92557230914117 28.801579401814134 20.241240160367035 29.28671178771944 20.097521194815393 29.38659335879622 20.06133181473019 29.42948687542809 20.03603006062591 29.48658332487328 20.022196971520827 29.557423475535252 20.02040328394584 29.64156794169247 20.031184467316717 29.738528796603735 20.055070113196702 29.8478100233579 20.092578057443994 29.96889942470394 20.312731684860182 30.485547341215263 20.433033700744687 30.800384051708377 20.560263527671836 31.18009941766042 20.68910804770608 31.62564888546073 20.814488997085594 32.1388555670547 20.9303157095606 32.71695067486762 21.03159247123179 33.36132652446582 21.113069627250873 34.07244746913489 21.16711955012893 34.81375430446445 A40.74366543152521 40.74366543152521 0 0 1 19.566035853711597 35.73814040758612 L18.951070263756183 35.320678383636356 18.375960038519114 34.89455662436118 17.868552564017488 34.48466045114181 17.4258208710855 34.09530402179516 17.04406132212297 33.7301175936849 16.722626424382383 33.39576023229668 16.457398184724187 33.095718287082654 16.244892603335472 32.83411532995363 15.907539196532463 32.38513273762026 15.821426670961388 32.29210520438536 15.738729175375545 32.216779014890406 15.66014920353517 32.15896180875273 15.586381114467645 32.11844295468052 15.518115199833918 32.09500268592735 15.456017347096354 32.088366423019366 15.4007757819929 32.09826058720442 15.242416321294687 32.17278407683938 14.48011327651507 32.52286690935152 13.709870732462612 32.855117334530476 13.548525824804221 32.92293540050633 13.504209205933785 32.957367395683676 13.46758933651849 33.007955620242434 13.439330038097697 33.07437168270299 13.420080928668053 33.15630446177318 13.410467222027611 33.25338802343339 13.411110064607998 33.365247298209404 13.422622468107976 33.49148894571788 13.530548068678625 34.042619378593315 13.582762964069367 34.37558834711641 13.628265250255364 34.773458589723035 13.66165926520124 35.23606001467305 13.677598671105367 35.76412006413658 13.67070156069482 36.35366413447228 13.635791909721494 37.005015448487164 13.567638236414101 37.717536747617736 13.46638068124899 38.45388186085706 A40.74366543152521 40.74366543152521 0 0 1 11.708093827355906 39.025183891314306 L11.193361946258769 38.488985878588 10.719414954750789 37.95260376279689 10.308317757406394 37.446168858455195 9.95621256775238 36.97327170640339 9.658721908609564 36.53669320461617 9.413827938936082 36.142812280709514 9.216777800813265 35.794182920118956 9.063306289374973 35.494114220523606 8.826673593831003 34.98480325784992 8.761784345278004 34.87590479862194 8.696555183804769 34.785030890961394 8.631713245969818 34.71213943468695 8.567981510097855 34.65716876666531 8.50608087539667 34.62004744228712 8.44671976637261 34.60064532808702 8.390628249600944 34.59883791384182 8.220235018329843 34.63880810319581 7.401803810412715 34.82274907092 6.579314166290825 34.98759659747787 6.407394863209123 35.020387183442466 6.35688785445282 35.044852813752975 6.310550333741585 35.086721865262845 6.269099892949235 35.14581113889284 6.233236640114484 35.22195137527355 6.2036482085745925 35.31491462617953 6.181020152549916 35.42446316190934 6.166033868026995 35.55033968980949 6.157014575122675 36.111865594515145 6.138860308536215 36.448414479381384 6.100646385730535 36.84705075984743 6.037130416892649 37.30648623986893 5.94293165079762 37.826320899127204 5.813612154322469 38.4015480271657 5.6440418099672485 39.03140762764445 5.429235949894526 39.714188681407975 5.177096357734619 40.41339025773262 A40.74366543152521 40.74366543152521 0 0 1 3.3384519190773134 40.60663957538319 L2.94645 39.97514 2.59438 39.35194 2.29756 38.7711 2.05147 38.23533 1.85125 37.74644 1.6936 37.31025 1.57334 36.92827 1.48561 36.60285 1.36004 36.05547 1.31921 35.93546 1.2743 35.83301 1.22603 35.74823 1.17512 35.68121 1.12229 35.63203 1.06826 35.60071 1.01377 35.58728 0.83879 35.59095 0 35.60071 -0.83879 35.59095 -1.01377 35.58728 -1.06826 35.60071 -1.12229 35.63203 -1.17512 35.68121 -1.22603 35.74823 -1.2743 35.83301 -1.31921 35.93546 -1.36004 36.05547 -1.48561 36.60285 -1.57334 36.92827 -1.6936 37.31025 -1.85125 37.74644 -2.05147 38.23533 -2.29756 38.7711 -2.59438 39.35194 -2.94645 39.97514 -3.3384519190773134 40.60663957538319 A40.74366543152521 40.74366543152521 0 0 1 -5.177096357734619 40.41339025773262 L-5.429235949894526 39.714188681407975 -5.6440418099672485 39.03140762764445 -5.813612154322469 38.4015480271657 -5.94293165079762 37.826320899127204 -6.037130416892649 37.30648623986893 -6.100646385730535 36.84705075984743 -6.138860308536215 36.448414479381384 -6.157014575122675 36.111865594515145 -6.166033868026995 35.55033968980949 -6.181020152549916 35.42446316190934 -6.2036482085745925 35.31491462617953 -6.233236640114484 35.22195137527355 -6.269099892949235 35.14581113889284 -6.310550333741585 35.086721865262845 -6.35688785445282 35.044852813752975 -6.407394863209123 35.020387183442466 -6.579314166290825 34.98759659747787 -7.401803810412715 34.82274907092 -8.220235018329843 34.63880810319581 -8.390628249600944 34.59883791384182 -8.44671976637261 34.60064532808702 -8.50608087539667 34.62004744228712 -8.567981510097855 34.65716876666531 -8.631713245969818 34.71213943468695 -8.696555183804769 34.785030890961394 -8.761784345278004 34.87590479862194 -8.826673593831003 34.98480325784992 -9.063306289374973 35.494114220523606 -9.216777800813265 35.794182920118956 -9.413827938936082 36.142812280709514 -9.658721908609564 36.53669320461617 -9.95621256775238 36.97327170640339 -10.308317757406394 37.446168858455195 -10.719414954750789 37.95260376279689 -11.193361946258769 38.488985878588 -11.708093827355906 39.025183891314306 A40.74366543152521 40.74366543152521 0 0 1 -13.46638068124899 38.45388186085706 L-13.567638236414101 37.717536747617736 -13.635791909721494 37.005015448487164 -13.67070156069482 36.35366413447228 -13.677598671105367 35.76412006413658 -13.66165926520124 35.23606001467305 -13.628265250255364 34.773458589723035 -13.582762964069367 34.37558834711641 -13.530548068678625 34.042619378593315 -13.422622468107976 33.49148894571788 -13.411110064607998 33.365247298209404 -13.410467222027611 33.25338802343339 -13.420080928668053 33.15630446177318 -13.439330038097697 33.07437168270299 -13.46758933651849 33.007955620242434 -13.504209205933785 32.957367395683676 -13.548525824804221 32.92293540050633 -13.709870732462612 32.855117334530476 -14.48011327651507 32.52286690935152 -15.242416321294687 32.17278407683938 -15.4007757819929 32.09826058720442 -15.456017347096354 32.088366423019366 -15.518115199833918 32.09500268592735 -15.586381114467645 32.11844295468052 -15.66014920353517 32.15896180875273 -15.738729175375545 32.216779014890406 -15.821426670961388 32.29210520438536 -15.907539196532463 32.38513273762026 -16.244892603335472 32.83411532995363 -16.457398184724187 33.095718287082654 -16.722626424382383 33.39576023229668 -17.04406132212297 33.7301175936849 -17.4258208710855 34.09530402179516 -17.868552564017488 34.48466045114181 -18.375960038519114 34.89455662436118 -18.951070263756183 35.320678383636356 -19.566035853711597 35.73814040758612 A40.74366543152521 40.74366543152521 0 0 1 -21.16711955012892 34.81375430446446 L-21.113069627250862 34.0724474691349 -21.031592471231782 33.36132652446582 -20.930315709560592 32.71695067486762 -20.814488997085583 32.138855567054705 -20.68910804770607 31.625648885460738 -20.56026352767183 31.180099417660422 -20.433033700744677 30.80038405170838 -20.312731684860175 30.485547341215266 -20.092578057443983 29.968899424703945 -20.05507011319669 29.847810023357905 -20.03118446731671 29.738528796603738 -20.020403283945832 29.641567941692472 -20.022196971520817 29.557423475535256 -20.036030060625905 29.486583324873283 -20.06133181473018 29.429486875428093 -20.097521194815386 29.386593358796222 -20.241240160367028 29.28671178771944 -20.925572309141163 28.801579401814138 -21.59843088979055 28.300655004178637 -21.73783551159037 28.194835248363145 -21.789812803552145 28.173671928200182 -21.851933425860025 28.16725230328264 -21.923581072380596 28.175987064187392 -22.004161495172866 28.200283235956192 -22.093045179180702 28.24049930261114 -22.189596731495442 28.2969856580044 -22.29316900350339 28.370076515648233 -22.716499158886904 28.739108043898824 -22.97875129660444 28.950811954024704 -23.30056589101865 29.18915321109536 -23.684493469379312 29.449373988847857 -24.13383718398633 29.727207944013823 -24.6478458807528 30.016006906353432 -25.229387490964733 30.311449918780728 -25.88052587340299 30.60868775590059 -26.568848225003325 30.88916869742216 A40.74366543152521 40.74366543152521 0 0 1 -27.942753723559495 29.65209863003915 L-27.735758563628345 28.93822873850812 -27.508211520971592 28.259587545919448 -27.275174627120737 27.650349477423767 -27.041686274893564 27.10896886235315 -26.8123435311711 26.633045143253288 -26.59367962983859 26.224020282329107 -26.390282816123445 25.879055176600236 -26.207151455112452 25.596110599139806 -25.884391570783123 25.1365251920959 -25.82252736293521 25.025880224802528 -25.77644283109663 24.923953160068876 -25.745737947161597 24.831352666535974 -25.72999782012783 24.748674030232753 -25.728800127544794 24.67650584588205 -25.741677958272412 24.615396560370346 -25.76815845000674 24.565916174786686 -25.887970265016918 24.43833640254999 -26.456483419821325 23.821524669105866 -27.01049038763241 23.19165150622562 -27.124847519623582 23.059160315338254 -27.171288881370238 23.027652777841386 -27.23071730396576 23.008457833512 -27.302615336416675 23.00210533560276 -27.3864863417899 23.009116965775878 -27.48178909446282 23.02997425785719 -27.58797493736455 23.065152054366465 -27.704480350527724 23.115111815211346 -28.195285695338022 23.38806383078486 -28.495822712540736 23.54061621716703 -28.86015881969731 23.706840129472077 -29.28979960121477 23.881551426923235 -29.787089004947582 24.059890232108934 -30.349910059012455 24.235509826976084 -30.980169646022183 24.403587401275363 -31.678878313840464 24.55895059645238 -32.41047443738369 24.690192092504383 A40.74366543152521 40.74366543152521 0 0 1 -33.49715547506173 23.194503958925463 L-33.14626175983947 22.539270550980664 -32.782589728200996 21.922768987070274 -32.427977532666844 21.375295326718977 -32.08703210208126 20.894290135101663 -31.763750942425087 20.476449528755946 -31.46482432154835 20.12182562384933 -31.194149937810767 19.82668740879021 -30.956192950911234 19.5880010001162 -30.544932965387712 19.205564190162992 -30.46141625667954 19.110199372926473 -30.39514695406183 19.020081172042513 -30.34586032032898 18.93588812580184 -30.31327429776735 18.85828877249517 -30.29709816840923 18.78794665041324 -30.2969892527627 18.725495297846766 -30.312603531589875 18.671590573594553 -30.403271844821763 18.521888448440354 -30.8311192527627 17.800355000000003 -31.242061844821766 17.069061551559653 -31.326373531589876 16.915689426405454 -31.365249252762702 16.87521470215324 -31.41938816840923 16.844083349586768 -31.48839429776735 16.822921227504835 -31.571890320328983 16.812341874198168 -31.669446954061826 16.812928827957496 -31.78062625667954 16.825260627073533 -31.90497296538771 16.849905809837015 -32.44180295091123 17.014848999883803 -32.767489937810765 17.101582591209795 -33.15842432154835 17.18842437615068 -33.61500094242509 17.26999047124406 -34.138502102081254 17.34103986489834 -34.72553753266685 17.395804673281027 -35.376969728201 17.429171012929732 -36.09271175983947 17.435869449019346 -36.835607394139046 17.412135616457736 A40.74366543152521 40.74366543152521 0 0 1 -37.5875707951183 15.723198165228254 L-37.10811426373498 15.155238084955602 -36.62421145598943 14.6278202263691 -36.16352221333492 14.166038200189625 -35.7300206557452 13.766430667018286 -35.32693001810741 13.424934812945702 -34.960805205427846 13.140210630375364 -34.63468302107695 12.907798262214364 -34.352300270460695 12.723801763730295 -33.87051421855472 12.435227874598155 -33.76899508991446 12.359311107542887 -33.6854373030374 12.284940368322358 -33.61972298190438 12.212834409497683 -33.57171522936591 12.143705803290088 -33.54126763770734 12.078264031750855 -33.52817673582305 12.017200035911603 -33.5322423828327 11.961226868104225 -33.58980455392324 11.795945091252257 -33.85828723023403 11.001224401814143 -34.108205283346756 10.200471700645831 -34.15878669960768 10.03292173905515 -34.188397724645014 9.985248767716683 -34.23488100294146 9.94354159640508 -34.29797933022569 9.908494736432568 -34.377451193131414 9.880786768150989 -34.47299801490139 9.86107773089253 -34.584311708213214 9.850024573819429 -34.711065164614126 9.848278065754034 -35.27045774448742 9.89800362138381 -35.60706061693671 9.915127743518731 -36.00750756877467 9.91879199838042 -36.47106543978065 9.903648061362896 -36.997898842645945 9.864302844050249 -37.583492384527126 9.79581938103144 -38.22762647572238 9.693016216877457 -38.929120509887106 9.550757140079892 -39.650847550915394 9.373085261275175 A40.74366543152521 40.74366543152521 0 0 1 -40.03522890625233 7.564713163434904 L-39.4481641098171 7.108848991717154 -38.86517940068623 6.693565529706444 -38.31854744144763 6.337657228118848 -37.81143585509171 6.03691212012276 -37.34615273458056 5.786686025825201 -36.928831141274024 5.5843053786276755 -36.56151426067382 5.424776393091708 -36.24704722756554 5.303511334694489 -35.71579147161138 5.121412430069647 -35.60070679610345 5.06826164020501 -35.50351240120832 5.01288872082225 -35.42424242384092 4.956021225816992 -35.3629111104783 4.898384618515594 -35.31952276237852 4.840703316959786 -35.294022009485936 4.783695467483494 -35.28636133639459 4.728100152143194 -35.308301622253175 4.554462330351845 -35.40568558565624 3.721287507537383 -35.48365648166172 2.886072289119937 -35.49829697680829 2.711667228408204 -35.51734916182654 2.6588795475912717 -35.554145260459826 2.6084193610540667 -35.608578085988476 2.561019479145264 -35.68055248748101 2.517393867060263 -35.769913642692266 2.4782502182866684 -35.87649678415809 2.4442951810274502 -36.000117253976455 2.4162333129163147 -36.55762428819566 2.3485679887383686 -36.89043188546887 2.29533423537427 -37.28288995205423 2.2156608146362604 -37.73316936982905 2.104468708224169 -38.24030986817109 1.956448454740456 -38.79886827357809 1.7677097762741893 -39.4075525097509 1.5332300998953614 -40.06413989100706 1.2482309145014563 -40.73315540384053 0.924386103121666 A40.74366543152521 40.74366543152521 0 0 1 -40.733155403840534 -0.9243861031216603 L-40.064139891007066 -1.2482309145014505 -39.40755250975091 -1.5332300998953565 -38.798868273578094 -1.7677097762741836 -38.240309868171096 -1.9564484547404515 -37.73316936982905 -2.1044687082241644 -37.28288995205423 -2.215660814636255 -36.89043188546887 -2.295334235374265 -36.55762428819566 -2.3485679887383637 -36.000117253976455 -2.41623331291631 -35.87649678415809 -2.444295181027446 -35.769913642692266 -2.4782502182866635 -35.680552487481016 -2.5173938670602585 -35.608578085988476 -2.5610194791452594 -35.55414526045983 -2.608419361054062 -35.517349161826544 -2.6588795475912668 -35.4982969768083 -2.7116672284081993 -35.48365648166172 -2.8860722891199324 -35.405685585656244 -3.7212875075373786 -35.308301622253175 -4.554462330351841 -35.2863613363946 -4.728100152143189 -35.29402200948594 -4.78369546748349 -35.319522762378526 -4.8407033169597815 -35.3629111104783 -4.89838461851559 -35.42424242384093 -4.956021225816987 -35.50351240120832 -5.012888720822246 -35.60070679610345 -5.068261640205005 -35.71579147161138 -5.121412430069643 -36.24704722756554 -5.303511334694486 -36.56151426067382 -5.424776393091703 -36.928831141274024 -5.584305378627671 -37.34615273458056 -5.786686025825197 -37.811435855091716 -6.036912120122755 -38.318547441447635 -6.337657228118844 -38.86517940068624 -6.693565529706439 -39.44816410981711 -7.108848991717149 -40.035228906252335 -7.564713163434899 A40.74366543152521 40.74366543152521 0 0 1 -39.6508475509154 -9.373085261275154 L-38.92912050988711 -9.550757140079869 -38.22762647572238 -9.693016216877435 -37.58349238452713 -9.795819381031418 -36.997898842645945 -9.864302844050227 -36.47106543978066 -9.903648061362876 -36.00750756877467 -9.9187919983804 -35.60706061693671 -9.915127743518712 -35.27045774448742 -9.89800362138379 -34.711065164614126 -9.848278065754014 -34.584311708213214 -9.850024573819407 -34.4729980149014 -9.86107773089251 -34.377451193131414 -9.88078676815097 -34.29797933022569 -9.908494736432544 -34.234881002941464 -9.94354159640506 -34.18839772464502 -9.985248767716662 -34.15878669960769 -10.03292173905513 -34.108205283346756 -10.200471700645812 -33.85828723023404 -11.001224401814124 -33.58980455392324 -11.795945091252237 -33.532242382832706 -11.961226868104205 -33.52817673582306 -12.017200035911586 -33.54126763770735 -12.078264031750836 -33.57171522936591 -12.143705803290068 -33.61972298190438 -12.212834409497663 -33.68543730303741 -12.284940368322339 -33.76899508991446 -12.359311107542865 -33.87051421855472 -12.435227874598136 -34.352300270460695 -12.723801763730275 -34.63468302107695 -12.907798262214344 -34.960805205427846 -13.140210630375343 -35.32693001810742 -13.424934812945683 -35.7300206557452 -13.766430667018264 -36.16352221333493 -14.166038200189604 -36.62421145598943 -14.627820226369078 -37.10811426373499 -15.15523808495558 -37.58757079511831 -15.723198165228233 A40.74366543152521 40.74366543152521 0 0 1 -36.835607394139046 -17.412135616457743 L-36.09271175983947 -17.43586944901935 -35.376969728201 -17.429171012929736 -34.72553753266685 -17.39580467328103 -34.138502102081254 -17.34103986489834 -33.61500094242509 -17.269990471244064 -33.15842432154835 -17.188424376150685 -32.767489937810765 -17.101582591209798 -32.44180295091123 -17.014848999883807 -31.90497296538771 -16.84990580983702 -31.78062625667954 -16.825260627073536 -31.66944695406183 -16.8129288279575 -31.571890320328983 -16.81234187419817 -31.48839429776735 -16.82292122750484 -31.41938816840923 -16.844083349586768 -31.365249252762702 -16.875214702153244 -31.326373531589876 -16.915689426405457 -31.242061844821766 -17.069061551559656 -30.8311192527627 -17.800355000000007 -30.403271844821763 -18.521888448440357 -30.312603531589875 -18.671590573594557 -30.2969892527627 -18.72549529784677 -30.29709816840923 -18.787946650413247 -30.31327429776735 -18.858288772495175 -30.34586032032898 -18.935888125801842 -30.395146954061826 -19.020081172042516 -30.46141625667954 -19.110199372926477 -30.544932965387712 -19.205564190162995 -30.956192950911234 -19.588001000116204 -31.194149937810767 -19.826687408790214 -31.46482432154835 -20.121825623849332 -31.763750942425087 -20.47644952875595 -32.08703210208126 -20.89429013510167 -32.427977532666844 -21.37529532671898 -32.782589728200996 -21.922768987070278 -33.14626175983947 -22.539270550980667 -33.49715547506173 -23.19450395892547 A40.74366543152521 40.74366543152521 0 0 1 -32.4104744373837 -24.69019209250437 L-31.678878313840467 -24.558950596452366 -30.98016964602219 -24.403587401275352 -30.349910059012466 -24.235509826976074 -29.78708900494759 -24.05989023210892 -29.289799601214778 -23.88155142692322 -28.86015881969732 -23.706840129472067 -28.495822712540747 -23.540616217167017 -28.195285695338026 -23.388063830784848 -27.70448035052773 -23.115111815211336 -27.587974937364557 -23.065152054366447 -27.481789094462826 -23.029974257857177 -27.386486341789908 -23.009116965775867 -27.302615336416686 -23.00210533560275 -27.23071730396577 -23.00845783351199 -27.171288881370245 -23.027652777841375 -27.12484751962359 -23.059160315338236 -27.010490387632416 -23.19165150622561 -26.456483419821332 -23.821524669105855 -25.887970265016925 -24.43833640254998 -25.768158450006748 -24.565916174786675 -25.74167795827242 -24.615396560370336 -25.7288001275448 -24.67650584588204 -25.729997820127842 -24.748674030232742 -25.745737947161604 -24.831352666535963 -25.776442831096638 -24.923953160068862 -25.82252736293522 -25.025880224802517 -25.88439157078313 -25.13652519209589 -26.207151455112463 -25.596110599139795 -26.390282816123456 -25.87905517660022 -26.5936796298386 -26.224020282329096 -26.812343531171106 -26.633045143253273 -27.04168627489358 -27.108968862353137 -27.275174627120748 -27.650349477423756 -27.508211520971606 -28.259587545919437 -27.735758563628355 -28.938228738508105 -27.942753723559505 -29.652098630039134 A40.74366543152521 40.74366543152521 0 0 1 -26.56884822500334 -30.889168697422143 L-25.880525873403005 -30.60868775590058 -25.229387490964744 -30.311449918780717 -24.64784588075281 -30.016006906353425 -24.133837183986344 -29.727207944013813 -23.684493469379323 -29.449373988847846 -23.300565891018664 -29.189153211095352 -22.978751296604447 -28.950811954024697 -22.71649915888692 -28.739108043898817 -22.293169003503404 -28.370076515648226 -22.189596731495456 -28.29698565800439 -22.093045179180713 -28.240499302611134 -22.004161495172877 -28.200283235956185 -21.92358107238061 -28.17598706418738 -21.851933425860036 -28.167252303282634 -21.789812803552156 -28.17367192820017 -21.73783551159038 -28.194835248363137 -21.59843088979056 -28.300655004178626 -20.925572309141174 -28.80157940181413 -20.241240160367038 -29.286711787719437 -20.097521194815396 -29.386593358796215 -20.061331814730192 -29.42948687542809 -20.036030060625915 -29.486583324873276 -20.02219697152083 -29.557423475535245 -20.020403283945843 -29.641567941692465 -20.03118446731672 -29.73852879660373 -20.055070113196706 -29.847810023357898 -20.092578057443998 -29.968899424703938 -20.31273168486019 -30.48554734121526 -20.43303370074469 -30.800384051708374 -20.560263527671843 -31.180099417660415 -20.689108047706082 -31.625648885460727 -20.814488997085597 -32.13885556705469 -20.930315709560602 -32.71695067486761 -21.031592471231793 -33.36132652446581 -21.113069627250876 -34.07244746913489 -21.167119550128934 -34.813754304464446 A40.74366543152521 40.74366543152521 0 0 1 -19.566035853711593 -35.73814040758612 L-18.95107026375618 -35.320678383636356 -18.375960038519107 -34.89455662436118 -17.868552564017484 -34.48466045114181 -17.425820871085495 -34.09530402179516 -17.044061322122968 -33.7301175936849 -16.72262642438238 -33.39576023229668 -16.457398184724184 -33.095718287082654 -16.244892603335472 -32.83411532995363 -15.90753919653246 -32.38513273762026 -15.821426670961385 -32.29210520438536 -15.738729175375541 -32.216779014890406 -15.660149203535166 -32.158961808752736 -15.586381114467642 -32.11844295468052 -15.518115199833913 -32.095002685927355 -15.45601734709635 -32.088366423019366 -15.400775781992897 -32.09826058720442 -15.242416321294684 -32.17278407683938 -14.480113276515064 -32.52286690935152 -13.709870732462608 -32.855117334530476 -13.548525824804218 -32.92293540050633 -13.50420920593378 -32.957367395683676 -13.467589336518484 -33.00795562024243 -13.439330038097694 -33.07437168270299 -13.42008092866805 -33.156304461773175 -13.410467222027608 -33.25338802343339 -13.411110064607994 -33.365247298209404 -13.422622468107972 -33.49148894571788 -13.530548068678621 -34.042619378593315 -13.582762964069364 -34.37558834711641 -13.62826525025536 -34.773458589723035 -13.661659265201237 -35.23606001467305 -13.677598671105361 -35.76412006413658 -13.670701560694816 -36.35366413447228 -13.635791909721487 -37.005015448487164 -13.567638236414098 -37.717536747617736 -13.466380681248987 -38.45388186085706 A40.74366543152521 40.74366543152521 0 0 1 -11.70809382735592 -39.025183891314306 L-11.193361946258781 -38.488985878588 -10.719414954750802 -37.95260376279689 -10.308317757406407 -37.446168858455195 -9.956212567752393 -36.97327170640339 -9.658721908609577 -36.53669320461617 -9.413827938936095 -36.142812280709514 -9.216777800813277 -35.794182920118956 -9.063306289374985 -35.494114220523606 -8.826673593831016 -34.98480325784992 -8.761784345278015 -34.87590479862194 -8.696555183804781 -34.78503089096139 -8.63171324596983 -34.71213943468695 -8.567981510097866 -34.65716876666531 -8.506080875396682 -34.62004744228712 -8.446719766372622 -34.60064532808702 -8.390628249600955 -34.59883791384182 -8.220235018329854 -34.63880810319581 -7.401803810412727 -34.82274907092 -6.579314166290836 -34.98759659747787 -6.407394863209134 -35.020387183442466 -6.356887854452832 -35.044852813752975 -6.310550333741597 -35.086721865262845 -6.269099892949248 -35.14581113889284 -6.2332366401144945 -35.22195137527355 -6.203648208574604 -35.31491462617954 -6.181020152549928 -35.42446316190934 -6.166033868027007 -35.55033968980949 -6.1570145751226875 -36.111865594515145 -6.138860308536225 -36.448414479381384 -6.100646385730547 -36.84705075984743 -6.037130416892661 -37.30648623986893 -5.942931650797632 -37.826320899127204 -5.813612154322481 -38.4015480271657 -5.644041809967261 -39.03140762764445 -5.429235949894538 -39.714188681407975 -5.177096357734634 -40.41339025773262 A40.74366543152521 40.74366543152521 0 0 1 -3.3384519190773183 -40.60663957538319 L-2.946450000000005 -39.97514 -2.594380000000005 -39.35194 -2.2975600000000047 -38.7711 -2.051470000000005 -38.23533 -1.8512500000000047 -37.74644 -1.6936000000000047 -37.31025 -1.5733400000000044 -36.92827 -1.4856100000000045 -36.60285 -1.3600400000000044 -36.05547 -1.3192100000000044 -35.93546 -1.2743000000000044 -35.83301 -1.2260300000000044 -35.74823 -1.1751200000000044 -35.68121 -1.1222900000000045 -35.63203 -1.0682600000000044 -35.60071 -1.0137700000000045 -35.58728 -0.8387900000000044 -35.59095 -4.3598295548873165e-15 -35.60071 0.8387899999999957 -35.59095 1.0137699999999956 -35.58728 1.0682599999999955 -35.60071 1.1222899999999956 -35.63203 1.1751199999999955 -35.68121 1.2260299999999955 -35.74823 1.2742999999999955 -35.83301 1.3192099999999956 -35.93546 1.3600399999999955 -36.05547 1.4856099999999957 -36.60285 1.5733399999999955 -36.92827 1.6935999999999953 -37.31025 1.8512499999999954 -37.74644 2.0514699999999952 -38.23533 2.297559999999995 -38.7711 2.5943799999999952 -39.35194 2.946449999999995 -39.97514 3.3384519190773085 -40.60663957538319 A40.74366543152521 40.74366543152521 0 0 1 5.177096357734625 -40.41339025773262 L5.4292359498945295 -39.714188681407975 5.644041809967252 -39.03140762764445 5.813612154322472 -38.4015480271657 5.9429316507976235 -37.826320899127204 6.037130416892653 -37.30648623986893 6.100646385730538 -36.84705075984743 6.138860308536218 -36.448414479381384 6.1570145751226795 -36.111865594515145 6.166033868026998 -35.55033968980949 6.1810201525499195 -35.42446316190934 6.203648208574596 -35.31491462617953 6.233236640114487 -35.22195137527355 6.269099892949239 -35.14581113889284 6.310550333741589 -35.086721865262845 6.3568878544528244 -35.044852813752975 6.407394863209126 -35.020387183442466 6.579314166290828 -34.98759659747787 7.401803810412719 -34.82274907092 8.220235018329847 -34.63880810319581 8.390628249600947 -34.59883791384182 8.446719766372615 -34.60064532808702 8.506080875396675 -34.62004744228712 8.567981510097859 -34.65716876666531 8.631713245969822 -34.71213943468695 8.696555183804772 -34.785030890961394 8.761784345278008 -34.87590479862194 8.826673593831009 -34.98480325784992 9.063306289374978 -35.494114220523606 9.216777800813269 -35.794182920118956 9.413827938936086 -36.142812280709514 9.658721908609568 -36.53669320461617 9.956212567752385 -36.97327170640339 10.308317757406398 -37.446168858455195 10.719414954750793 -37.95260376279689 11.193361946258772 -38.488985878588 11.708093827355912 -39.025183891314306 A40.74366543152521 40.74366543152521 0 0 1 13.466380681248976 -38.45388186085706 L13.567638236414089 -37.71753674761774 13.635791909721478 -37.00501544848717 13.670701560694807 -36.35366413447229 13.677598671105352 -35.764120064136584 13.661659265201228 -35.23606001467306 13.628265250255351 -34.773458589723035 13.582762964069355 -34.37558834711641 13.530548068678613 -34.04261937859332 13.422622468107965 -33.49148894571788 13.411110064607985 -33.36524729820941 13.4104672220276 -33.253388023433395 13.42008092866804 -33.15630446177318 13.439330038097685 -33.07437168270299 13.467589336518477 -33.00795562024243 13.504209205933773 -32.95736739568368 13.54852582480421 -32.92293540050634 13.7098707324626 -32.85511733453048 14.480113276515057 -32.52286690935153 15.242416321294675 -32.172784076839385 15.40077578199289 -32.09826058720443 15.456017347096342 -32.08836642301937 15.518115199833906 -32.095002685927355 15.586381114467633 -32.11844295468052 15.660149203535157 -32.15896180875274 15.738729175375534 -32.21677901489041 15.821426670961376 -32.292105204385365 15.907539196532452 -32.38513273762026 16.24489260333546 -32.83411532995364 16.457398184724173 -33.095718287082654 16.72262642438237 -33.39576023229668 17.04406132212296 -33.73011759368491 17.425820871085484 -34.095304021795165 17.868552564017477 -34.484660451141814 18.3759600385191 -34.894556624361186 18.951070263756172 -35.32067838363636 19.566035853711583 -35.73814040758612 A40.74366543152521 40.74366543152521 0 0 1 21.167119550128927 -34.81375430446445 L21.113069627250866 -34.07244746913489 21.031592471231786 -33.36132652446582 20.930315709560595 -32.71695067486762 20.814488997085586 -32.1388555670547 20.689108047706075 -31.62564888546073 20.560263527671832 -31.18009941766042 20.43303370074468 -30.800384051708377 20.31273168486018 -30.485547341215263 20.09257805744399 -29.96889942470394 20.0550701131967 -29.8478100233579 20.031184467316713 -29.738528796603735 20.020403283945836 -29.64156794169247 20.02219697152082 -29.557423475535252 20.036030060625908 -29.48658332487328 20.061331814730185 -29.42948687542809 20.09752119481539 -29.38659335879622 20.24124016036703 -29.28671178771944 20.925572309141167 -28.801579401814134 21.598430889790553 -28.30065500417863 21.737835511590372 -28.19483524836314 21.78981280355215 -28.17367192820018 21.85193342586003 -28.167252303282638 21.9235810723806 -28.17598706418739 22.00416149517287 -28.20028323595619 22.093045179180706 -28.240499302611138 22.18959673149545 -28.296985658004395 22.293169003503397 -28.37007651564823 22.716499158886908 -28.73910804389882 22.978751296604443 -28.9508119540247 23.300565891018653 -29.189153211095356 23.684493469379316 -29.44937398884785 24.133837183986333 -29.72720794401382 24.647845880752804 -30.01600690635343 25.229387490964736 -30.311449918780724 25.880525873402995 -30.60868775590058 26.568848225003332 -30.889168697422154 A40.74366543152521 40.74366543152521 0 0 1 27.942753723559502 -29.65209863003914 L27.73575856362835 -28.938228738508116 27.5082115209716 -28.259587545919445 27.275174627120744 -27.650349477423763 27.041686274893575 -27.108968862353144 26.812343531171102 -26.633045143253284 26.593679629838594 -26.224020282329104 26.39028281612345 -25.879055176600232 26.207151455112456 -25.5961105991398 25.884391570783126 -25.136525192095895 25.822527362935215 -25.025880224802528 25.776442831096634 -24.92395316006887 25.7457379471616 -24.83135266653597 25.729997820127835 -24.74867403023275 25.728800127544798 -24.676505845882048 25.741677958272415 -24.615396560370343 25.768158450006744 -24.565916174786683 25.88797026501692 -24.438336402549986 26.45648341982133 -23.821524669105862 27.010490387632412 -23.191651506225618 27.124847519623586 -23.059160315338243 27.17128888137024 -23.027652777841382 27.230717303965765 -23.008457833511997 27.30261533641668 -23.002105335602756 27.386486341789904 -23.009116965775874 27.481789094462822 -23.029974257857184 27.587974937364553 -23.065152054366457 27.704480350527728 -23.115111815211343 28.195285695338026 -23.38806383078486 28.49582271254074 -23.540616217167027 28.860158819697315 -23.706840129472074 29.289799601214774 -23.88155142692323 29.787089004947585 -24.059890232108927 30.349910059012462 -24.23550982697608 30.98016964602219 -24.40358740127536 31.678878313840464 -24.558950596452377 32.4104744373837 -24.690192092504375 A40.74366543152521 40.74366543152521 0 0 1 33.49715547506173 -23.194503958925477 L33.14626175983946 -22.539270550980678 32.782589728200996 -21.922768987070288 32.42797753266684 -21.37529532671899 32.08703210208125 -20.894290135101677 31.76375094242508 -20.47644952875596 31.46482432154835 -20.121825623849343 31.194149937810764 -19.826687408790225 30.95619295091123 -19.588001000116215 30.54493296538771 -19.205564190163006 30.461416256679538 -19.110199372926484 30.395146954061822 -19.020081172042524 30.345860320328978 -18.93588812580185 30.313274297767343 -18.858288772495182 30.297098168409224 -18.78794665041325 30.296989252762696 -18.725495297846777 30.312603531589872 -18.671590573594564 30.40327184482176 -18.521888448440365 30.831119252762697 -17.800355000000014 31.242061844821762 -17.069061551559663 31.326373531589873 -16.915689426405464 31.3652492527627 -16.87521470215325 31.419388168409224 -16.84408334958678 31.488394297767343 -16.822921227504846 31.57189032032898 -16.81234187419818 31.669446954061826 -16.812928827957506 31.780626256679536 -16.825260627073543 31.904972965387707 -16.84990580983703 32.44180295091123 -17.014848999883817 32.767489937810765 -17.10158259120981 33.15842432154835 -17.188424376150696 33.615000942425084 -17.269990471244075 34.13850210208125 -17.341039864898356 34.72553753266684 -17.39580467328104 35.376969728201 -17.429171012929746 36.09271175983946 -17.43586944901936 36.835607394139046 -17.41213561645775 A40.74366543152521 40.74366543152521 0 0 1 37.5875707951183 -15.72319816522825 L37.10811426373498 -15.155238084955597 36.62421145598943 -14.627820226369096 36.16352221333492 -14.166038200189622 35.7300206557452 -13.766430667018282 35.32693001810741 -13.424934812945699 34.960805205427846 -13.14021063037536 34.63468302107695 -12.90779826221436 34.352300270460695 -12.723801763730291 33.87051421855472 -12.435227874598151 33.76899508991446 -12.359311107542881 33.6854373030374 -12.284940368322355 33.61972298190438 -12.21283440949768 33.57171522936591 -12.143705803290082 33.54126763770734 -12.07826403175085 33.52817673582305 -12.0172000359116 33.5322423828327 -11.961226868104221 33.58980455392324 -11.795945091252253 33.85828723023403 -11.00122440181414 34.108205283346756 -10.200471700645828 34.15878669960768 -10.032921739055146 34.188397724645014 -9.98524876771668 34.23488100294146 -9.943541596405074 34.29797933022569 -9.908494736432562 34.377451193131414 -9.880786768150985 34.47299801490139 -9.861077730892527 34.584311708213214 -9.850024573819423 34.711065164614126 -9.84827806575403 35.27045774448742 -9.898003621383806 35.60706061693671 -9.915127743518727 36.00750756877467 -9.918791998380417 36.47106543978065 -9.903648061362892 36.997898842645945 -9.864302844050245 37.583492384527126 -9.795819381031436 38.22762647572238 -9.693016216877453 38.929120509887106 -9.550757140079886 39.650847550915394 -9.373085261275172 A40.74366543152521 40.74366543152521 0 0 1 40.035228906252335 -7.564713163434899 Z"></path></g></g></g></g></svg></div><p></p>
+  <p><a id="downloadSVG" download="involute_gear_30_to_8.svg" type="image/svg+xml" href="blob:http://hessmer.org/afeaec1a-f042-4063-958d-99026a81164e">Download SVG</a></p>
+  <div id="drawingForExport" style="display: none"><svg id="SvgjsSvg1030" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="112.04507993669432mm" height="91.67324722093173mm" viewBox="-45.836623610465864 -45.836623610465864 112.04507993669432 91.67324722093173"><defs id="SvgjsDefs1031"></defs><g id="SvgjsG1032"><g id="SvgjsG1033" transform="matrix(1,0,0,1,48.38310241699219,0)"><g id="SvgjsG1034" stroke="blue" stroke-width="0.04" fill="none"><circle id="SvgjsCircle1035" r="10.185916357881302" cx="0" cy="0"></circle><circle id="SvgjsCircle1036" r="12.732395447351628" cx="0" cy="0"></circle><line id="SvgjsLine1037" x1="0" y1="-1.0185916357881302" x2="0" y2="1.0185916357881302"></line><line id="SvgjsLine1038" x1="-1.0185916357881302" y1="0" x2="1.0185916357881302" y2="0"></line></g><g id="SvgjsG1039" stroke="black" stroke-width="0.1" fill="none"><circle id="SvgjsCircle1040" r="2" cx="0" cy="0"></circle><path id="SvgjsPath1041" d="M-5.565686972193999 11.18759600456014  L-5.635966315176128 10.866986718902346 -5.689826638699108 10.560349863240802 -5.728512450697824 10.26904308259538 -5.75359352822651 9.991638021268084 -5.766151744660384 9.731309588706445 -5.767714450646806 9.48752038375676 -5.759632220137844 9.259839071282503 -5.743340479899307 9.049941494355089 -5.691905532635797 8.683052069868637 -5.62505565754242 8.387863272994501 -5.553687370117261 8.16199215388008 -5.489786130301434 8.006110463967506 -5.173483124941068 7.700399918189315 -5.015932663024893 7.518708830763431 -4.88238140526219 7.338021834966833 -4.772440442923305 7.16001477387093 -4.685607730193598 6.986335206275893 -4.621324652715928 6.818588264575007 -4.578898245844735 6.658343725822511 -4.557564834256337 6.507114798530145 -4.556468818745498 6.366365193734962 -4.574683889428863 6.2375161960671495 -4.611170599338089 6.121918379478773 -4.664832932962337 6.020837465108156 -4.744276379828644 5.926007374683227 -5.152722469845431 5.572206496716539 -5.36654448940843 5.366544489408431 -5.572206496716538 5.152722469845432 -5.926007374683227 4.744276379828646 -6.020837465108155 4.664832932962338 -6.121918379478772 4.61117059933809 -6.2375161960671495 4.574683889428865 -6.3663651937349615 4.556468818745499 -6.507114798530144 4.557564834256338 -6.65834372582251 4.578898245844736 -6.818588264575006 4.621324652715929 -6.986335206275892 4.685607730193599 -7.16001477387093 4.7724404429233065 -7.338021834966832 4.8823814052621906 -7.51870883076343 5.015932663024894 -7.700399918189314 5.173483124941069 -8.006110463967506 5.489786130301435 -8.16199215388008 5.553687370117263 -8.3878632729945 5.625055657542422 -8.683052069868635 5.691905532635799 -9.049941494355089 5.743340479899308 -9.259839071282501 5.759632220137846 -9.487520383756758 5.767714450646808 -9.731309588706445 5.7661517446603865 -9.991638021268084 5.753593528226512 -10.269043082595378 5.728512450697826 -10.5603498632408 5.68982663869911 -10.866986718902346 5.63596631517613 -11.18759600456014 5.565686972193999 -11.489638265789267 5.4862674461646375 A12.732395447351628 12.732395447351628 0 0 1 -12.003778045706051 4.245024216534018 L-11.84636 3.975290000000001 -11.66935 3.698890000000001 -11.49061 3.4439800000000007 -11.31198 3.210640000000001 -11.13356 2.996750000000001 -10.95836 2.8037900000000007 -10.78708 2.6303000000000005 -10.62037 2.4750200000000007 -10.46043 2.3381200000000004 -10.16463 2.1150600000000006 -9.90863 1.9536000000000007 -9.69845 1.8443500000000006 -9.54304 1.7793100000000006 -9.10321 1.7868000000000006 -8.86333 1.7697300000000005 -8.64113 1.7364000000000004 -8.43752 1.6882700000000004 -8.25331 1.6268600000000004 -8.08924 1.5537000000000005 -7.94593 1.4703900000000005 -7.82391 1.3785400000000005 -7.72361 1.2797900000000004 -7.64538 1.1758000000000004 -7.58944 1.0682600000000004 -7.55591 0.9588400000000005 -7.54503 0.8356100000000004 -7.58367 0.29662000000000044 -7.58944 4.647191701660444e-16 -7.58367 -0.29661999999999955 -7.54503 -0.8356099999999995 -7.55591 -0.9588399999999996 -7.58944 -1.0682599999999995 -7.64538 -1.1757999999999995 -7.72361 -1.2797899999999995 -7.82391 -1.3785399999999997 -7.94593 -1.4703899999999996 -8.08924 -1.5536999999999996 -8.25331 -1.6268599999999995 -8.43752 -1.6882699999999995 -8.64113 -1.7363999999999995 -8.86333 -1.7697299999999996 -9.10321 -1.7867999999999993 -9.54304 -1.7793099999999993 -9.69845 -1.8443499999999993 -9.90863 -1.9535999999999993 -10.16463 -2.1150599999999997 -10.46043 -2.3381199999999995 -10.62037 -2.4750199999999998 -10.78708 -2.6302999999999996 -10.95836 -2.803789999999999 -11.13356 -2.996749999999999 -11.31198 -3.2106399999999993 -11.49061 -3.443979999999999 -11.66935 -3.698889999999999 -11.84636 -3.9752899999999993 -12.003778045706051 -4.245024216534016 A12.732395447351628 12.732395447351628 0 0 1 -11.489638265789266 -5.486267446164637 L-11.18759600456014 -5.565686972193999 -10.866986718902346 -5.635966315176128 -10.560349863240802 -5.689826638699108 -10.26904308259538 -5.728512450697824 -9.991638021268084 -5.75359352822651 -9.731309588706445 -5.766151744660384 -9.48752038375676 -5.767714450646806 -9.259839071282503 -5.759632220137844 -9.049941494355089 -5.743340479899307 -8.683052069868637 -5.691905532635797 -8.387863272994501 -5.62505565754242 -8.16199215388008 -5.553687370117261 -8.006110463967506 -5.489786130301434 -7.700399918189315 -5.173483124941068 -7.518708830763431 -5.015932663024893 -7.338021834966833 -4.88238140526219 -7.16001477387093 -4.772440442923305 -6.986335206275893 -4.685607730193598 -6.818588264575007 -4.621324652715928 -6.658343725822511 -4.578898245844735 -6.507114798530145 -4.557564834256337 -6.366365193734962 -4.556468818745498 -6.2375161960671495 -4.574683889428863 -6.121918379478773 -4.611170599338089 -6.020837465108156 -4.664832932962337 -5.926007374683227 -4.744276379828644 -5.572206496716539 -5.152722469845431 -5.366544489408431 -5.36654448940843 -5.152722469845432 -5.572206496716538 -4.744276379828646 -5.926007374683227 -4.664832932962338 -6.020837465108155 -4.61117059933809 -6.121918379478772 -4.574683889428865 -6.2375161960671495 -4.556468818745499 -6.3663651937349615 -4.557564834256338 -6.507114798530144 -4.578898245844736 -6.65834372582251 -4.621324652715929 -6.818588264575006 -4.685607730193599 -6.986335206275892 -4.7724404429233065 -7.16001477387093 -4.8823814052621906 -7.338021834966832 -5.015932663024894 -7.51870883076343 -5.173483124941069 -7.700399918189314 -5.489786130301435 -8.006110463967506 -5.553687370117263 -8.16199215388008 -5.625055657542422 -8.3878632729945 -5.691905532635799 -8.683052069868635 -5.743340479899308 -9.049941494355089 -5.759632220137846 -9.259839071282501 -5.767714450646808 -9.487520383756758 -5.7661517446603865 -9.731309588706445 -5.753593528226512 -9.991638021268084 -5.728512450697826 -10.269043082595378 -5.68982663869911 -10.5603498632408 -5.63596631517613 -10.866986718902346 -5.565686972193999 -11.18759600456014 -5.4862674461646375 -11.489638265789267 A12.732395447351628 12.732395447351628 0 0 1 -4.245024216534019 -12.003778045706051 L-3.9752900000000015 -11.84636 -3.6988900000000013 -11.66935 -3.443980000000001 -11.49061 -3.2106400000000015 -11.31198 -2.9967500000000014 -11.13356 -2.803790000000001 -10.95836 -2.6303000000000014 -10.78708 -2.4750200000000016 -10.62037 -2.3381200000000013 -10.46043 -2.1150600000000015 -10.16463 -1.9536000000000011 -9.90863 -1.844350000000001 -9.69845 -1.779310000000001 -9.54304 -1.786800000000001 -9.10321 -1.7697300000000011 -8.86333 -1.736400000000001 -8.64113 -1.688270000000001 -8.43752 -1.626860000000001 -8.25331 -1.553700000000001 -8.08924 -1.470390000000001 -7.94593 -1.378540000000001 -7.82391 -1.2797900000000009 -7.72361 -1.1758000000000008 -7.64538 -1.0682600000000009 -7.58944 -0.9588400000000009 -7.55591 -0.8356100000000009 -7.54503 -0.29662000000000094 -7.58367 -9.294383403320888e-16 -7.58944 0.29661999999999905 -7.58367 0.8356099999999991 -7.54503 0.9588399999999991 -7.55591 1.068259999999999 -7.58944 1.175799999999999 -7.64538 1.279789999999999 -7.72361 1.3785399999999992 -7.82391 1.4703899999999992 -7.94593 1.5536999999999992 -8.08924 1.6268599999999989 -8.25331 1.6882699999999988 -8.43752 1.7363999999999988 -8.64113 1.769729999999999 -8.86333 1.7867999999999988 -9.10321 1.7793099999999988 -9.54304 1.8443499999999988 -9.69845 1.953599999999999 -9.90863 2.115059999999999 -10.16463 2.3381199999999986 -10.46043 2.475019999999999 -10.62037 2.6302999999999988 -10.78708 2.8037899999999985 -10.95836 2.9967499999999987 -11.13356 3.210639999999999 -11.31198 3.4439799999999985 -11.49061 3.6988899999999987 -11.66935 3.975289999999999 -11.84636 4.2450242165340155 -12.003778045706051 A12.732395447351628 12.732395447351628 0 0 1 5.486267446164636 -11.489638265789267 L5.5656869721939985 -11.187596004560142 5.635966315176127 -10.866986718902348 5.689826638699108 -10.560349863240804 5.728512450697823 -10.269043082595381 5.75359352822651 -9.991638021268084 5.766151744660384 -9.731309588706447 5.767714450646806 -9.48752038375676 5.759632220137843 -9.259839071282505 5.743340479899307 -9.049941494355089 5.691905532635797 -8.683052069868637 5.62505565754242 -8.387863272994501 5.553687370117261 -8.161992153880082 5.489786130301434 -8.006110463967508 5.173483124941068 -7.700399918189316 5.015932663024892 -7.5187088307634315 4.88238140526219 -7.338021834966835 4.772440442923305 -7.160014773870932 4.685607730193598 -6.986335206275894 4.621324652715928 -6.818588264575007 4.5788982458447345 -6.658343725822512 4.557564834256337 -6.507114798530146 4.556468818745498 -6.366365193734963 4.574683889428863 -6.23751619606715 4.611170599338089 -6.121918379478774 4.664832932962336 -6.020837465108157 4.744276379828644 -5.926007374683229 5.152722469845431 -5.5722064967165394 5.36654448940843 -5.366544489408432 5.572206496716538 -5.152722469845433 5.926007374683227 -4.744276379828646 6.020837465108156 -4.664832932962339 6.121918379478772 -4.611170599338091 6.2375161960671495 -4.574683889428866 6.3663651937349615 -4.5564688187455 6.507114798530144 -4.557564834256339 6.658343725822511 -4.578898245844737 6.818588264575006 -4.621324652715931 6.986335206275892 -4.6856077301936 7.16001477387093 -4.7724404429233065 7.338021834966832 -4.882381405262192 7.518708830763431 -5.015932663024895 7.700399918189314 -5.17348312494107 8.006110463967506 -5.489786130301436 8.16199215388008 -5.553687370117265 8.3878632729945 -5.625055657542424 8.683052069868635 -5.6919055326358 9.049941494355089 -5.743340479899309 9.259839071282501 -5.7596322201378465 9.48752038375676 -5.7677144506468085 9.731309588706445 -5.766151744660387 9.991638021268084 -5.753593528226513 10.269043082595378 -5.728512450697827 10.5603498632408 -5.689826638699111 10.866986718902346 -5.635966315176132 11.187596004560142 -5.565686972194001 11.489638265789267 -5.486267446164639 A12.732395447351628 12.732395447351628 0 0 1 12.003778045706051 -4.245024216534019 L11.84636 -3.9752900000000024 11.66935 -3.6988900000000022 11.49061 -3.443980000000002 11.31198 -3.2106400000000024 11.13356 -2.9967500000000022 10.95836 -2.803790000000002 10.78708 -2.630300000000002 10.62037 -2.475020000000002 10.46043 -2.3381200000000018 10.16463 -2.115060000000002 9.90863 -1.9536000000000018 9.69845 -1.8443500000000017 9.54304 -1.7793100000000017 9.10321 -1.7868000000000017 8.86333 -1.7697300000000016 8.64113 -1.7364000000000015 8.43752 -1.6882700000000015 8.25331 -1.6268600000000015 8.08924 -1.5537000000000016 7.94593 -1.4703900000000016 7.82391 -1.3785400000000014 7.72361 -1.2797900000000013 7.64538 -1.1758000000000013 7.58944 -1.0682600000000013 7.55591 -0.9588400000000015 7.54503 -0.8356100000000013 7.58367 -0.2966200000000014 7.58944 -1.3941575104981331e-15 7.58367 0.2966199999999986 7.54503 0.8356099999999986 7.55591 0.9588399999999986 7.58944 1.0682599999999987 7.64538 1.1757999999999986 7.72361 1.2797899999999987 7.82391 1.3785399999999988 7.94593 1.4703899999999985 8.08924 1.5536999999999985 8.25331 1.6268599999999984 8.43752 1.6882699999999984 8.64113 1.7363999999999984 8.86333 1.7697299999999985 9.10321 1.7867999999999982 9.54304 1.7793099999999982 9.69845 1.8443499999999982 9.90863 1.9535999999999982 10.16463 2.1150599999999984 10.46043 2.338119999999998 10.62037 2.4750199999999984 10.78708 2.6302999999999983 10.95836 2.8037899999999976 11.13356 2.996749999999998 11.31198 3.210639999999998 11.49061 3.4439799999999976 11.66935 3.698889999999998 11.84636 3.975289999999998 12.003778045706051 4.2450242165340155 A12.732395447351628 12.732395447351628 0 0 1 11.489638265789267 5.486267446164634 L11.187596004560142 5.565686972193997 10.866986718902348 5.635966315176127 10.560349863240802 5.689826638699106 10.269043082595381 5.7285124506978224 9.991638021268084 5.753593528226508 9.731309588706447 5.766151744660383 9.48752038375676 5.767714450646804 9.259839071282503 5.759632220137842 9.049941494355089 5.743340479899305 8.683052069868637 5.691905532635795 8.387863272994501 5.625055657542419 8.161992153880082 5.55368737011726 8.006110463967508 5.489786130301432 7.700399918189316 5.173483124941066 7.5187088307634315 5.015932663024891 7.338021834966835 4.882381405262189 7.160014773870932 4.772440442923304 6.986335206275893 4.685607730193597 6.818588264575007 4.621324652715927 6.658343725822512 4.578898245844734 6.507114798530146 4.557564834256336 6.366365193734962 4.556468818745497 6.23751619606715 4.574683889428862 6.121918379478773 4.611170599338088 6.020837465108157 4.6648329329623355 5.926007374683228 4.744276379828643 5.5722064967165394 5.15272246984543 5.366544489408432 5.3665444894084295 5.152722469845433 5.572206496716537 4.744276379828647 5.926007374683226 4.664832932962339 6.020837465108155 4.611170599338092 6.121918379478771 4.574683889428866 6.237516196067149 4.5564688187455005 6.366365193734961 4.557564834256339 6.507114798530143 4.578898245844737 6.65834372582251 4.621324652715931 6.8185882645750056 4.685607730193601 6.986335206275891 4.7724404429233065 7.160014773870929 4.882381405262192 7.338021834966831 5.015932663024895 7.51870883076343 5.17348312494107 7.700399918189314 5.489786130301436 8.006110463967504 5.553687370117265 8.161992153880078 5.625055657542424 8.387863272994498 5.6919055326358 8.683052069868635 5.7433404798993095 9.049941494355087 5.7596322201378465 9.259839071282501 5.7677144506468085 9.487520383756756 5.766151744660387 9.731309588706443 5.753593528226514 9.991638021268082 5.728512450697827 10.269043082595378 5.689826638699112 10.560349863240798 5.635966315176132 10.866986718902346 5.565686972194001 11.187596004560138 5.486267446164639 11.489638265789266 A12.732395447351628 12.732395447351628 0 0 1 4.24502421653402 12.00377804570605 L3.9752900000000033 11.846359999999999 3.6988900000000027 11.669349999999998 3.4439800000000025 11.49061 3.210640000000003 11.31198 2.9967500000000027 11.13356 2.8037900000000024 10.95836 2.6303000000000027 10.78708 2.475020000000003 10.62037 2.3381200000000026 10.46043 2.115060000000003 10.16463 1.9536000000000024 9.90863 1.8443500000000024 9.69845 1.7793100000000024 9.54304 1.7868000000000022 9.10321 1.7697300000000022 8.86333 1.7364000000000022 8.64113 1.688270000000002 8.43752 1.626860000000002 8.25331 1.553700000000002 8.08924 1.470390000000002 7.94593 1.378540000000002 7.82391 1.279790000000002 7.72361 1.1758000000000017 7.64538 1.0682600000000018 7.58944 0.9588400000000019 7.55591 0.8356100000000019 7.54503 0.2966200000000018 7.58367 1.8588766806641776e-15 7.58944 -0.29661999999999816 7.58367 -0.8356099999999981 7.54503 -0.9588399999999981 7.55591 -1.0682599999999982 7.58944 -1.1757999999999982 7.64538 -1.279789999999998 7.72361 -1.378539999999998 7.82391 -1.470389999999998 7.94593 -1.553699999999998 8.08924 -1.626859999999998 8.25331 -1.688269999999998 8.43752 -1.7363999999999977 8.64113 -1.7697299999999978 8.86333 -1.7867999999999977 9.10321 -1.7793099999999975 9.54304 -1.8443499999999975 9.69845 -1.9535999999999976 9.90863 -2.1150599999999975 10.16463 -2.3381199999999973 10.46043 -2.4750199999999976 10.62037 -2.6302999999999974 10.78708 -2.803789999999997 10.95836 -2.9967499999999974 11.13356 -3.2106399999999975 11.31198 -3.443979999999997 11.49061 -3.6988899999999973 11.669350000000001 -3.975289999999997 11.846360000000002 -4.245024216534015 12.003778045706053 A12.732395447351628 12.732395447351628 0 0 1 -5.486267446164637 11.489638265789266 Z"></path></g></g><g id="SvgjsG1042" transform="matrix(1,0,0,1,0,0)"><g id="SvgjsG1043" stroke="blue" stroke-width="0.04" fill="none"><circle id="SvgjsCircle1044" r="38.197186342054884" cx="0" cy="0"></circle><circle id="SvgjsCircle1045" r="40.74366543152521" cx="0" cy="0"></circle><line id="SvgjsLine1046" x1="0" y1="-1.0185916357881302" x2="0" y2="1.0185916357881302"></line><line id="SvgjsLine1047" x1="-1.0185916357881302" y1="0" x2="1.0185916357881302" y2="0"></line></g><g id="SvgjsG1048" stroke="black" stroke-width="0.1" fill="none"><circle id="SvgjsCircle1049" r="2" cx="0" cy="0"></circle><path id="SvgjsPath1050" d="M39.44816410981711 -7.108848991717149  L38.86517940068624 -6.693565529706439 38.318547441447635 -6.337657228118844 37.811435855091716 -6.036912120122755 37.34615273458056 -5.786686025825197 36.928831141274024 -5.584305378627671 36.56151426067382 -5.424776393091703 36.24704722756554 -5.303511334694486 35.71579147161138 -5.121412430069643 35.60070679610345 -5.068261640205005 35.50351240120832 -5.012888720822246 35.42424242384093 -4.956021225816987 35.3629111104783 -4.89838461851559 35.319522762378526 -4.8407033169597815 35.29402200948594 -4.78369546748349 35.2863613363946 -4.728100152143189 35.308301622253175 -4.554462330351841 35.405685585656244 -3.7212875075373786 35.48365648166172 -2.8860722891199324 35.4982969768083 -2.7116672284081993 35.517349161826544 -2.6588795475912668 35.55414526045983 -2.608419361054062 35.608578085988476 -2.5610194791452594 35.680552487481016 -2.5173938670602585 35.769913642692266 -2.4782502182866635 35.87649678415809 -2.444295181027446 36.000117253976455 -2.41623331291631 36.55762428819566 -2.3485679887383637 36.89043188546887 -2.295334235374265 37.28288995205423 -2.215660814636255 37.73316936982905 -2.1044687082241644 38.240309868171096 -1.9564484547404515 38.798868273578094 -1.7677097762741836 39.40755250975091 -1.5332300998953565 40.064139891007066 -1.2482309145014505 40.733155403840534 -0.9243861031216603 A40.74366543152521 40.74366543152521 0 0 1 40.73315540384053 0.9243861031216749 L40.06413989100706 1.2482309145014652 39.4075525097509 1.5332300998953703 38.79886827357809 1.7677097762741973 38.240309868171096 1.9564484547404644 37.73316936982905 2.1044687082241778 37.28288995205423 2.2156608146362684 36.89043188546887 2.295334235374278 36.55762428819566 2.3485679887383766 36.000117253976455 2.4162333129163227 35.87649678415809 2.4442951810274582 35.769913642692266 2.4782502182866764 35.68055248748101 2.517393867060271 35.608578085988476 2.561019479145272 35.554145260459826 2.6084193610540747 35.51734916182654 2.6588795475912796 35.49829697680829 2.7116672284082117 35.483656481661725 2.8860722891199444 35.40568558565624 3.721287507537391 35.30830162225317 4.5544623303518526 35.28636133639459 4.728100152143201 35.294022009485936 4.783695467483502 35.31952276237852 4.840703316959793 35.3629111104783 4.898384618515602 35.42424242384092 4.9560212258169996 35.50351240120832 5.012888720822257 35.60070679610345 5.068261640205018 35.71579147161138 5.121412430069656 36.24704722756554 5.303511334694497 36.56151426067382 5.424776393091716 36.928831141274024 5.5843053786276835 37.34615273458056 5.786686025825209 37.8114358550917 6.036912120122768 38.31854744144763 6.337657228118857 38.86517940068623 6.6935655297064525 39.4481641098171 7.108848991717163 40.03522890625233 7.564713163434913 A40.74366543152521 40.74366543152521 0 0 1 39.650847550915394 9.373085261275167 L38.929120509887106 9.550757140079883 38.22762647572238 9.69301621687745 37.583492384527126 9.795819381031432 36.997898842645945 9.86430284405024 36.47106543978065 9.903648061362889 36.00750756877467 9.918791998380412 35.60706061693671 9.915127743518724 35.27045774448742 9.898003621383802 34.711065164614126 9.848278065754027 34.584311708213214 9.85002457381942 34.47299801490139 9.861077730892521 34.377451193131414 9.88078676815098 34.29797933022569 9.908494736432559 34.23488100294146 9.94354159640507 34.188397724645014 9.985248767716675 34.15878669960768 10.032921739055142 34.108205283346756 10.200471700645824 33.85828723023403 11.001224401814135 33.58980455392324 11.795945091252246 33.5322423828327 11.961226868104218 33.52817673582305 12.017200035911594 33.54126763770734 12.078264031750846 33.57171522936591 12.143705803290079 33.61972298190438 12.212834409497674 33.6854373030374 12.28494036832235 33.76899508991446 12.359311107542878 33.87051421855472 12.435227874598148 34.352300270460695 12.723801763730288 34.63468302107695 12.907798262214357 34.960805205427846 13.140210630375355 35.32693001810741 13.424934812945695 35.7300206557452 13.766430667018277 36.16352221333492 14.166038200189618 36.62421145598943 14.627820226369089 37.10811426373498 15.155238084955593 37.5875707951183 15.723198165228245 A40.74366543152521 40.74366543152521 0 0 1 36.835607394139046 17.412135616457736 L36.09271175983947 17.435869449019346 35.376969728201 17.429171012929732 34.72553753266685 17.395804673281027 34.138502102081254 17.34103986489834 33.61500094242509 17.26999047124406 33.15842432154835 17.18842437615068 32.767489937810765 17.101582591209795 32.44180295091123 17.014848999883803 31.90497296538771 16.849905809837015 31.78062625667954 16.825260627073533 31.669446954061826 16.812928827957496 31.571890320328983 16.812341874198168 31.48839429776735 16.822921227504835 31.41938816840923 16.844083349586768 31.365249252762702 16.87521470215324 31.326373531589876 16.915689426405454 31.242061844821766 17.069061551559653 30.8311192527627 17.800355000000003 30.403271844821763 18.521888448440354 30.312603531589875 18.671590573594553 30.2969892527627 18.725495297846766 30.29709816840923 18.78794665041324 30.31327429776735 18.85828877249517 30.34586032032898 18.93588812580184 30.39514695406183 19.020081172042513 30.46141625667954 19.110199372926473 30.544932965387712 19.205564190162992 30.956192950911234 19.5880010001162 31.194149937810767 19.82668740879021 31.46482432154835 20.12182562384933 31.763750942425087 20.476449528755946 32.08703210208126 20.894290135101663 32.427977532666844 21.375295326718977 32.782589728200996 21.922768987070274 33.14626175983947 22.539270550980664 33.49715547506173 23.194503958925463 A40.74366543152521 40.74366543152521 0 0 1 32.41047443738369 24.690192092504383 L31.678878313840464 24.55895059645238 30.980169646022183 24.403587401275363 30.349910059012455 24.235509826976084 29.787089004947582 24.059890232108934 29.28979960121477 23.881551426923235 28.86015881969731 23.706840129472077 28.495822712540736 23.54061621716703 28.195285695338022 23.38806383078486 27.704480350527724 23.115111815211346 27.58797493736455 23.065152054366465 27.48178909446282 23.02997425785719 27.3864863417899 23.009116965775878 27.302615336416675 23.00210533560276 27.23071730396576 23.008457833512 27.171288881370238 23.027652777841386 27.124847519623582 23.059160315338254 27.01049038763241 23.19165150622562 26.456483419821325 23.821524669105866 25.887970265016918 24.43833640254999 25.76815845000674 24.565916174786686 25.741677958272412 24.615396560370346 25.728800127544794 24.67650584588205 25.72999782012783 24.748674030232753 25.745737947161597 24.831352666535974 25.77644283109663 24.923953160068876 25.82252736293521 25.025880224802528 25.884391570783123 25.1365251920959 26.207151455112452 25.596110599139806 26.390282816123445 25.879055176600236 26.59367962983859 26.224020282329107 26.8123435311711 26.633045143253288 27.041686274893564 27.10896886235315 27.275174627120737 27.650349477423767 27.508211520971592 28.259587545919448 27.735758563628345 28.93822873850812 27.942753723559495 29.65209863003915 A40.74366543152521 40.74366543152521 0 0 1 26.568848225003336 30.88916869742215 L25.880525873403002 30.60868775590058 25.22938749096474 30.311449918780724 24.647845880752808 30.01600690635343 24.13383718398634 29.72720794401382 23.68449346937932 29.44937398884785 23.300565891018657 29.189153211095356 22.978751296604443 28.9508119540247 22.71649915888691 28.73910804389882 22.2931690035034 28.37007651564823 22.189596731495453 28.296985658004395 22.09304517918071 28.240499302611138 22.004161495172873 28.20028323595619 21.923581072380607 28.17598706418739 21.851933425860032 28.167252303282638 21.789812803552152 28.17367192820018 21.737835511590376 28.19483524836314 21.598430889790556 28.30065500417863 20.92557230914117 28.801579401814134 20.241240160367035 29.28671178771944 20.097521194815393 29.38659335879622 20.06133181473019 29.42948687542809 20.03603006062591 29.48658332487328 20.022196971520827 29.557423475535252 20.02040328394584 29.64156794169247 20.031184467316717 29.738528796603735 20.055070113196702 29.8478100233579 20.092578057443994 29.96889942470394 20.312731684860182 30.485547341215263 20.433033700744687 30.800384051708377 20.560263527671836 31.18009941766042 20.68910804770608 31.62564888546073 20.814488997085594 32.1388555670547 20.9303157095606 32.71695067486762 21.03159247123179 33.36132652446582 21.113069627250873 34.07244746913489 21.16711955012893 34.81375430446445 A40.74366543152521 40.74366543152521 0 0 1 19.566035853711597 35.73814040758612 L18.951070263756183 35.320678383636356 18.375960038519114 34.89455662436118 17.868552564017488 34.48466045114181 17.4258208710855 34.09530402179516 17.04406132212297 33.7301175936849 16.722626424382383 33.39576023229668 16.457398184724187 33.095718287082654 16.244892603335472 32.83411532995363 15.907539196532463 32.38513273762026 15.821426670961388 32.29210520438536 15.738729175375545 32.216779014890406 15.66014920353517 32.15896180875273 15.586381114467645 32.11844295468052 15.518115199833918 32.09500268592735 15.456017347096354 32.088366423019366 15.4007757819929 32.09826058720442 15.242416321294687 32.17278407683938 14.48011327651507 32.52286690935152 13.709870732462612 32.855117334530476 13.548525824804221 32.92293540050633 13.504209205933785 32.957367395683676 13.46758933651849 33.007955620242434 13.439330038097697 33.07437168270299 13.420080928668053 33.15630446177318 13.410467222027611 33.25338802343339 13.411110064607998 33.365247298209404 13.422622468107976 33.49148894571788 13.530548068678625 34.042619378593315 13.582762964069367 34.37558834711641 13.628265250255364 34.773458589723035 13.66165926520124 35.23606001467305 13.677598671105367 35.76412006413658 13.67070156069482 36.35366413447228 13.635791909721494 37.005015448487164 13.567638236414101 37.717536747617736 13.46638068124899 38.45388186085706 A40.74366543152521 40.74366543152521 0 0 1 11.708093827355906 39.025183891314306 L11.193361946258769 38.488985878588 10.719414954750789 37.95260376279689 10.308317757406394 37.446168858455195 9.95621256775238 36.97327170640339 9.658721908609564 36.53669320461617 9.413827938936082 36.142812280709514 9.216777800813265 35.794182920118956 9.063306289374973 35.494114220523606 8.826673593831003 34.98480325784992 8.761784345278004 34.87590479862194 8.696555183804769 34.785030890961394 8.631713245969818 34.71213943468695 8.567981510097855 34.65716876666531 8.50608087539667 34.62004744228712 8.44671976637261 34.60064532808702 8.390628249600944 34.59883791384182 8.220235018329843 34.63880810319581 7.401803810412715 34.82274907092 6.579314166290825 34.98759659747787 6.407394863209123 35.020387183442466 6.35688785445282 35.044852813752975 6.310550333741585 35.086721865262845 6.269099892949235 35.14581113889284 6.233236640114484 35.22195137527355 6.2036482085745925 35.31491462617953 6.181020152549916 35.42446316190934 6.166033868026995 35.55033968980949 6.157014575122675 36.111865594515145 6.138860308536215 36.448414479381384 6.100646385730535 36.84705075984743 6.037130416892649 37.30648623986893 5.94293165079762 37.826320899127204 5.813612154322469 38.4015480271657 5.6440418099672485 39.03140762764445 5.429235949894526 39.714188681407975 5.177096357734619 40.41339025773262 A40.74366543152521 40.74366543152521 0 0 1 3.3384519190773134 40.60663957538319 L2.94645 39.97514 2.59438 39.35194 2.29756 38.7711 2.05147 38.23533 1.85125 37.74644 1.6936 37.31025 1.57334 36.92827 1.48561 36.60285 1.36004 36.05547 1.31921 35.93546 1.2743 35.83301 1.22603 35.74823 1.17512 35.68121 1.12229 35.63203 1.06826 35.60071 1.01377 35.58728 0.83879 35.59095 0 35.60071 -0.83879 35.59095 -1.01377 35.58728 -1.06826 35.60071 -1.12229 35.63203 -1.17512 35.68121 -1.22603 35.74823 -1.2743 35.83301 -1.31921 35.93546 -1.36004 36.05547 -1.48561 36.60285 -1.57334 36.92827 -1.6936 37.31025 -1.85125 37.74644 -2.05147 38.23533 -2.29756 38.7711 -2.59438 39.35194 -2.94645 39.97514 -3.3384519190773134 40.60663957538319 A40.74366543152521 40.74366543152521 0 0 1 -5.177096357734619 40.41339025773262 L-5.429235949894526 39.714188681407975 -5.6440418099672485 39.03140762764445 -5.813612154322469 38.4015480271657 -5.94293165079762 37.826320899127204 -6.037130416892649 37.30648623986893 -6.100646385730535 36.84705075984743 -6.138860308536215 36.448414479381384 -6.157014575122675 36.111865594515145 -6.166033868026995 35.55033968980949 -6.181020152549916 35.42446316190934 -6.2036482085745925 35.31491462617953 -6.233236640114484 35.22195137527355 -6.269099892949235 35.14581113889284 -6.310550333741585 35.086721865262845 -6.35688785445282 35.044852813752975 -6.407394863209123 35.020387183442466 -6.579314166290825 34.98759659747787 -7.401803810412715 34.82274907092 -8.220235018329843 34.63880810319581 -8.390628249600944 34.59883791384182 -8.44671976637261 34.60064532808702 -8.50608087539667 34.62004744228712 -8.567981510097855 34.65716876666531 -8.631713245969818 34.71213943468695 -8.696555183804769 34.785030890961394 -8.761784345278004 34.87590479862194 -8.826673593831003 34.98480325784992 -9.063306289374973 35.494114220523606 -9.216777800813265 35.794182920118956 -9.413827938936082 36.142812280709514 -9.658721908609564 36.53669320461617 -9.95621256775238 36.97327170640339 -10.308317757406394 37.446168858455195 -10.719414954750789 37.95260376279689 -11.193361946258769 38.488985878588 -11.708093827355906 39.025183891314306 A40.74366543152521 40.74366543152521 0 0 1 -13.46638068124899 38.45388186085706 L-13.567638236414101 37.717536747617736 -13.635791909721494 37.005015448487164 -13.67070156069482 36.35366413447228 -13.677598671105367 35.76412006413658 -13.66165926520124 35.23606001467305 -13.628265250255364 34.773458589723035 -13.582762964069367 34.37558834711641 -13.530548068678625 34.042619378593315 -13.422622468107976 33.49148894571788 -13.411110064607998 33.365247298209404 -13.410467222027611 33.25338802343339 -13.420080928668053 33.15630446177318 -13.439330038097697 33.07437168270299 -13.46758933651849 33.007955620242434 -13.504209205933785 32.957367395683676 -13.548525824804221 32.92293540050633 -13.709870732462612 32.855117334530476 -14.48011327651507 32.52286690935152 -15.242416321294687 32.17278407683938 -15.4007757819929 32.09826058720442 -15.456017347096354 32.088366423019366 -15.518115199833918 32.09500268592735 -15.586381114467645 32.11844295468052 -15.66014920353517 32.15896180875273 -15.738729175375545 32.216779014890406 -15.821426670961388 32.29210520438536 -15.907539196532463 32.38513273762026 -16.244892603335472 32.83411532995363 -16.457398184724187 33.095718287082654 -16.722626424382383 33.39576023229668 -17.04406132212297 33.7301175936849 -17.4258208710855 34.09530402179516 -17.868552564017488 34.48466045114181 -18.375960038519114 34.89455662436118 -18.951070263756183 35.320678383636356 -19.566035853711597 35.73814040758612 A40.74366543152521 40.74366543152521 0 0 1 -21.16711955012892 34.81375430446446 L-21.113069627250862 34.0724474691349 -21.031592471231782 33.36132652446582 -20.930315709560592 32.71695067486762 -20.814488997085583 32.138855567054705 -20.68910804770607 31.625648885460738 -20.56026352767183 31.180099417660422 -20.433033700744677 30.80038405170838 -20.312731684860175 30.485547341215266 -20.092578057443983 29.968899424703945 -20.05507011319669 29.847810023357905 -20.03118446731671 29.738528796603738 -20.020403283945832 29.641567941692472 -20.022196971520817 29.557423475535256 -20.036030060625905 29.486583324873283 -20.06133181473018 29.429486875428093 -20.097521194815386 29.386593358796222 -20.241240160367028 29.28671178771944 -20.925572309141163 28.801579401814138 -21.59843088979055 28.300655004178637 -21.73783551159037 28.194835248363145 -21.789812803552145 28.173671928200182 -21.851933425860025 28.16725230328264 -21.923581072380596 28.175987064187392 -22.004161495172866 28.200283235956192 -22.093045179180702 28.24049930261114 -22.189596731495442 28.2969856580044 -22.29316900350339 28.370076515648233 -22.716499158886904 28.739108043898824 -22.97875129660444 28.950811954024704 -23.30056589101865 29.18915321109536 -23.684493469379312 29.449373988847857 -24.13383718398633 29.727207944013823 -24.6478458807528 30.016006906353432 -25.229387490964733 30.311449918780728 -25.88052587340299 30.60868775590059 -26.568848225003325 30.88916869742216 A40.74366543152521 40.74366543152521 0 0 1 -27.942753723559495 29.65209863003915 L-27.735758563628345 28.93822873850812 -27.508211520971592 28.259587545919448 -27.275174627120737 27.650349477423767 -27.041686274893564 27.10896886235315 -26.8123435311711 26.633045143253288 -26.59367962983859 26.224020282329107 -26.390282816123445 25.879055176600236 -26.207151455112452 25.596110599139806 -25.884391570783123 25.1365251920959 -25.82252736293521 25.025880224802528 -25.77644283109663 24.923953160068876 -25.745737947161597 24.831352666535974 -25.72999782012783 24.748674030232753 -25.728800127544794 24.67650584588205 -25.741677958272412 24.615396560370346 -25.76815845000674 24.565916174786686 -25.887970265016918 24.43833640254999 -26.456483419821325 23.821524669105866 -27.01049038763241 23.19165150622562 -27.124847519623582 23.059160315338254 -27.171288881370238 23.027652777841386 -27.23071730396576 23.008457833512 -27.302615336416675 23.00210533560276 -27.3864863417899 23.009116965775878 -27.48178909446282 23.02997425785719 -27.58797493736455 23.065152054366465 -27.704480350527724 23.115111815211346 -28.195285695338022 23.38806383078486 -28.495822712540736 23.54061621716703 -28.86015881969731 23.706840129472077 -29.28979960121477 23.881551426923235 -29.787089004947582 24.059890232108934 -30.349910059012455 24.235509826976084 -30.980169646022183 24.403587401275363 -31.678878313840464 24.55895059645238 -32.41047443738369 24.690192092504383 A40.74366543152521 40.74366543152521 0 0 1 -33.49715547506173 23.194503958925463 L-33.14626175983947 22.539270550980664 -32.782589728200996 21.922768987070274 -32.427977532666844 21.375295326718977 -32.08703210208126 20.894290135101663 -31.763750942425087 20.476449528755946 -31.46482432154835 20.12182562384933 -31.194149937810767 19.82668740879021 -30.956192950911234 19.5880010001162 -30.544932965387712 19.205564190162992 -30.46141625667954 19.110199372926473 -30.39514695406183 19.020081172042513 -30.34586032032898 18.93588812580184 -30.31327429776735 18.85828877249517 -30.29709816840923 18.78794665041324 -30.2969892527627 18.725495297846766 -30.312603531589875 18.671590573594553 -30.403271844821763 18.521888448440354 -30.8311192527627 17.800355000000003 -31.242061844821766 17.069061551559653 -31.326373531589876 16.915689426405454 -31.365249252762702 16.87521470215324 -31.41938816840923 16.844083349586768 -31.48839429776735 16.822921227504835 -31.571890320328983 16.812341874198168 -31.669446954061826 16.812928827957496 -31.78062625667954 16.825260627073533 -31.90497296538771 16.849905809837015 -32.44180295091123 17.014848999883803 -32.767489937810765 17.101582591209795 -33.15842432154835 17.18842437615068 -33.61500094242509 17.26999047124406 -34.138502102081254 17.34103986489834 -34.72553753266685 17.395804673281027 -35.376969728201 17.429171012929732 -36.09271175983947 17.435869449019346 -36.835607394139046 17.412135616457736 A40.74366543152521 40.74366543152521 0 0 1 -37.5875707951183 15.723198165228254 L-37.10811426373498 15.155238084955602 -36.62421145598943 14.6278202263691 -36.16352221333492 14.166038200189625 -35.7300206557452 13.766430667018286 -35.32693001810741 13.424934812945702 -34.960805205427846 13.140210630375364 -34.63468302107695 12.907798262214364 -34.352300270460695 12.723801763730295 -33.87051421855472 12.435227874598155 -33.76899508991446 12.359311107542887 -33.6854373030374 12.284940368322358 -33.61972298190438 12.212834409497683 -33.57171522936591 12.143705803290088 -33.54126763770734 12.078264031750855 -33.52817673582305 12.017200035911603 -33.5322423828327 11.961226868104225 -33.58980455392324 11.795945091252257 -33.85828723023403 11.001224401814143 -34.108205283346756 10.200471700645831 -34.15878669960768 10.03292173905515 -34.188397724645014 9.985248767716683 -34.23488100294146 9.94354159640508 -34.29797933022569 9.908494736432568 -34.377451193131414 9.880786768150989 -34.47299801490139 9.86107773089253 -34.584311708213214 9.850024573819429 -34.711065164614126 9.848278065754034 -35.27045774448742 9.89800362138381 -35.60706061693671 9.915127743518731 -36.00750756877467 9.91879199838042 -36.47106543978065 9.903648061362896 -36.997898842645945 9.864302844050249 -37.583492384527126 9.79581938103144 -38.22762647572238 9.693016216877457 -38.929120509887106 9.550757140079892 -39.650847550915394 9.373085261275175 A40.74366543152521 40.74366543152521 0 0 1 -40.03522890625233 7.564713163434904 L-39.4481641098171 7.108848991717154 -38.86517940068623 6.693565529706444 -38.31854744144763 6.337657228118848 -37.81143585509171 6.03691212012276 -37.34615273458056 5.786686025825201 -36.928831141274024 5.5843053786276755 -36.56151426067382 5.424776393091708 -36.24704722756554 5.303511334694489 -35.71579147161138 5.121412430069647 -35.60070679610345 5.06826164020501 -35.50351240120832 5.01288872082225 -35.42424242384092 4.956021225816992 -35.3629111104783 4.898384618515594 -35.31952276237852 4.840703316959786 -35.294022009485936 4.783695467483494 -35.28636133639459 4.728100152143194 -35.308301622253175 4.554462330351845 -35.40568558565624 3.721287507537383 -35.48365648166172 2.886072289119937 -35.49829697680829 2.711667228408204 -35.51734916182654 2.6588795475912717 -35.554145260459826 2.6084193610540667 -35.608578085988476 2.561019479145264 -35.68055248748101 2.517393867060263 -35.769913642692266 2.4782502182866684 -35.87649678415809 2.4442951810274502 -36.000117253976455 2.4162333129163147 -36.55762428819566 2.3485679887383686 -36.89043188546887 2.29533423537427 -37.28288995205423 2.2156608146362604 -37.73316936982905 2.104468708224169 -38.24030986817109 1.956448454740456 -38.79886827357809 1.7677097762741893 -39.4075525097509 1.5332300998953614 -40.06413989100706 1.2482309145014563 -40.73315540384053 0.924386103121666 A40.74366543152521 40.74366543152521 0 0 1 -40.733155403840534 -0.9243861031216603 L-40.064139891007066 -1.2482309145014505 -39.40755250975091 -1.5332300998953565 -38.798868273578094 -1.7677097762741836 -38.240309868171096 -1.9564484547404515 -37.73316936982905 -2.1044687082241644 -37.28288995205423 -2.215660814636255 -36.89043188546887 -2.295334235374265 -36.55762428819566 -2.3485679887383637 -36.000117253976455 -2.41623331291631 -35.87649678415809 -2.444295181027446 -35.769913642692266 -2.4782502182866635 -35.680552487481016 -2.5173938670602585 -35.608578085988476 -2.5610194791452594 -35.55414526045983 -2.608419361054062 -35.517349161826544 -2.6588795475912668 -35.4982969768083 -2.7116672284081993 -35.48365648166172 -2.8860722891199324 -35.405685585656244 -3.7212875075373786 -35.308301622253175 -4.554462330351841 -35.2863613363946 -4.728100152143189 -35.29402200948594 -4.78369546748349 -35.319522762378526 -4.8407033169597815 -35.3629111104783 -4.89838461851559 -35.42424242384093 -4.956021225816987 -35.50351240120832 -5.012888720822246 -35.60070679610345 -5.068261640205005 -35.71579147161138 -5.121412430069643 -36.24704722756554 -5.303511334694486 -36.56151426067382 -5.424776393091703 -36.928831141274024 -5.584305378627671 -37.34615273458056 -5.786686025825197 -37.811435855091716 -6.036912120122755 -38.318547441447635 -6.337657228118844 -38.86517940068624 -6.693565529706439 -39.44816410981711 -7.108848991717149 -40.035228906252335 -7.564713163434899 A40.74366543152521 40.74366543152521 0 0 1 -39.6508475509154 -9.373085261275154 L-38.92912050988711 -9.550757140079869 -38.22762647572238 -9.693016216877435 -37.58349238452713 -9.795819381031418 -36.997898842645945 -9.864302844050227 -36.47106543978066 -9.903648061362876 -36.00750756877467 -9.9187919983804 -35.60706061693671 -9.915127743518712 -35.27045774448742 -9.89800362138379 -34.711065164614126 -9.848278065754014 -34.584311708213214 -9.850024573819407 -34.4729980149014 -9.86107773089251 -34.377451193131414 -9.88078676815097 -34.29797933022569 -9.908494736432544 -34.234881002941464 -9.94354159640506 -34.18839772464502 -9.985248767716662 -34.15878669960769 -10.03292173905513 -34.108205283346756 -10.200471700645812 -33.85828723023404 -11.001224401814124 -33.58980455392324 -11.795945091252237 -33.532242382832706 -11.961226868104205 -33.52817673582306 -12.017200035911586 -33.54126763770735 -12.078264031750836 -33.57171522936591 -12.143705803290068 -33.61972298190438 -12.212834409497663 -33.68543730303741 -12.284940368322339 -33.76899508991446 -12.359311107542865 -33.87051421855472 -12.435227874598136 -34.352300270460695 -12.723801763730275 -34.63468302107695 -12.907798262214344 -34.960805205427846 -13.140210630375343 -35.32693001810742 -13.424934812945683 -35.7300206557452 -13.766430667018264 -36.16352221333493 -14.166038200189604 -36.62421145598943 -14.627820226369078 -37.10811426373499 -15.15523808495558 -37.58757079511831 -15.723198165228233 A40.74366543152521 40.74366543152521 0 0 1 -36.835607394139046 -17.412135616457743 L-36.09271175983947 -17.43586944901935 -35.376969728201 -17.429171012929736 -34.72553753266685 -17.39580467328103 -34.138502102081254 -17.34103986489834 -33.61500094242509 -17.269990471244064 -33.15842432154835 -17.188424376150685 -32.767489937810765 -17.101582591209798 -32.44180295091123 -17.014848999883807 -31.90497296538771 -16.84990580983702 -31.78062625667954 -16.825260627073536 -31.66944695406183 -16.8129288279575 -31.571890320328983 -16.81234187419817 -31.48839429776735 -16.82292122750484 -31.41938816840923 -16.844083349586768 -31.365249252762702 -16.875214702153244 -31.326373531589876 -16.915689426405457 -31.242061844821766 -17.069061551559656 -30.8311192527627 -17.800355000000007 -30.403271844821763 -18.521888448440357 -30.312603531589875 -18.671590573594557 -30.2969892527627 -18.72549529784677 -30.29709816840923 -18.787946650413247 -30.31327429776735 -18.858288772495175 -30.34586032032898 -18.935888125801842 -30.395146954061826 -19.020081172042516 -30.46141625667954 -19.110199372926477 -30.544932965387712 -19.205564190162995 -30.956192950911234 -19.588001000116204 -31.194149937810767 -19.826687408790214 -31.46482432154835 -20.121825623849332 -31.763750942425087 -20.47644952875595 -32.08703210208126 -20.89429013510167 -32.427977532666844 -21.37529532671898 -32.782589728200996 -21.922768987070278 -33.14626175983947 -22.539270550980667 -33.49715547506173 -23.19450395892547 A40.74366543152521 40.74366543152521 0 0 1 -32.4104744373837 -24.69019209250437 L-31.678878313840467 -24.558950596452366 -30.98016964602219 -24.403587401275352 -30.349910059012466 -24.235509826976074 -29.78708900494759 -24.05989023210892 -29.289799601214778 -23.88155142692322 -28.86015881969732 -23.706840129472067 -28.495822712540747 -23.540616217167017 -28.195285695338026 -23.388063830784848 -27.70448035052773 -23.115111815211336 -27.587974937364557 -23.065152054366447 -27.481789094462826 -23.029974257857177 -27.386486341789908 -23.009116965775867 -27.302615336416686 -23.00210533560275 -27.23071730396577 -23.00845783351199 -27.171288881370245 -23.027652777841375 -27.12484751962359 -23.059160315338236 -27.010490387632416 -23.19165150622561 -26.456483419821332 -23.821524669105855 -25.887970265016925 -24.43833640254998 -25.768158450006748 -24.565916174786675 -25.74167795827242 -24.615396560370336 -25.7288001275448 -24.67650584588204 -25.729997820127842 -24.748674030232742 -25.745737947161604 -24.831352666535963 -25.776442831096638 -24.923953160068862 -25.82252736293522 -25.025880224802517 -25.88439157078313 -25.13652519209589 -26.207151455112463 -25.596110599139795 -26.390282816123456 -25.87905517660022 -26.5936796298386 -26.224020282329096 -26.812343531171106 -26.633045143253273 -27.04168627489358 -27.108968862353137 -27.275174627120748 -27.650349477423756 -27.508211520971606 -28.259587545919437 -27.735758563628355 -28.938228738508105 -27.942753723559505 -29.652098630039134 A40.74366543152521 40.74366543152521 0 0 1 -26.56884822500334 -30.889168697422143 L-25.880525873403005 -30.60868775590058 -25.229387490964744 -30.311449918780717 -24.64784588075281 -30.016006906353425 -24.133837183986344 -29.727207944013813 -23.684493469379323 -29.449373988847846 -23.300565891018664 -29.189153211095352 -22.978751296604447 -28.950811954024697 -22.71649915888692 -28.739108043898817 -22.293169003503404 -28.370076515648226 -22.189596731495456 -28.29698565800439 -22.093045179180713 -28.240499302611134 -22.004161495172877 -28.200283235956185 -21.92358107238061 -28.17598706418738 -21.851933425860036 -28.167252303282634 -21.789812803552156 -28.17367192820017 -21.73783551159038 -28.194835248363137 -21.59843088979056 -28.300655004178626 -20.925572309141174 -28.80157940181413 -20.241240160367038 -29.286711787719437 -20.097521194815396 -29.386593358796215 -20.061331814730192 -29.42948687542809 -20.036030060625915 -29.486583324873276 -20.02219697152083 -29.557423475535245 -20.020403283945843 -29.641567941692465 -20.03118446731672 -29.73852879660373 -20.055070113196706 -29.847810023357898 -20.092578057443998 -29.968899424703938 -20.31273168486019 -30.48554734121526 -20.43303370074469 -30.800384051708374 -20.560263527671843 -31.180099417660415 -20.689108047706082 -31.625648885460727 -20.814488997085597 -32.13885556705469 -20.930315709560602 -32.71695067486761 -21.031592471231793 -33.36132652446581 -21.113069627250876 -34.07244746913489 -21.167119550128934 -34.813754304464446 A40.74366543152521 40.74366543152521 0 0 1 -19.566035853711593 -35.73814040758612 L-18.95107026375618 -35.320678383636356 -18.375960038519107 -34.89455662436118 -17.868552564017484 -34.48466045114181 -17.425820871085495 -34.09530402179516 -17.044061322122968 -33.7301175936849 -16.72262642438238 -33.39576023229668 -16.457398184724184 -33.095718287082654 -16.244892603335472 -32.83411532995363 -15.90753919653246 -32.38513273762026 -15.821426670961385 -32.29210520438536 -15.738729175375541 -32.216779014890406 -15.660149203535166 -32.158961808752736 -15.586381114467642 -32.11844295468052 -15.518115199833913 -32.095002685927355 -15.45601734709635 -32.088366423019366 -15.400775781992897 -32.09826058720442 -15.242416321294684 -32.17278407683938 -14.480113276515064 -32.52286690935152 -13.709870732462608 -32.855117334530476 -13.548525824804218 -32.92293540050633 -13.50420920593378 -32.957367395683676 -13.467589336518484 -33.00795562024243 -13.439330038097694 -33.07437168270299 -13.42008092866805 -33.156304461773175 -13.410467222027608 -33.25338802343339 -13.411110064607994 -33.365247298209404 -13.422622468107972 -33.49148894571788 -13.530548068678621 -34.042619378593315 -13.582762964069364 -34.37558834711641 -13.62826525025536 -34.773458589723035 -13.661659265201237 -35.23606001467305 -13.677598671105361 -35.76412006413658 -13.670701560694816 -36.35366413447228 -13.635791909721487 -37.005015448487164 -13.567638236414098 -37.717536747617736 -13.466380681248987 -38.45388186085706 A40.74366543152521 40.74366543152521 0 0 1 -11.70809382735592 -39.025183891314306 L-11.193361946258781 -38.488985878588 -10.719414954750802 -37.95260376279689 -10.308317757406407 -37.446168858455195 -9.956212567752393 -36.97327170640339 -9.658721908609577 -36.53669320461617 -9.413827938936095 -36.142812280709514 -9.216777800813277 -35.794182920118956 -9.063306289374985 -35.494114220523606 -8.826673593831016 -34.98480325784992 -8.761784345278015 -34.87590479862194 -8.696555183804781 -34.78503089096139 -8.63171324596983 -34.71213943468695 -8.567981510097866 -34.65716876666531 -8.506080875396682 -34.62004744228712 -8.446719766372622 -34.60064532808702 -8.390628249600955 -34.59883791384182 -8.220235018329854 -34.63880810319581 -7.401803810412727 -34.82274907092 -6.579314166290836 -34.98759659747787 -6.407394863209134 -35.020387183442466 -6.356887854452832 -35.044852813752975 -6.310550333741597 -35.086721865262845 -6.269099892949248 -35.14581113889284 -6.2332366401144945 -35.22195137527355 -6.203648208574604 -35.31491462617954 -6.181020152549928 -35.42446316190934 -6.166033868027007 -35.55033968980949 -6.1570145751226875 -36.111865594515145 -6.138860308536225 -36.448414479381384 -6.100646385730547 -36.84705075984743 -6.037130416892661 -37.30648623986893 -5.942931650797632 -37.826320899127204 -5.813612154322481 -38.4015480271657 -5.644041809967261 -39.03140762764445 -5.429235949894538 -39.714188681407975 -5.177096357734634 -40.41339025773262 A40.74366543152521 40.74366543152521 0 0 1 -3.3384519190773183 -40.60663957538319 L-2.946450000000005 -39.97514 -2.594380000000005 -39.35194 -2.2975600000000047 -38.7711 -2.051470000000005 -38.23533 -1.8512500000000047 -37.74644 -1.6936000000000047 -37.31025 -1.5733400000000044 -36.92827 -1.4856100000000045 -36.60285 -1.3600400000000044 -36.05547 -1.3192100000000044 -35.93546 -1.2743000000000044 -35.83301 -1.2260300000000044 -35.74823 -1.1751200000000044 -35.68121 -1.1222900000000045 -35.63203 -1.0682600000000044 -35.60071 -1.0137700000000045 -35.58728 -0.8387900000000044 -35.59095 -4.3598295548873165e-15 -35.60071 0.8387899999999957 -35.59095 1.0137699999999956 -35.58728 1.0682599999999955 -35.60071 1.1222899999999956 -35.63203 1.1751199999999955 -35.68121 1.2260299999999955 -35.74823 1.2742999999999955 -35.83301 1.3192099999999956 -35.93546 1.3600399999999955 -36.05547 1.4856099999999957 -36.60285 1.5733399999999955 -36.92827 1.6935999999999953 -37.31025 1.8512499999999954 -37.74644 2.0514699999999952 -38.23533 2.297559999999995 -38.7711 2.5943799999999952 -39.35194 2.946449999999995 -39.97514 3.3384519190773085 -40.60663957538319 A40.74366543152521 40.74366543152521 0 0 1 5.177096357734625 -40.41339025773262 L5.4292359498945295 -39.714188681407975 5.644041809967252 -39.03140762764445 5.813612154322472 -38.4015480271657 5.9429316507976235 -37.826320899127204 6.037130416892653 -37.30648623986893 6.100646385730538 -36.84705075984743 6.138860308536218 -36.448414479381384 6.1570145751226795 -36.111865594515145 6.166033868026998 -35.55033968980949 6.1810201525499195 -35.42446316190934 6.203648208574596 -35.31491462617953 6.233236640114487 -35.22195137527355 6.269099892949239 -35.14581113889284 6.310550333741589 -35.086721865262845 6.3568878544528244 -35.044852813752975 6.407394863209126 -35.020387183442466 6.579314166290828 -34.98759659747787 7.401803810412719 -34.82274907092 8.220235018329847 -34.63880810319581 8.390628249600947 -34.59883791384182 8.446719766372615 -34.60064532808702 8.506080875396675 -34.62004744228712 8.567981510097859 -34.65716876666531 8.631713245969822 -34.71213943468695 8.696555183804772 -34.785030890961394 8.761784345278008 -34.87590479862194 8.826673593831009 -34.98480325784992 9.063306289374978 -35.494114220523606 9.216777800813269 -35.794182920118956 9.413827938936086 -36.142812280709514 9.658721908609568 -36.53669320461617 9.956212567752385 -36.97327170640339 10.308317757406398 -37.446168858455195 10.719414954750793 -37.95260376279689 11.193361946258772 -38.488985878588 11.708093827355912 -39.025183891314306 A40.74366543152521 40.74366543152521 0 0 1 13.466380681248976 -38.45388186085706 L13.567638236414089 -37.71753674761774 13.635791909721478 -37.00501544848717 13.670701560694807 -36.35366413447229 13.677598671105352 -35.764120064136584 13.661659265201228 -35.23606001467306 13.628265250255351 -34.773458589723035 13.582762964069355 -34.37558834711641 13.530548068678613 -34.04261937859332 13.422622468107965 -33.49148894571788 13.411110064607985 -33.36524729820941 13.4104672220276 -33.253388023433395 13.42008092866804 -33.15630446177318 13.439330038097685 -33.07437168270299 13.467589336518477 -33.00795562024243 13.504209205933773 -32.95736739568368 13.54852582480421 -32.92293540050634 13.7098707324626 -32.85511733453048 14.480113276515057 -32.52286690935153 15.242416321294675 -32.172784076839385 15.40077578199289 -32.09826058720443 15.456017347096342 -32.08836642301937 15.518115199833906 -32.095002685927355 15.586381114467633 -32.11844295468052 15.660149203535157 -32.15896180875274 15.738729175375534 -32.21677901489041 15.821426670961376 -32.292105204385365 15.907539196532452 -32.38513273762026 16.24489260333546 -32.83411532995364 16.457398184724173 -33.095718287082654 16.72262642438237 -33.39576023229668 17.04406132212296 -33.73011759368491 17.425820871085484 -34.095304021795165 17.868552564017477 -34.484660451141814 18.3759600385191 -34.894556624361186 18.951070263756172 -35.32067838363636 19.566035853711583 -35.73814040758612 A40.74366543152521 40.74366543152521 0 0 1 21.167119550128927 -34.81375430446445 L21.113069627250866 -34.07244746913489 21.031592471231786 -33.36132652446582 20.930315709560595 -32.71695067486762 20.814488997085586 -32.1388555670547 20.689108047706075 -31.62564888546073 20.560263527671832 -31.18009941766042 20.43303370074468 -30.800384051708377 20.31273168486018 -30.485547341215263 20.09257805744399 -29.96889942470394 20.0550701131967 -29.8478100233579 20.031184467316713 -29.738528796603735 20.020403283945836 -29.64156794169247 20.02219697152082 -29.557423475535252 20.036030060625908 -29.48658332487328 20.061331814730185 -29.42948687542809 20.09752119481539 -29.38659335879622 20.24124016036703 -29.28671178771944 20.925572309141167 -28.801579401814134 21.598430889790553 -28.30065500417863 21.737835511590372 -28.19483524836314 21.78981280355215 -28.17367192820018 21.85193342586003 -28.167252303282638 21.9235810723806 -28.17598706418739 22.00416149517287 -28.20028323595619 22.093045179180706 -28.240499302611138 22.18959673149545 -28.296985658004395 22.293169003503397 -28.37007651564823 22.716499158886908 -28.73910804389882 22.978751296604443 -28.9508119540247 23.300565891018653 -29.189153211095356 23.684493469379316 -29.44937398884785 24.133837183986333 -29.72720794401382 24.647845880752804 -30.01600690635343 25.229387490964736 -30.311449918780724 25.880525873402995 -30.60868775590058 26.568848225003332 -30.889168697422154 A40.74366543152521 40.74366543152521 0 0 1 27.942753723559502 -29.65209863003914 L27.73575856362835 -28.938228738508116 27.5082115209716 -28.259587545919445 27.275174627120744 -27.650349477423763 27.041686274893575 -27.108968862353144 26.812343531171102 -26.633045143253284 26.593679629838594 -26.224020282329104 26.39028281612345 -25.879055176600232 26.207151455112456 -25.5961105991398 25.884391570783126 -25.136525192095895 25.822527362935215 -25.025880224802528 25.776442831096634 -24.92395316006887 25.7457379471616 -24.83135266653597 25.729997820127835 -24.74867403023275 25.728800127544798 -24.676505845882048 25.741677958272415 -24.615396560370343 25.768158450006744 -24.565916174786683 25.88797026501692 -24.438336402549986 26.45648341982133 -23.821524669105862 27.010490387632412 -23.191651506225618 27.124847519623586 -23.059160315338243 27.17128888137024 -23.027652777841382 27.230717303965765 -23.008457833511997 27.30261533641668 -23.002105335602756 27.386486341789904 -23.009116965775874 27.481789094462822 -23.029974257857184 27.587974937364553 -23.065152054366457 27.704480350527728 -23.115111815211343 28.195285695338026 -23.38806383078486 28.49582271254074 -23.540616217167027 28.860158819697315 -23.706840129472074 29.289799601214774 -23.88155142692323 29.787089004947585 -24.059890232108927 30.349910059012462 -24.23550982697608 30.98016964602219 -24.40358740127536 31.678878313840464 -24.558950596452377 32.4104744373837 -24.690192092504375 A40.74366543152521 40.74366543152521 0 0 1 33.49715547506173 -23.194503958925477 L33.14626175983946 -22.539270550980678 32.782589728200996 -21.922768987070288 32.42797753266684 -21.37529532671899 32.08703210208125 -20.894290135101677 31.76375094242508 -20.47644952875596 31.46482432154835 -20.121825623849343 31.194149937810764 -19.826687408790225 30.95619295091123 -19.588001000116215 30.54493296538771 -19.205564190163006 30.461416256679538 -19.110199372926484 30.395146954061822 -19.020081172042524 30.345860320328978 -18.93588812580185 30.313274297767343 -18.858288772495182 30.297098168409224 -18.78794665041325 30.296989252762696 -18.725495297846777 30.312603531589872 -18.671590573594564 30.40327184482176 -18.521888448440365 30.831119252762697 -17.800355000000014 31.242061844821762 -17.069061551559663 31.326373531589873 -16.915689426405464 31.3652492527627 -16.87521470215325 31.419388168409224 -16.84408334958678 31.488394297767343 -16.822921227504846 31.57189032032898 -16.81234187419818 31.669446954061826 -16.812928827957506 31.780626256679536 -16.825260627073543 31.904972965387707 -16.84990580983703 32.44180295091123 -17.014848999883817 32.767489937810765 -17.10158259120981 33.15842432154835 -17.188424376150696 33.615000942425084 -17.269990471244075 34.13850210208125 -17.341039864898356 34.72553753266684 -17.39580467328104 35.376969728201 -17.429171012929746 36.09271175983946 -17.43586944901936 36.835607394139046 -17.41213561645775 A40.74366543152521 40.74366543152521 0 0 1 37.5875707951183 -15.72319816522825 L37.10811426373498 -15.155238084955597 36.62421145598943 -14.627820226369096 36.16352221333492 -14.166038200189622 35.7300206557452 -13.766430667018282 35.32693001810741 -13.424934812945699 34.960805205427846 -13.14021063037536 34.63468302107695 -12.90779826221436 34.352300270460695 -12.723801763730291 33.87051421855472 -12.435227874598151 33.76899508991446 -12.359311107542881 33.6854373030374 -12.284940368322355 33.61972298190438 -12.21283440949768 33.57171522936591 -12.143705803290082 33.54126763770734 -12.07826403175085 33.52817673582305 -12.0172000359116 33.5322423828327 -11.961226868104221 33.58980455392324 -11.795945091252253 33.85828723023403 -11.00122440181414 34.108205283346756 -10.200471700645828 34.15878669960768 -10.032921739055146 34.188397724645014 -9.98524876771668 34.23488100294146 -9.943541596405074 34.29797933022569 -9.908494736432562 34.377451193131414 -9.880786768150985 34.47299801490139 -9.861077730892527 34.584311708213214 -9.850024573819423 34.711065164614126 -9.84827806575403 35.27045774448742 -9.898003621383806 35.60706061693671 -9.915127743518727 36.00750756877467 -9.918791998380417 36.47106543978065 -9.903648061362892 36.997898842645945 -9.864302844050245 37.583492384527126 -9.795819381031436 38.22762647572238 -9.693016216877453 38.929120509887106 -9.550757140079886 39.650847550915394 -9.373085261275172 A40.74366543152521 40.74366543152521 0 0 1 40.035228906252335 -7.564713163434899 Z"></path></g></g></g></svg></div>
+  <p><textarea id="exportedSVG" rows="2"></textarea></p>
+
+  <h2>License and Credits</h2>
+  <ul>
+      <li>The application itself, as well as the application specific source code is copyright (c) 2020 by Dr. Rainer Hessmer and is covered by the permissive MIT license.</li>
+      <li>This page leverages <a href="http://svgjs.com/">svg.js</a> with plug-ins <a href="https://github.com/wout/svg.export.js">svg.export.js</a>, <a href="https://github.com/otm/svg.path.js">svg.path.js</a>, <a href="http://jillix.github.io/svg.pan-zoom.js/">svg.pan-zoom.js</a>.</li>
+      <li>For boolean 2d operations <a href="http://jsclipper.sourceforge.net/">Javascript Clipper</a> is used.</li>
+  </ul>
+  
+
+<svg id="SvgjsSvg1002" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="2" height="0" style="opacity: 0; position: fixed; left: 100%; top: 100%; overflow: hidden;"><defs id="SvgjsDefs1003"></defs><path id="SvgjsPath1004"></path><polyline id="SvgjsPolyline1005" points="0,0"></polyline></svg></body></html>
