@@ -1,0 +1,182 @@
+.sobrenos .textoImagem .imagem img {
+    width: 364px;
+    height: 456px;
+    object-fit: cover;
+}
+
+.sobrenos .textoImagem p + p {
+    margin-top: 20px;
+}
+
+.eventos ul li img {
+    width: 347px;
+    height: 313px;
+    object-fit: cover;
+    background: url(../imagens/noimage.png) center center;
+    background-size: cover;
+}
+
+.carouselNoticias .flexslider .slides img {
+    height: 438px;
+    object-fit: cover;
+    background: url(../imagens/noimage.png) center center;
+    background-size: cover;
+}
+
+.noticias ul li .imagem img {
+    background: url(../imagens/noimage.png) center center;
+    background-size: cover;
+    height: 339px;
+    object-fit: cover;
+}
+
+.vitrine .filtro ul li a:hover, .vitrine .filtro ul li a.active {
+    color: #00a389;
+}
+
+.eventos ul {
+    align-items: inherit !important;
+}
+
+.compartilhar {
+    width: 36px;
+    max-height: 150px;
+}
+
+header nav ul li.menu-item-has-children {
+    margin-right: 0;
+    padding-right: 35px;
+    background: url(../imagens/setamenu.png) no-repeat 83%;
+}
+
+header nav .sub-menu li.menu-item-has-children {
+    margin-right: 0;
+    padding-right: 35px;
+    background: unset;
+}
+
+header nav .sub-menu li.menu-item-has-children:hover:after {
+    content: "";
+    padding-right: 0px;
+    background: url(../imagens/seta.png) no-repeat 83%;
+    width: 20px;
+}
+
+header .sub-menu li {
+    margin-right: 0;
+}
+
+header nav .sub-menu li a {
+    white-space: nowrap;
+    text-transform: none;
+}
+
+header nav .sub-menu li:hover a {
+    color: #00B09B;
+}
+
+header nav .sub-menu li:hover .sub-menu li a {
+    color: #5A5A5A;
+}
+
+header nav .sub-menu li:hover .sub-menu li:hover a {
+    color: #00B09B;
+}
+
+header nav .sub-menu li {
+    padding: 0 20px;
+    padding-bottom: 7px;
+    display: block;
+}
+
+header nav .sub-menu li:last-child {
+    padding-bottom: 0px;
+}
+
+header .sub-menu:after {
+    content: "";
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    position: absolute;
+    top: -50px;
+}
+
+header .sub-menu {
+    top: 70px;
+    width: 170px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: none;
+    background: rgba(255, 255, 255, 0.71);
+    position: absolute;
+}
+
+header .sub-menu .sub-menu {
+    right: -170px;
+    top: -20px;
+}
+
+header .menu-item-has-children:hover > a + .sub-menu {
+    display: block;
+}
+
+header .sub-menu .menu-item-has-children:hover .sub-menu {
+    display: block;
+}
+
+header .hassub:hover > a .sub-menu {
+    display: block;
+}
+
+.pdp {
+    margin-top: 120px;
+}
+
+.pdp .detalheProd {
+    align-items: flex-start;
+}
+
+.pdp .detalheProd .descricao .botoes {
+    justify-content: center !important;
+}
+
+.pdp .detalheProd .descricao .botoes a + a {
+    margin-left: 20px;
+}
+
+.vitrine .filtro .search input {
+    padding: 10px;
+}
+
+.produtos ul {
+    justify-content: space-evenly !important;
+}
+
+.eventos ul li  > a {margin-top: 0px !important;margin-bottom: 0px !important;}
+
+/*# sourceMappingURL=alteracoes.css.map */
+header nav ul li a.active, header nav ul li a:hover {
+    color: #00B09B;
+}
+
+header nav ul li .combo_idioma a:last-child {top:60px;}
+header nav ul li .combo_idioma.act {
+    height: 90px !important;
+    background: url(../imagens/setamenu.png) no-repeat 85% 17% !important;
+    background-color: white !important;
+}
+
+header nav {
+    display: flex; align-items: center;
+}
+
+.conteudo div {margin-top:15px;margin-bottom: 15px;}
+
+.conteudo strong {margin-bottom: 20px;}
+
+.conteudo.galeria a + a {display: inline-block;margin:5px;}
+.conteudo.galeria img {width: 350px; height: 350px; object-fit: cover;}
+
+
+/*# sourceMappingURL=alteracoes.css.map */
